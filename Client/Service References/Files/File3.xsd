@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RosService.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RosService.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Хранилище">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Оперативное" />
+      <xs:enumeration value="Конфигурация" />
+      <xs:enumeration value="Корзина" />
+      <xs:enumeration value="Статистика" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Хранилище" nillable="true" type="tns:Хранилище" />
+  <xs:complexType name="ArrayOfQuery.Параметр">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Query.Параметр" nillable="true" type="tns:Query.Параметр" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuery.Параметр" nillable="true" type="tns:ArrayOfQuery.Параметр" />
+  <xs:complexType name="Query.Параметр">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Значение" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Query.Параметр" nillable="true" type="tns:Query.Параметр" />
+  <xs:simpleType name="ФорматОтчета">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ПоУмолчанию" />
+      <xs:enumeration value="Xaml" />
+      <xs:enumeration value="Xps" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ФорматОтчета" nillable="true" type="tns:ФорматОтчета" />
+  <xs:simpleType name="MimeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="НеОпределен" />
+      <xs:enumeration value="Изображение" />
+      <xs:enumeration value="Word" />
+      <xs:enumeration value="Excel" />
+      <xs:enumeration value="Xps" />
+      <xs:enumeration value="Text" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MimeType" nillable="true" type="tns:MimeType" />
+</xs:schema>

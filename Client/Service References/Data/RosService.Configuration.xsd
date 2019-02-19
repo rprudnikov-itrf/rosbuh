@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RosService.Configuration" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RosService.Configuration" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="MemberTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="Object" />
+      <xs:enumeration value="String" />
+      <xs:enumeration value="Int" />
+      <xs:enumeration value="Double" />
+      <xs:enumeration value="DateTime" />
+      <xs:enumeration value="Bool" />
+      <xs:enumeration value="Ссылка" />
+      <xs:enumeration value="Таблица" />
+      <xs:enumeration value="Byte" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MemberTypes" nillable="true" type="tns:MemberTypes" />
+</xs:schema>

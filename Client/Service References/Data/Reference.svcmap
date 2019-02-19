@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="87a807ff-abb2-4934-9b3a-8dd6d4fa2a5f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8080/RosService/Data/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="97ba2008-9766-47c9-9785-e20f5dfc24ca" SourceId="1" SourceUrl="http://localhost:8080/RosService/Data/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="88e99b25-aa95-444b-9b0e-da28be1a2f24" SourceId="1" SourceUrl="http://localhost:8080/RosService/Data/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="d4dc5682-9aa9-421e-96cb-70a0f1091051" SourceId="1" SourceUrl="http://localhost:8080/RosService/Data/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="07428cd6-ed64-4bd3-86c3-8ed5b812afba" SourceId="1" SourceUrl="http://localhost:8080/RosService/Data/mex" />
+    <MetadataFile FileName="RosService.Data.xsd" MetadataType="Schema" ID="4685c3e1-1ef7-4ab3-8780-f06f6cee4021" SourceId="1" SourceUrl="http://localhost:8080/RosService/Data/mex" />
+    <MetadataFile FileName="RosService.Configuration.xsd" MetadataType="Schema" ID="d9f657c8-c465-4644-b53e-00cfcc6175c0" SourceId="1" SourceUrl="http://localhost:8080/RosService/Data/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6b20a89e-d146-4da1-9bd9-dca3f06bb368" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8080/RosService/File" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="File5.xsd" MetadataType="Schema" ID="3a74b7ba-24b0-4621-af8b-00cdb44c0403" SourceId="1" SourceUrl="http://localhost:8080/RosService/File?xsd=xsd5" />
+    <MetadataFile FileName="File.disco" MetadataType="Disco" ID="cf28bec2-be29-49dd-8a47-d102cb89acdf" SourceId="1" SourceUrl="http://localhost:8080/RosService/File?disco" />
+    <MetadataFile FileName="File.xsd" MetadataType="Schema" ID="a56719f4-0b7f-4930-bb32-3066badc0840" SourceId="1" SourceUrl="http://localhost:8080/RosService/File?xsd=xsd4" />
+    <MetadataFile FileName="File.wsdl" MetadataType="Wsdl" ID="52f26af1-6e86-4797-9cfb-64ee0636f590" SourceId="1" SourceUrl="http://localhost:8080/RosService/File?wsdl" />
+    <MetadataFile FileName="File4.xsd" MetadataType="Schema" ID="db86a1ce-e8f7-4eee-b0a9-7902d31d2acb" SourceId="1" SourceUrl="http://localhost:8080/RosService/File?xsd=xsd0" />
+    <MetadataFile FileName="File1.xsd" MetadataType="Schema" ID="76d765cc-7722-43b1-afca-0dc3611b9fd4" SourceId="1" SourceUrl="http://localhost:8080/RosService/File?xsd=xsd1" />
+    <MetadataFile FileName="File3.xsd" MetadataType="Schema" ID="a8e6ded9-e43f-472a-bea5-878d47bf82d8" SourceId="1" SourceUrl="http://localhost:8080/RosService/File?xsd=xsd2" />
+    <MetadataFile FileName="File2.xsd" MetadataType="Schema" ID="44db7333-2a48-4f2c-a298-d234651ce2c5" SourceId="1" SourceUrl="http://localhost:8080/RosService/File?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

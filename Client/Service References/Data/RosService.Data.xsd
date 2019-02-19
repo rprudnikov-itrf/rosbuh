@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/RosService.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RosService.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/RosService.Configuration" />
+  <xs:simpleType name="Хранилище">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Оперативное" />
+      <xs:enumeration value="Конфигурация" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Хранилище" nillable="true" type="tns:Хранилище" />
+  <xs:complexType name="ArrayOfDependencyNodeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DependencyNodeInfo" nillable="true" type="tns:DependencyNodeInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDependencyNodeInfo" nillable="true" type="tns:ArrayOfDependencyNodeInfo" />
+  <xs:complexType name="DependencyNodeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Атрибут" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Группа" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="НазваниеОбъекта" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Тип" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DependencyNodeInfo" nillable="true" type="tns:DependencyNodeInfo" />
+  <xs:complexType name="ArrayOfNodeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NodeInfo" nillable="true" type="tns:NodeInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNodeInfo" nillable="true" type="tns:ArrayOfNodeInfo" />
+  <xs:complexType name="NodeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Children" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Data" nillable="true" type="q1:ArrayOfKeyValueOfstringanyType" />
+      <xs:element minOccurs="0" name="HashCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsHidden" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsNew" type="xs:boolean" />
+      <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+      <xs:element minOccurs="0" name="id_parent" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NodeInfo" nillable="true" type="tns:NodeInfo" />
+  <xs:complexType name="Value">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsСписок" type="xs:boolean" />
+      <xs:element minOccurs="0" name="buffer" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Значение" nillable="true" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Value" nillable="true" type="tns:Value" />
+  <xs:complexType name="Query">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CacheDuration" type="ser:duration" />
+      <xs:element minOccurs="0" name="CacheLocation" type="tns:Query.OutputCacheLocation" />
+      <xs:element minOccurs="0" name="CacheName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDebug" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Sql" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ВКорзине" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ВыводимыеКолонки" nillable="true" type="tns:ArrayOfQuery.Колонка" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Группировки" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element minOccurs="0" name="КоличествоВыводимыхДанных" type="xs:int" />
+      <xs:element minOccurs="0" name="КоличествоВыводимыхСтраниц" type="xs:int" />
+      <xs:element minOccurs="0" name="МестаПоиска" nillable="true" type="tns:ArrayOfQuery.МестоПоиска" />
+      <xs:element minOccurs="0" name="Объединения" nillable="true" type="tns:ArrayOfQuery.Объединение" />
+      <xs:element minOccurs="0" name="Параметры" nillable="true" type="tns:ArrayOfQuery.Параметр" />
+      <xs:element minOccurs="0" name="Сортировки" nillable="true" type="tns:ArrayOfQuery.Сортировка" />
+      <xs:element minOccurs="0" name="Страница" type="xs:int" />
+      <xs:element minOccurs="0" name="СтрокаЗапрос" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Типы" nillable="true" type="q3:ArrayOfstring" />
+      <xs:element minOccurs="0" name="УсловияПоиска" nillable="true" type="tns:ArrayOfQuery.УсловиеПоиска" />
+      <xs:element minOccurs="0" name="ФорматДат" type="tns:Query.ФорматДаты" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Query" nillable="true" type="tns:Query" />
+  <xs:simpleType name="Query.OutputCacheLocation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Server" />
+      <xs:enumeration value="Memory" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Query.OutputCacheLocation" nillable="true" type="tns:Query.OutputCacheLocation" />
+  <xs:complexType name="ArrayOfQuery.Колонка">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Query.Колонка" nillable="true" type="tns:Query.Колонка" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuery.Колонка" nillable="true" type="tns:ArrayOfQuery.Колонка" />
+  <xs:complexType name="Query.Колонка">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Атрибут" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ПолнотекстовыйВывод" nillable="true" type="xs:boolean" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="Тип" type="q4:MemberTypes" />
+      <xs:element minOccurs="0" name="Функция" type="tns:Query.ФункцияАгрегации" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Query.Колонка" nillable="true" type="tns:Query.Колонка" />
+  <xs:simpleType name="Query.ФункцияАгрегации">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Sum" />
+      <xs:enumeration value="Count" />
+      <xs:enumeration value="Max" />
+      <xs:enumeration value="Min" />
+      <xs:enumeration value="Avg" />
+      <xs:enumeration value="Функция" />
+      <xs:enumeration value="Sql" />
+      <xs:enumeration value="Distinct" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Query.ФункцияАгрегации" nillable="true" type="tns:Query.ФункцияАгрегации" />
+  <xs:complexType name="ArrayOfQuery.МестоПоиска">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Query.МестоПоиска" nillable="true" type="tns:Query.МестоПоиска" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuery.МестоПоиска" nillable="true" type="tns:ArrayOfQuery.МестоПоиска" />
+  <xs:complexType name="Query.МестоПоиска">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="МаксимальнаяГлубина" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Query.МестоПоиска" nillable="true" type="tns:Query.МестоПоиска" />
+  <xs:complexType name="ArrayOfQuery.Объединение">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Query.Объединение" nillable="true" type="tns:Query.Объединение" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuery.Объединение" nillable="true" type="tns:ArrayOfQuery.Объединение" />
+  <xs:complexType name="Query.Объединение">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Атрибут" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="МестоПоиска" nillable="true" type="tns:Query.МестоПоиска" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Query.Объединение" nillable="true" type="tns:Query.Объединение" />
+  <xs:complexType name="ArrayOfQuery.Параметр">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Query.Параметр" nillable="true" type="tns:Query.Параметр" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuery.Параметр" nillable="true" type="tns:ArrayOfQuery.Параметр" />
+  <xs:complexType name="Query.Параметр">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Значение" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Query.Параметр" nillable="true" type="tns:Query.Параметр" />
+  <xs:complexType name="ArrayOfQuery.Сортировка">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Query.Сортировка" nillable="true" type="tns:Query.Сортировка" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuery.Сортировка" nillable="true" type="tns:ArrayOfQuery.Сортировка" />
+  <xs:complexType name="Query.Сортировка">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Атрибут" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Направление" type="tns:Query.НаправлениеСортировки" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Query.Сортировка" nillable="true" type="tns:Query.Сортировка" />
+  <xs:simpleType name="Query.НаправлениеСортировки">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Asc" />
+      <xs:enumeration value="Desc" />
+      <xs:enumeration value="Rand" />
+      <xs:enumeration value="Sql" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Query.НаправлениеСортировки" nillable="true" type="tns:Query.НаправлениеСортировки" />
+  <xs:complexType name="ArrayOfQuery.УсловиеПоиска">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Query.УсловиеПоиска" nillable="true" type="tns:Query.УсловиеПоиска" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuery.УсловиеПоиска" nillable="true" type="tns:ArrayOfQuery.УсловиеПоиска" />
+  <xs:complexType name="Query.УсловиеПоиска">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Атрибут" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Значение" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="Оператор" type="tns:Query.Оператор" />
+      <xs:element minOccurs="0" name="УчитыватьВремя" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Query.УсловиеПоиска" nillable="true" type="tns:Query.УсловиеПоиска" />
+  <xs:simpleType name="Query.Оператор">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Равно" />
+      <xs:enumeration value="Соодержит" />
+      <xs:enumeration value="НеРавно" />
+      <xs:enumeration value="Больше" />
+      <xs:enumeration value="БольшеРавно" />
+      <xs:enumeration value="Меньше" />
+      <xs:enumeration value="МеньшеРавно" />
+      <xs:enumeration value="Функция" />
+      <xs:enumeration value="СоодержитСлева" />
+      <xs:enumeration value="СоодержитСправа" />
+      <xs:enumeration value="Sql" />
+      <xs:enumeration value="ТочноРавно" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Query.Оператор" nillable="true" type="tns:Query.Оператор" />
+  <xs:simpleType name="Query.ФорматДаты">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ПоУмолчанию" />
+      <xs:enumeration value="День" />
+      <xs:enumeration value="Неделя" />
+      <xs:enumeration value="Месяц" />
+      <xs:enumeration value="Квартал" />
+      <xs:enumeration value="Год" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Query.ФорматДаты" nillable="true" type="tns:Query.ФорматДаты" />
+  <xs:complexType name="URI">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="node" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="хранилище" type="tns:Хранилище" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="URI" nillable="true" type="tns:URI" />
+  <xs:complexType name="ArrayOfФайлИнформация">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ФайлИнформация" nillable="true" type="tns:ФайлИнформация" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfФайлИнформация" nillable="true" type="tns:ArrayOfФайлИнформация" />
+  <xs:complexType name="ФайлИнформация">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MimeType" type="tns:MimeType" />
+      <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ДатаСоздания" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ИдентификаторФайла" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ПолноеИмяФайла" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Размер" type="xs:double" />
+      <xs:element minOccurs="0" name="Создатель" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ФайлИнформация" nillable="true" type="tns:ФайлИнформация" />
+  <xs:simpleType name="MimeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="НеОпределен" />
+      <xs:enumeration value="Изображение" />
+      <xs:enumeration value="Word" />
+      <xs:enumeration value="Excel" />
+      <xs:enumeration value="Xps" />
+      <xs:enumeration value="Text" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MimeType" nillable="true" type="tns:MimeType" />
+  <xs:complexType name="TableValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Count" type="xs:int" />
+      <xs:element minOccurs="0" name="Page" type="xs:int" />
+      <xs:element minOccurs="0" name="PageCount" type="xs:int" />
+      <xs:element minOccurs="0" name="buffer" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="ВремяПодготовкиДанных" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TableValue" nillable="true" type="tns:TableValue" />
+  <xs:complexType name="ArrayOfФайл">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Файл" nillable="true" type="tns:Файл" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfФайл" nillable="true" type="tns:ArrayOfФайл" />
+  <xs:complexType name="Файл">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MimeType" type="tns:MimeType" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Stream" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Файл" nillable="true" type="tns:Файл" />
+</xs:schema>

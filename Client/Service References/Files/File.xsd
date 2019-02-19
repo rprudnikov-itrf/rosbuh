@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RosService.Files" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RosService.Files" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RosService.Data" />
+  <xs:complexType name="ШаблонОтчета">
+    <xs:sequence>
+      <xs:element name="ВерхнийКолонтитул" type="xs:boolean" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="Группировки" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="Запросы" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element name="Колонки" nillable="true" type="tns:ArrayOfШаблонОтчета.Колонка" />
+      <xs:element minOccurs="0" name="НазваниеОтчета" nillable="true" type="xs:string" />
+      <xs:element name="НижнийКолонтитул" type="xs:boolean" />
+      <xs:element name="ОриентацияСтраницы" type="tns:ШаблонОтчета.Ориентация" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RosService.Data" name="ФорматОтчета" type="q3:ФорматОтчета" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ШаблонОтчета" nillable="true" type="tns:ШаблонОтчета" />
+  <xs:complexType name="ArrayOfШаблонОтчета.Колонка">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ШаблонОтчета.Колонка" nillable="true" type="tns:ШаблонОтчета.Колонка" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfШаблонОтчета.Колонка" nillable="true" type="tns:ArrayOfШаблонОтчета.Колонка" />
+  <xs:complexType name="ШаблонОтчета.Колонка">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Атрибут" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Название" nillable="true" type="xs:string" />
+      <xs:element name="Размер" type="xs:double" />
+      <xs:element name="ТипЗначения" type="tns:ШаблонОтчета.ТипЗначения" />
+      <xs:element minOccurs="0" name="Формат" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ШаблонОтчета.Колонка" nillable="true" type="tns:ШаблонОтчета.Колонка" />
+  <xs:simpleType name="ШаблонОтчета.ТипЗначения">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="String" />
+      <xs:enumeration value="DateTime" />
+      <xs:enumeration value="Number" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ШаблонОтчета.ТипЗначения" nillable="true" type="tns:ШаблонОтчета.ТипЗначения" />
+  <xs:simpleType name="ШаблонОтчета.Ориентация">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Альбом" />
+      <xs:enumeration value="Книга" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ШаблонОтчета.Ориентация" nillable="true" type="tns:ШаблонОтчета.Ориентация" />
+  <xs:simpleType name="ImageType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Full" />
+      <xs:enumeration value="Thumbnail" />
+      <xs:enumeration value="Resize" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ImageType" nillable="true" type="tns:ImageType" />
+  <xs:simpleType name="ImageFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Jpg" />
+      <xs:enumeration value="Png" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ImageFormat" nillable="true" type="tns:ImageFormat" />
+  <xs:complexType name="КонструкторИзображения">
+    <xs:sequence>
+      <xs:element name="ОбрезатьПустоеМесто" type="xs:boolean" />
+      <xs:element name="ПрозрачныйФон" type="xs:boolean" />
+      <xs:element name="Слои" nillable="true" type="tns:ArrayOfСлойИзображения" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="КонструкторИзображения" nillable="true" type="tns:КонструкторИзображения" />
+  <xs:complexType name="ArrayOfСлойИзображения">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="СлойИзображения" nillable="true" type="tns:СлойИзображения" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfСлойИзображения" nillable="true" type="tns:ArrayOfСлойИзображения" />
+  <xs:complexType name="СлойИзображения">
+    <xs:sequence>
+      <xs:element name="HorizontalAlign" type="tns:HorizontalAlign" />
+      <xs:element name="VerticalAlign" type="tns:VerticalAlign" />
+      <xs:element name="height" type="xs:double" />
+      <xs:element name="id_file" nillable="true" type="xs:anyType" />
+      <xs:element name="width" type="xs:double" />
+      <xs:element name="x" type="xs:int" />
+      <xs:element name="y" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="СлойИзображения" nillable="true" type="tns:СлойИзображения" />
+  <xs:simpleType name="HorizontalAlign">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Left" />
+      <xs:enumeration value="Right" />
+      <xs:enumeration value="Center" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="HorizontalAlign" nillable="true" type="tns:HorizontalAlign" />
+  <xs:simpleType name="VerticalAlign">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Top" />
+      <xs:enumeration value="Bottom" />
+      <xs:enumeration value="Center" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="VerticalAlign" nillable="true" type="tns:VerticalAlign" />
+</xs:schema>

@@ -1,0 +1,1005 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServicesClient" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IServices1_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <gzip:GZipEncoding xmlns:gzip="http://schemas.microsoft.com/ws/06/2004/mspolicy/netgzip1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetNamedPipeBinding_IServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/RosService.Services" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServices_Почта_КоличествоПисем_InputMessage">
+    <wsdl:part name="parameters" element="tns:Почта_КоличествоПисем" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Почта_КоличествоПисем_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Почта_КоличествоПисемResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Данные_СписокТелефонов_Проиндекировать_InputMessage">
+    <wsdl:part name="parameters" element="tns:Данные_СписокТелефонов_Проиндекировать" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Данные_СписокТелефонов_Проиндекировать_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Данные_СписокТелефонов_ПроиндекироватьResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Данные_СписокТелефонов_Совпадения_InputMessage">
+    <wsdl:part name="parameters" element="tns:Данные_СписокТелефонов_Совпадения" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Данные_СписокТелефонов_Совпадения_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Данные_СписокТелефонов_СовпаденияResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ПоискАдреса_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискАдреса" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ПоискАдреса_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискАдресаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ПоискБанка_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискБанка" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ПоискБанка_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискБанкаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ПоискКоординатГеокодирование_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискКоординатГеокодирование" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ПоискКоординатГеокодирование_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискКоординатГеокодированиеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_СообщенияПользователя_Очистить_InputMessage">
+    <wsdl:part name="parameters" element="tns:СообщенияПользователя_Очистить" />
+  </wsdl:message>
+  <wsdl:message name="IServices_СообщенияПользователя_Добавить_InputMessage">
+    <wsdl:part name="parameters" element="tns:СообщенияПользователя_Добавить" />
+  </wsdl:message>
+  <wsdl:message name="IServices_СообщенияПользователя_Добавить_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СообщенияПользователя_ДобавитьResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_СообщенияПользователя_Список_InputMessage">
+    <wsdl:part name="parameters" element="tns:СообщенияПользователя_Список" />
+  </wsdl:message>
+  <wsdl:message name="IServices_СообщенияПользователя_Список_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СообщенияПользователя_СписокResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Пользователи_Список_InputMessage">
+    <wsdl:part name="parameters" element="tns:Пользователи_Список" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Пользователи_Список_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Пользователи_СписокResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ЗадачаПользователя_Добавить_InputMessage">
+    <wsdl:part name="parameters" element="tns:ЗадачаПользователя_Добавить" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ЗадачаПользователя_Добавить_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ЗадачаПользователя_ДобавитьResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ЗадачаПользователя_Список_InputMessage">
+    <wsdl:part name="parameters" element="tns:ЗадачаПользователя_Список" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ЗадачаПользователя_Список_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ЗадачаПользователя_СписокResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Рассылка_InputMessage">
+    <wsdl:part name="parameters" element="tns:Рассылка" />
+  </wsdl:message>
+  <wsdl:message name="IServices_СтатистикаКонфигурации_InputMessage">
+    <wsdl:part name="parameters" element="tns:СтатистикаКонфигурации" />
+  </wsdl:message>
+  <wsdl:message name="IServices_СтатистикаКонфигурации_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СтатистикаКонфигурацииResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ОптравитьВСтатистику_InputMessage">
+    <wsdl:part name="parameters" element="tns:ОптравитьВСтатистику" />
+  </wsdl:message>
+  <wsdl:portType name="IServices">
+    <wsdl:operation name="Почта_КоличествоПисем">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/Почта_КоличествоПисем" message="tns:IServices_Почта_КоличествоПисем_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/Почта_КоличествоПисемResponse" message="tns:IServices_Почта_КоличествоПисем_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Проиндекировать">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/Данные_СписокТелефонов_Проиндекировать" message="tns:IServices_Данные_СписокТелефонов_Проиндекировать_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/Данные_СписокТелефонов_ПроиндекироватьResponse" message="tns:IServices_Данные_СписокТелефонов_Проиндекировать_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Совпадения">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/Данные_СписокТелефонов_Совпадения" message="tns:IServices_Данные_СписокТелефонов_Совпадения_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/Данные_СписокТелефонов_СовпаденияResponse" message="tns:IServices_Данные_СписокТелефонов_Совпадения_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПоискАдреса">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/ПоискАдреса" message="tns:IServices_ПоискАдреса_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/ПоискАдресаResponse" message="tns:IServices_ПоискАдреса_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПоискБанка">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/ПоискБанка" message="tns:IServices_ПоискБанка_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/ПоискБанкаResponse" message="tns:IServices_ПоискБанка_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПоискКоординатГеокодирование">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/ПоискКоординатГеокодирование" message="tns:IServices_ПоискКоординатГеокодирование_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/ПоискКоординатГеокодированиеResponse" message="tns:IServices_ПоискКоординатГеокодирование_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Очистить">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/СообщенияПользователя_Очистить" message="tns:IServices_СообщенияПользователя_Очистить_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Добавить">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/СообщенияПользователя_Добавить" message="tns:IServices_СообщенияПользователя_Добавить_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/СообщенияПользователя_ДобавитьResponse" message="tns:IServices_СообщенияПользователя_Добавить_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Список">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/СообщенияПользователя_Список" message="tns:IServices_СообщенияПользователя_Список_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/СообщенияПользователя_СписокResponse" message="tns:IServices_СообщенияПользователя_Список_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Пользователи_Список">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/Пользователи_Список" message="tns:IServices_Пользователи_Список_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/Пользователи_СписокResponse" message="tns:IServices_Пользователи_Список_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Добавить">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/ЗадачаПользователя_Добавить" message="tns:IServices_ЗадачаПользователя_Добавить_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/ЗадачаПользователя_ДобавитьResponse" message="tns:IServices_ЗадачаПользователя_Добавить_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Список">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/ЗадачаПользователя_Список" message="tns:IServices_ЗадачаПользователя_Список_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/ЗадачаПользователя_СписокResponse" message="tns:IServices_ЗадачаПользователя_Список_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Рассылка">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/Рассылка" message="tns:IServices_Рассылка_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СтатистикаКонфигурации">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/СтатистикаКонфигурации" message="tns:IServices_СтатистикаКонфигурации_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/СтатистикаКонфигурацииResponse" message="tns:IServices_СтатистикаКонфигурации_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ОптравитьВСтатистику">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/ОптравитьВСтатистику" message="tns:IServices_ОптравитьВСтатистику_InputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IServices" type="tns:IServices">
+    <wsp:PolicyReference URI="#WSHttpBinding_IServices_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Почта_КоличествоПисем">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Почта_КоличествоПисем" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Проиндекировать">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Проиндекировать" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Совпадения">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Совпадения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискАдреса">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискАдреса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискБанка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискБанка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискКоординатГеокодирование">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискКоординатГеокодирование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Очистить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Очистить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Пользователи_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Пользователи_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Рассылка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Рассылка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СтатистикаКонфигурации">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СтатистикаКонфигурации" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОптравитьВСтатистику">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ОптравитьВСтатистику" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IServices" type="tns:IServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Почта_КоличествоПисем">
+      <soap:operation soapAction="http://tempuri.org/IServices/Почта_КоличествоПисем" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Проиндекировать">
+      <soap:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Проиндекировать" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Совпадения">
+      <soap:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Совпадения" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискАдреса">
+      <soap:operation soapAction="http://tempuri.org/IServices/ПоискАдреса" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискБанка">
+      <soap:operation soapAction="http://tempuri.org/IServices/ПоискБанка" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискКоординатГеокодирование">
+      <soap:operation soapAction="http://tempuri.org/IServices/ПоискКоординатГеокодирование" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Очистить">
+      <soap:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Очистить" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Добавить">
+      <soap:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Список">
+      <soap:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Пользователи_Список">
+      <soap:operation soapAction="http://tempuri.org/IServices/Пользователи_Список" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Добавить">
+      <soap:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Список">
+      <soap:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Рассылка">
+      <soap:operation soapAction="http://tempuri.org/IServices/Рассылка" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СтатистикаКонфигурации">
+      <soap:operation soapAction="http://tempuri.org/IServices/СтатистикаКонфигурации" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОптравитьВСтатистику">
+      <soap:operation soapAction="http://tempuri.org/IServices/ОптравитьВСтатистику" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IServices" type="tns:IServices">
+    <wsp:PolicyReference URI="#CustomBinding_IServices_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Почта_КоличествоПисем">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Почта_КоличествоПисем" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Проиндекировать">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Проиндекировать" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Совпадения">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Совпадения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискАдреса">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискАдреса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискБанка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискБанка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискКоординатГеокодирование">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискКоординатГеокодирование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Очистить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Очистить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Пользователи_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Пользователи_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Рассылка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Рассылка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СтатистикаКонфигурации">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СтатистикаКонфигурации" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОптравитьВСтатистику">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ОптравитьВСтатистику" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IServices1" type="tns:IServices">
+    <wsp:PolicyReference URI="#CustomBinding_IServices1_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Почта_КоличествоПисем">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Почта_КоличествоПисем" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Проиндекировать">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Проиндекировать" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Совпадения">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Совпадения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискАдреса">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискАдреса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискБанка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискБанка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискКоординатГеокодирование">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискКоординатГеокодирование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Очистить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Очистить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Пользователи_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Пользователи_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Рассылка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Рассылка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СтатистикаКонфигурации">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СтатистикаКонфигурации" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОптравитьВСтатистику">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ОптравитьВСтатистику" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IServices" type="tns:IServices">
+    <wsp:PolicyReference URI="#NetTcpBinding_IServices_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Почта_КоличествоПисем">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Почта_КоличествоПисем" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Проиндекировать">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Проиндекировать" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Совпадения">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Совпадения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискАдреса">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискАдреса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискБанка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискБанка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискКоординатГеокодирование">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискКоординатГеокодирование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Очистить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Очистить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Пользователи_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Пользователи_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Рассылка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Рассылка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СтатистикаКонфигурации">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СтатистикаКонфигурации" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОптравитьВСтатистику">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ОптравитьВСтатистику" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetNamedPipeBinding_IServices" type="tns:IServices">
+    <wsp:PolicyReference URI="#NetNamedPipeBinding_IServices_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="Почта_КоличествоПисем">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Почта_КоличествоПисем" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Проиндекировать">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Проиндекировать" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Данные_СписокТелефонов_Совпадения">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Данные_СписокТелефонов_Совпадения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискАдреса">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискАдреса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискБанка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискБанка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискКоординатГеокодирование">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ПоискКоординатГеокодирование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Очистить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Очистить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СообщенияПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СообщенияПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Пользователи_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Пользователи_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Добавить">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Добавить" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЗадачаПользователя_Список">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ЗадачаПользователя_Список" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Рассылка">
+      <soap12:operation soapAction="http://tempuri.org/IServices/Рассылка" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СтатистикаКонфигурации">
+      <soap12:operation soapAction="http://tempuri.org/IServices/СтатистикаКонфигурации" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОптравитьВСтатистику">
+      <soap12:operation soapAction="http://tempuri.org/IServices/ОптравитьВСтатистику" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicesClient">
+    <wsdl:port name="WSHttpBinding_IServices" binding="tns:WSHttpBinding_IServices">
+      <soap12:address location="http://localhost:8080/RosService/Services" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Services</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IServices" binding="tns:BasicHttpBinding_IServices">
+      <soap:address location="http://localhost:8080/RosService/Services/basic" />
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IServices" binding="tns:CustomBinding_IServices">
+      <soap12:address location="http://localhost:8080/RosService/Services/binary" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Services/binary</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IServices1" binding="tns:CustomBinding_IServices1">
+      <soap12:address location="http://localhost:8080/RosService/Services/gzip" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Services/gzip</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IServices" binding="tns:NetTcpBinding_IServices">
+      <soap12:address location="net.tcp://localhost/RosService/Services/tcp" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost/RosService/Services/tcp</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetNamedPipeBinding_IServices" binding="tns:NetNamedPipeBinding_IServices">
+      <soap12:address location="net.pipe://localhost/RosService/Services/pipe" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/RosService/Services/pipe</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

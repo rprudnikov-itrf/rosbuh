@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="RosApplication.Конфигуратор.Статистика"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    Loaded="UserControl_Loaded">
+    <r:Window IsButton="True" IsDeleteButton="False" IsWhiteBackground="True" IsScroll="True" 
+              IsEnabledComplite="True" 
+              ButtonCompliteText="Сохранить" ПоказатьКнопкуФайл="False" 
+              ПоказатьСписокФайлов="False" Padding="0,0,0,0" Name="Форма"
+              IsCompliteButton="False">
+        <DockPanel>
+            <Label Background="#FF000000" Foreground="#FFFFFFFF" FontFamily="Times New Roman" FontSize="21" 
+                   FontWeight="Bold" Padding="24,10,24,10" DockPanel.Dock="Top">Статистика</Label>
+            <Grid>
+                <TextBlock Text="Загрузка, подождите..." x:Name="PART_TextBlock1" TextWrapping="Wrap" Margin="24" />
+                <ItemsControl Name="PART_ItemsControl" Grid.IsSharedSizeScope="True" 
+                          VerticalAlignment="Top" Margin="24" Visibility="Collapsed"
+                              Background="White">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <r:UniformGrid Orientation="Vertical" Columns="2" IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <r:ParamItemControl ПоказатьЛинию="True" 
+                                            ContentStringFormat="N0"
+                                            Content="{Binding [Count]}" 
+                                            Margin="0 0 0 6">
+                                <r:ParamItemControl.Header>
+                                    <TextBlock Text="{Binding [Name]}" MaxWidth="250" />
+                                </r:ParamItemControl.Header>
+                            </r:ParamItemControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </DockPanel>
+    </r:Window>
+</UserControl>

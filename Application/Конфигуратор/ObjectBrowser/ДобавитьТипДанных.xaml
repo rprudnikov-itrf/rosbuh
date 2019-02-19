@@ -1,0 +1,70 @@
+﻿<Window x:Class="RosApplication.Конфигуратор.ДобавитьТипДанных"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    Title="Добавить тип данных" Height="420" Width="580" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen"
+    x:Name="Window">
+    <r:Window Complite="Window_Complite" ПоказатьКнопкуВыполнить="False" ПоказатьКнопкуФайл="False" IsWhiteBackground="False" IsScroll="False">
+        <StackPanel Grid.IsSharedSizeScope="True">
+            <Label HorizontalAlignment="Left" Margin="0,0,0,12" Padding="0" FontSize="20" FontFamily="Times New Roman" FontWeight="Bold">Добавить тип данных</Label>
+            <r:ParamItemControl Header="Название:" Padding="0,0,50,0">
+                <TextBox Name="Описание" Height="23" VerticalAlignment="Top" LostFocus="Описание_LostFocus" />
+            </r:ParamItemControl>
+            <r:ParamItemControl Header="Имя:">
+                <TextBox Name="Имя" />
+            </r:ParamItemControl>
+            <r:ParamItemControl Header="Категория:">
+                <ComboBox Name="Категория" Height="23" VerticalAlignment="Top" IsEditable="True"></ComboBox>
+            </r:ParamItemControl>
+            <r:ParamItemControl Header="Иконка:">
+                <r:FileUpload Name="File1" />
+            </r:ParamItemControl>
+            <r:ParamItemControl Header="Базовый тип:" VerticalContentAlignment="Top">
+                <StackPanel Orientation="Vertical">
+                    <r:ComboBox SelectedValue="object" Margin="0,0,0,6" Name="БазовыйТип" Background="White" 
+                                BorderBrush="Silver" Height="23" VerticalAlignment="Top" 
+                                DisplayMemberPath="Описание" 
+                                SelectedValuePath="Name">
+                        <!--ГруппироватьПо="Namespace"-->
+                        <r:ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="MaxWidth" Value="420" />
+                            </Style>
+                        </r:ComboBox.ItemContainerStyle>
+                    </r:ComboBox>
+                    <r:RadioButtonList Name="БазовыйТип_RadioButtonList" Orientation="Vertical" SelectedValuePath="Content">
+                        <r:RadioButtonList.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <r:UniformGrid Columns="2" Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </r:RadioButtonList.ItemsPanel>
+                        <r:RadioButtonList.SelectedValue>
+                            <Binding Path="SelectedValue" ElementName="БазовыйТип" Mode="TwoWay" />
+                        </r:RadioButtonList.SelectedValue>
+                        <ListBoxItem>object</ListBoxItem>
+                        <ListBoxItem>Журнал</ListBoxItem>
+                        <ListBoxItem>Отчет</ListBoxItem>
+                        <ListBoxItem>Справочник</ListBoxItem>
+                        <ListBoxItem>ЭлементСправочника</ListBoxItem>
+                        <ListBoxItem>Папка</ListBoxItem>
+                        <ListBoxItem>Договор</ListBoxItem>
+                        <ListBoxItem>Платеж</ListBoxItem>
+                        <ListBoxItem>Пользователь</ListBoxItem>
+                        <ListBoxItem>Иконка</ListBoxItem>
+                    </r:RadioButtonList>
+                </StackPanel>
+            </r:ParamItemControl>
+
+            <r:ParamItemControl Header="Группа:">
+                <r:ParamItemControl.Visibility>
+                    <Binding Path="SelectedValue" ElementName="БазовыйТип" ConverterParameter="Журнал">
+                        <Binding.Converter>
+                            <r:VisibilityConverter />
+                        </Binding.Converter>
+                    </Binding>
+                </r:ParamItemControl.Visibility>
+                <TextBox Name="ГруппаЖурналов" />
+            </r:ParamItemControl>
+        </StackPanel>
+    </r:Window>
+</Window>

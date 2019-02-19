@@ -1,0 +1,641 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/RosService.Configuration" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/RosService.Data" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:element name="УдалитьКешированныеЗначения">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьКешированныеЗначенияResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ЖурналУдалений">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ЖурналУдаленийResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="ЖурналУдаленийResult" nillable="true" type="q1:ArrayOfDeleteLog" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьТип">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьТипResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="ПолучитьТипResult" nillable="true" type="q2:Type" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокТипов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="СписокТиповДанных" nillable="true" type="q3:ArrayOfstring" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокТиповResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="СписокТиповResult" nillable="true" type="q4:ArrayOfType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокНаследуемыхТипов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ДобавитьБазовыйТип" type="xs:boolean" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокНаследуемыхТиповResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="СписокНаследуемыхТиповResult" nillable="true" type="q5:ArrayOfType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокАтрибутов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокАтрибутовResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="СписокАтрибутовResult" nillable="true" type="q6:ArrayOfType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокКатегорий">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокКатегорийResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="СписокКатегорийResult" nillable="true" type="q7:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьЗначение">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Тип" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Атрибут" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьЗначениеResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПолучитьЗначениеResult" nillable="true" type="xs:anyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначение">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Тип" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="attribute" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначениеResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьТип">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьТипResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьАтрибут">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Атрибут" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьАтрибутResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПроверитьНаследование">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="БазовыйТип" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Тип" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПроверитьНаследованиеResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПроверитьНаследованиеResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Binder_СписокСвязей">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Binder_СписокСвязейResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="Binder_СписокСвязейResult" nillable="true" type="q8:ArrayOfBinding" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Binder_СохранитьСвязь">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="attribute" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="control" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyPath" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="StringFormat" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Binder_СохранитьСвязьResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Binder_УдалитьСвязи">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Binder_УдалитьСвязиResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Event_СписокСобытий">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Event_СписокСобытийResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="Event_СписокСобытийResult" nillable="true" type="q9:ArrayOfEvent" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Event_СохранитьСобытие">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="control" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ИмяСобытия" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ИмяФункции" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Event_СохранитьСобытиеResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Event_УдалитьСобытие">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Event_УдалитьСобытиеResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Процесс_СоздатьПроцесс">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеПроцесса" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Тип" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Процесс_СоздатьПроцессResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Процесс_СоздатьПроцессResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Процесс_ОбновитьСостояниеПроцесса">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Процесс" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СостояниеПроцесса" type="xs:double" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Процесс_ОбновитьСостояниеПроцессаResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Процесс_ЗавершитьПроцесс">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Процесс" type="xs:decimal" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Процесс_ЗавершитьПроцессResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Процесс_ОшибкаВПроцессе">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Процесс" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СообщениеОбОшибке" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Процесс_ОшибкаВПроцессеResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьФорму">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьФормуResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="ПолучитьФормуResult" nillable="true" type="q10:Форма" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="КопироватьТипДанных">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ИзДомена" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="КопироватьВ" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="КопироватьВДомен" nillable="true" type="xs:string" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="УсловияКопирования" type="q11:УсловияКопирования" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="КопироватьТипДанныхResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Сервис_ДобавитьВебСервис">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Адрес" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Название" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Сервис_ДобавитьВебСервисResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Сервис_ДобавитьВебСервисResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Сервис_СписокВебСервисов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Сервис_СписокВебСервисовResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="Сервис_СписокВебСервисовResult" nillable="true" type="q12:ArrayOfВебСервис" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьТип">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Номер" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Категория" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="БазовыйТип" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="IsМассив" type="xs:boolean" />
+        <xs:element minOccurs="0" name="ОбновитьКонфигурацию" type="xs:boolean" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьТипResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ДобавитьТипResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьАтрибут">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ТипДанных" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Атрибут" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ОбновитьКонфигурацию" type="xs:boolean" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьАтрибутResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОписаниеВИмя">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОписаниеВИмяResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ОписаниеВИмяResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="КомпилироватьКонфигурацию">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="КомпилироватьКонфигурациюResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокДоменов">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокДоменовResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="СписокДоменовResult" nillable="true" type="q13:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ЖурналСобытийДобавитьОшибку">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="StackTrace" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОтправитьИнструкцию">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_user" type="xs:decimal" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОтправитьПисьмоВТехническуюПоддержку">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ИмяДомена" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ОтКого" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ТемаСообщения" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ТекстСообщения" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="СрокРеализации" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="Важно" type="xs:boolean" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="СписокФайлов" nillable="true" type="q14:ArrayOfKeyValueOfstringbase64Binary" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОтправитьПисьмоВТехническуюПоддержкуResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ОтправитьПисьмоВТехническуюПоддержкуResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьIpАдресСоединения">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьIpАдресСоединенияResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПолучитьIpАдресСоединенияResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокЖурналов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокЖурналовResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="СписокЖурналовResult" nillable="true" type="q15:ArrayOfЖурнал" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокОтчетов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокОтчетовResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="СписокОтчетовResult" nillable="true" type="q16:ArrayOfОтчет" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокСправочников">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокСправочниковResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="СписокСправочниковResult" nillable="true" type="q17:ArrayOfСправочник" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Авторизация">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ЗаписатьВЖурнал" type="xs:boolean" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="АвторизацияResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="АвторизацияResult" nillable="true" type="q18:Пользователь" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="АвторизацияПродлитьСессиюПользователя">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="СсылкаНаПользователя" type="xs:decimal" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="ВремяСесси" type="q19:duration" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="АвторизацияБлокировки">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Выключить" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ping">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PingResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокКешированныхОбъектов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокКешированныхОбъектовResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/RosService.Configuration" minOccurs="0" name="СписокКешированныхОбъектовResult" nillable="true" type="q20:ArrayOfCacheObject" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьКешированныеОбъекты">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="items" nillable="true" type="q21:ArrayOfstring" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьКешированныеОбъектыResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

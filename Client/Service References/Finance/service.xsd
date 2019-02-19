@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/RosService.Finance" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="ДобавитьПлатеж">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/RosService.Finance" minOccurs="0" name="НапралениеПлатежа" type="q1:НапралениеПлатежа" />
+        <xs:element minOccurs="0" name="СсылкаНаКонтрагента" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СсылкаНаДоговор" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СтатьяДвиженияСредств" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ДатаПлатежа" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="СуммаПлатежа" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СпособОплаты" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="НазначениеПлатежа" nillable="true" type="xs:string" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/RosService.Finance" minOccurs="0" name="СтавкаНдс" type="q2:СтавкаНдс" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьПлатежResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ДобавитьПлатежResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьВнутреннийПеревод">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RosService.Finance" minOccurs="0" name="НапралениеПлатежа" type="q3:НапралениеПлатежа" />
+        <xs:element minOccurs="0" name="СсылкаНаКонтрагента" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СсылкаНаОбъект" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СтатьяДвиженияДенежныхСредств" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ДатаПлатежа" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="СуммаПлатежа" type="xs:decimal" />
+        <xs:element minOccurs="0" name="НазначениеПлатежа" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьВнутреннийПереводResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ДобавитьВнутреннийПереводResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьВнутреннийПереводНаСчет">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеСчета" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RosService.Finance" minOccurs="0" name="НапралениеПлатежа" type="q4:НапралениеПлатежа" />
+        <xs:element minOccurs="0" name="СсылкаНаКонтрагента" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СсылкаНаОбъект" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СтатьяДвиженияДенежныхСредств" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ДатаПлатежа" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="СуммаПлатежа" type="xs:decimal" />
+        <xs:element minOccurs="0" name="НазначениеПлатежа" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ТипДокумента" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьВнутреннийПереводНаСчетResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ДобавитьВнутреннийПереводНаСчетResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьВнутреннийПеревод">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Платеж" type="xs:decimal" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьВнутреннийПереводResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ВыводСредств">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_client" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Дата" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Сумма" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СпособОплаты" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="НазначениеПлатежа" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="УдерживатьНДФЛ" type="xs:boolean" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ВыводСредствResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ВыводСредствResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ВыводСредствСоСчета">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеСчета" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="СсылкаНаКонтрагента" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Дата" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Сумма" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СпособОплаты" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="НазначениеПлатежа" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="УдерживатьНДФЛ" type="xs:boolean" />
+        <xs:element minOccurs="0" name="ТипДокумента" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ВыводСредствСоСчетаResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ВыводСредствСоСчетаResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПеревестиСредства">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Отправитель" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Получатель" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Сумма" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Примечание" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПеревестиСредстваResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПеревестиСредстваСоСчета">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеСчета" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Отправитель" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Получатель" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Сумма" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Примечание" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ТипДокумента" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПеревестиСредстваСоСчетаResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="РегистрацияКлиента">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="СсылкаНаМестоАгента" type="xs:decimal" />
+        <xs:element minOccurs="0" name="РегиональныйПредставитель" type="xs:decimal" />
+        <xs:element minOccurs="0" name="ВидКонтрагента" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="СтатусКонтрагента" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Фамилия" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Отчество" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Компания" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Почта" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Пароль" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="РегистрацияКлиентаResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="РегистрацияКлиентаResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПополнитьСчет">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеСчета" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Получатель" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СсылкаНаОбъект" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Дата" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Сумма" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Примечание" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПополнитьСчетResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписатьСоСчета">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеСчета" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Получатель" type="xs:decimal" />
+        <xs:element minOccurs="0" name="СсылкаНаОбъект" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Дата" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Сумма" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Примечание" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписатьСоСчетаResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПеревестиСоСчета">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеСчета" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Отправитель" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Получатель" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Сумма" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Примечание" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПеревестиСоСчетаResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьСоСчета">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеСчета" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Получатель" type="xs:decimal" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="guid" nillable="true" type="q5:ArrayOfstring" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьСоСчетаResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОбновитьОстаткиНаСчетах">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОбновитьОстаткиНаСчетахResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОбновитьСведенияКонтрагента">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Контрагент" type="xs:decimal" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОбновитьСведенияКонтрагентаResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОбновитьОстаткиНаВнутреннихСчетах">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОбновитьОстаткиНаВнутреннихСчетахResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПроверитьБанковскиеРеквизитыКонтрагента">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Контрагент" type="xs:decimal" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПроверитьБанковскиеРеквизитыКонтрагентаResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПроверитьБанковскиеРеквизиты">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПроверитьБанковскиеРеквизитыResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="НДС">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="СтавкаНдс" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="НДСResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НДСResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ЧислоПрописью">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Число" type="xs:double" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RosService.Finance" minOccurs="0" name="ФорматЧислаПрописью" type="q6:ФорматЧислаПрописью" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ЧислоПрописьюResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ЧислоПрописьюResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ИнвентаризацияПродукцииНаСкладе">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Склады" nillable="true" type="q7:ArrayOfdecimal" />
+        <xs:element minOccurs="0" name="ДатаИнвентаризации" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ИнвентаризацияПродукцииНаСкладеТаблица">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Склад" type="xs:decimal" />
+        <xs:element minOccurs="0" name="ДатаИнвентаризации" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ИнвентаризацияПродукцииНаСкладеТаблицаResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/RosService.Finance" minOccurs="0" name="ИнвентаризацияПродукцииНаСкладеТаблицаResult" nillable="true" type="q8:ArrayOfИнвентаризация" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

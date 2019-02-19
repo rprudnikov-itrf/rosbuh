@@ -1,0 +1,412 @@
+﻿<Page x:Class="RosApplication.Клиент.Main"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    xmlns:rsu="clr-namespace:RosService;assembly=RosService.Client"
+    xmlns:command="clr-namespace:RosApplication.Command"
+    xmlns:a="clr-namespace:RosApplication.Клиент"
+    xmlns:msg="clr-namespace:RosApplication.Клиент.Чат"
+    xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"   
+    xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"     
+    KeepAlive="False"
+    Loaded="Page_Loaded" Initialized="Page_Initialized" ShowsNavigationUI="False"
+    x:Name="MainWindow">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <r:InvariantBooleanToVisibilityConverter x:Key="InvariantBooleanToVisibilityConverter" />
+        <r:VisibilityConverter x:Key="VisibilityConverter" />
+        <a:IsAlertConverter x:Key="IsAlertConverter" />
+        <!--<a:ToolButtonConverter x:Key="ToolButtonConverter" />-->
+
+        <!--<Style x:Key="MenuItemUser" TargetType="MenuItem">
+            <Setter Property="Margin" Value="0 1 0 1" />
+            <Setter Property="Padding" Value="2 1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter ContentSource="Header" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            </Trigger>
+                           
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+        <!--<CollectionViewSource x:Key="Users" Source="{Binding Path=СписокПользователей, ElementName=MainWindow, IsAsync=True}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Пользователь.Группа" />
+            </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <cm:SortDescription PropertyName="Пользователь.Группа" Direction="Ascending" />
+                <cm:SortDescription PropertyName="Пользователь.НазваниеОбъекта" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>-->
+    </Page.Resources>
+    <Page.InputBindings>
+        <KeyBinding Command="command:ApplicationCommand.Вид" CommandParameter="Конфигуратор" Gesture="Ctrl+K" />
+    </Page.InputBindings>
+    <Page.CommandBindings>
+        <CommandBinding Command="Find" Executed="Обновить" />
+    </Page.CommandBindings>
+
+    <r:DocumentsTabControl x:Name="PART_DocumentsHost" TextBlock.FontSize="12" 
+                           IsNavigation="True"
+                           NavigationWidth="200"
+                           SelectedValuePath="Tag">
+        <r:DocumentsTabControl.Header>
+            <Grid 
+                TextOptions.TextFormattingMode="Display" 
+                TextOptions.TextRenderingMode="ClearType">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="230" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Rectangle Grid.ColumnSpan="2" VerticalAlignment="Top" Height="35" Grid.Row="1" Grid.RowSpan="2" Fill="#f0f0f0" IsHitTestVisible="False">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform Y="0" />
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="0" Color="#000" Direction="270" Opacity="0.5" 
+                                                  BlurRadius="4"
+                                                  RenderingBias="Performance"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+
+                <r:ToolBarMain>
+                    <Menu VerticalAlignment="Center" HorizontalAlignment="Left"
+                          Margin="0,1,0,0">
+                        <MenuItem Header="Файл">
+                            <!--<MenuItem Visibility="Collapsed" Header="Сохранить" Command="Save" InputGestureText=" " CommandTarget="{Binding Path=SelectedDocument, ElementName=DockingManager}" />
+                        <MenuItem Visibility="Collapsed" Header="Сохранить как..." Command="SaveAs" />
+                        <MenuItem Visibility="Collapsed" Header="Печать..." Command="Print" InputGestureText=" " CommandTarget="{Binding Path=SelectedItem, RelativeSource={RelativeSource AncestorType=r:DocumentsTabControl}}" />
+                        <Separator Visibility="Collapsed" />-->
+                            <MenuItem Header="Настройки пользователя..." CommandParameter="Настройки" Command="command:ApplicationCommand.Пользователь" />
+                            <Separator />
+                            <MenuItem Header="Выход" Command="command:ApplicationCommand.Файл" CommandParameter="ЗавершениеРаботы" />
+                        </MenuItem>
+                        <MenuItem Header="Вид">
+                            <MenuItem.Visibility>
+                                <Binding Path="Группа" Mode="OneTime"
+                                            Source="{x:Static rsu:Client.User}" 
+                                            Converter="{StaticResource VisibilityConverter}"
+                                            ConverterParameter="Администратор" />
+                            </MenuItem.Visibility>
+                            <MenuItem Header="Конфигуратор" Command="command:ApplicationCommand.Вид" CommandParameter="Конфигуратор" x:Name="menu_Configurator" Visibility="Collapsed" />
+                            <Separator />
+                            <MenuItem Header="Журналы" Command="command:ApplicationCommand.Вид" CommandParameter="Журналы" InputGestureText="Ctrl+F1" />
+                            <MenuItem Header="Отчеты" Command="command:ApplicationCommand.Вид" CommandParameter="Отчеты" InputGestureText="Ctrl+F2" />
+                            <MenuItem Header="Справочники" Command="command:ApplicationCommand.Вид" CommandParameter="Справочники" InputGestureText="Ctrl+F3" />
+                            <Separator />
+                            <MenuItem Header="Журнал удалений" Click="ЖурналУдалений" />
+                        </MenuItem>
+                        <MenuItem Header="Помощь">
+                            <MenuItem Header="Справка" Command="command:ApplicationCommand.Справка">
+                                <MenuItem.Icon>
+                                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" Stretch="None" Source="/RosControl.Wpf;component/Themes/images/help.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="Техническая поддержка" CommandParameter="ТехническаяПоддержка" Command="command:ApplicationCommand.Справка" />
+                            <MenuItem Header="О программе" CommandParameter="ОПрограмме" Command="command:ApplicationCommand.Справка" />
+                        </MenuItem>
+                    </Menu>
+                    <!--<local:AppleSearchBox DockPanel.Dock="Right" HorizontalAlignment="Right"
+                            VerticalAlignment="Center" Margin="0 1 16 0"
+                            SnapsToDevicePixels="True"/>-->
+                </r:ToolBarMain>
+                <r:ToolBarMain Grid.Column="1" Padding="0">
+                    <!--<Grid Margin="-4,0,0,0" Width="400">
+                        <Grid.Visibility>
+                            <Binding Path="Права.ЗапретитьРасширенныйПоиск" Mode="OneTime" Source="{x:Static rsu:Client.User}" Converter="{StaticResource InvariantBooleanToVisibilityConverter}" />
+                        </Grid.Visibility>
+                        <Rectangle Height="25" 
+                            VerticalAlignment="Center"
+                            Fill="#e9e9e9" Margin="2,1,2,0" />
+                        <Border Height="24" 
+                            VerticalAlignment="Center"
+                            BorderThickness="1"
+                            BorderBrush="#c4c4c4"
+                            Background="#fff"
+                            Padding="2,0"
+                            CornerRadius="3">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+
+                                <r:TextBox Name="SearchQuery" VerticalContentAlignment="Center" BorderThickness="0" 
+                                     FontFamily="Tahoma" FontSize="12" KeyboardNavigation.IsTabStop="False" 
+                                     KeyboardNavigation.TabNavigation="None"
+                                     KeyDown="TextBox_KeyDown" Background="Transparent"
+                                     Padding="0" Foreground="Gray" Watermark="Поиск" />
+
+                                <Image x:Name="PART_FindImage" Grid.Column="1"
+                                   RenderOptions.BitmapScalingMode="NearestNeighbor" 
+                                   Source="/RosControl.Wpf;component/Themes/images/find.png" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Width="14" Height="14" Stretch="None" Margin="0,2,0,0" />
+                            </Grid>
+                        </Border>
+                    </Grid>-->
+                    <!--<r:Separator x:Name="Separator1" Margin="-4,5,4,5" Visibility="{Binding ElementName=PART_Explorer, Path=Visibility}" />
+                    <r:ToolBarButton Content="Проводник" CommandParameter="Проводник" Margin="0,0,0,0"
+                                     Command="command:ApplicationCommand.Вид" x:Name="PART_Explorer">
+                        <r:ToolBarButton.Icon>
+                            <Image Width="16" Height="16" Stretch="UniformToFill"
+                                RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                Margin="0,1,2,0" Source="/RosControl.Wpf;component/Themes/images/FolderUp.png"/>
+                        </r:ToolBarButton.Icon>
+                        <r:ToolBarButton.Visibility>
+                            <Binding Path="Права.ПоказатьВсеДерево" Mode="OneTime" Source="{x:Static rsu:Client.User}" Converter="{StaticResource BooleanToVisibilityConverter}" />
+                        </r:ToolBarButton.Visibility>
+                    </r:ToolBarButton>-->
+
+                    <!--<r:Separator Margin="4,5" Visibility="{Binding ElementName=PART_MailButton, Path=Visibility}" />
+                    <r:ToolBarSeparatorButton x:Name="PART_MailButton" Content="Письмо" Margin="0 0 3 0"
+                                          Command="command:ApplicationCommand.Почта" CommandParameter="mailto:">
+                        <r:ToolBarSeparatorButton.Icon>
+                            <Image Width="16" Height="16" RenderOptions.BitmapScalingMode="NearestNeighbor" 
+                                        Stretch="UniformToFill" Margin="0 3 0 0" Source="/RosApplication;component/Themes/images/newmail.png"/>
+                        </r:ToolBarSeparatorButton.Icon>
+                        <r:ToolBarSeparatorButton.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Отправленные" Command="command:ApplicationCommand.Почта" />
+                                <Separator />
+                                <MenuItem Header="Mail.ru" CommandParameter="http://www.mail.ru:@Mail.ru" Command="command:ApplicationCommand.Почта" InputGestureText=" " />
+                                <MenuItem Header="Яндекс" CommandParameter="http://mail.yandex.ru:@Яндекс" Command="command:ApplicationCommand.Почта" InputGestureText=" " />
+                                <MenuItem Header="РосИнфоТех" CommandParameter="http://mail.itrf.ru:@РосИнфоТех" Command="command:ApplicationCommand.Почта" InputGestureText=" " />
+                            </ContextMenu>
+                        </r:ToolBarSeparatorButton.ContextMenu>
+                        <r:ToolBarSeparatorButton.Visibility>
+                            <Binding Path="Права.ЗапретитьРаботуСПочтой" Mode="OneTime" Source="{x:Static rsu:Client.User}" Converter="{StaticResource VisibilityConverter}" ConverterParameter="False" />
+                        </r:ToolBarSeparatorButton.Visibility>
+                    </r:ToolBarSeparatorButton>-->
+                    <!--<r:ToolBarSeparatorButton Content="Задача" Command="command:ApplicationCommand.Задачи" 
+                                          CommandParameter="Создать">
+                        <r:ToolBarSeparatorButton.Resources>
+                            <CollectionViewSource x:Key="Users" Source="{Binding Path=СписокПользователей, Mode=OneTime, ElementName=MainWindow, IsAsync=True}">
+                                <CollectionViewSource.SortDescriptions>
+                                    <cm:SortDescription PropertyName="Пользователь.НазваниеОбъекта" Direction="Ascending" />
+                                </CollectionViewSource.SortDescriptions>
+                            </CollectionViewSource>
+                        </r:ToolBarSeparatorButton.Resources>
+                        <r:ToolBarSeparatorButton.Icon>
+                            <Image RenderOptions.BitmapScalingMode="NearestNeighbor" 
+                                    Width="16" Height="16" Stretch="UniformToFill" Margin="0,2,0,0"
+                                    Source="/RosApplication;component/Themes/images/clock.png" />
+                        </r:ToolBarSeparatorButton.Icon>
+                        <r:ToolBarSeparatorButton.ContextMenu>
+                            <ContextMenu ItemsSource="{Binding Source={StaticResource Users}, Mode=OneTime, IsAsync=True}"
+                                    ItemContainerStyle="{StaticResource MenuItemUser}"
+                                    MenuItem.Click="ContextMenu_Click"
+                                    Background="White">
+                                <ContextMenu.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <r:UniformGrid VirtualizingStackPanel.IsVirtualizing="True" 
+                                                   VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                                   IsItemsHost="True" Columns="3" Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ContextMenu.ItemsPanel>
+                                <ContextMenu.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Cursor="Hand" Background="Transparent">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="20" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image Name="PART_Online" 
+                                                Stretch="UniformToFill" Source="/RosControl.Wpf;component/Themes/images/offline.png"
+                                                Width="16" Height="16" VerticalAlignment="Center" />
+
+                                            <TextBlock Grid.Column="1" Text="{Binding Пользователь.НазваниеОбъекта, Mode=OneTime}" 
+                                                            VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                                            FontFamily="Tahoma" FontSize="12"/>
+                                        </Grid>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Пользователь.ВСети, Mode=OneTime}" Value="True">
+                                                <Setter TargetName="PART_Online" Property="Source" Value="/RosControl.Wpf;component/Themes/images/online.png" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ContextMenu.ItemTemplate>
+                                <ContextMenu.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.ContainerStyle>
+                                            <Style TargetType="GroupItem">
+                                                <Setter Property="Margin" Value="0" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="GroupItem">
+                                                            <Border Background="White">
+                                                                <StackPanel Margin="5">
+                                                                    <TextBlock Margin="4,0,4,0" Text="{Binding Name, Mode=OneTime}" FontWeight="Bold" FontFamily="Tahoma" FontSize="14" />
+                                                                    <ItemsPresenter />
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </GroupStyle.ContainerStyle>
+                                    </GroupStyle>
+                                </ContextMenu.GroupStyle>
+                            </ContextMenu>
+                        </r:ToolBarSeparatorButton.ContextMenu>
+                        <r:ToolBarSeparatorButton.Visibility>
+                            <Binding Path="Права.ЗапретитьРаботуСЗадачами" Mode="OneTime" Source="{x:Static rsu:Client.User}" Converter="{StaticResource VisibilityConverter}" ConverterParameter="False" />
+                        </r:ToolBarSeparatorButton.Visibility>
+                    </r:ToolBarSeparatorButton>-->
+                    <!--<r:ToolBarButton Content="Поиск" Command="command:ApplicationCommand.Поиск" HorizontalAlignment="Left">
+                        <r:ToolBarButton.Icon>
+                            <Image Width="16" Height="16" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="None" Source="/RosApplication;component/Themes/images/search.png"/>
+                        </r:ToolBarButton.Icon>
+                        <r:ToolBarButton.Visibility>
+                            <Binding Path="Права.ЗапретитьРасширенныйПоиск" Mode="OneTime" Source="{x:Static rsu:Client.User}" Converter="{StaticResource VisibilityConverter}" ConverterParameter="False" />
+                        </r:ToolBarButton.Visibility>
+                    </r:ToolBarButton>-->
+
+                    <ToggleButton DockPanel.Dock="Right" 
+                              HorizontalAlignment="Right"
+                              IsChecked="{Binding Path=SelectedItem.IsNavigation, ElementName=PART_DocumentsHost, Mode=TwoWay}"
+                              Visibility="{Binding Path=SelectedItem.IsFull, ElementName=PART_DocumentsHost, Mode=OneWay, Converter={StaticResource InvariantBooleanToVisibilityConverter}}"
+                              Padding="4,0,4,0" Margin="0,0,8,0" ToolTip="Скрыть меню">
+                        <Image x:Name="PART_Image" Width="16" Height="16" Stretch="None" 
+                                    RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="0 1 0 0"
+                                    Source="/RosApplication;component/Themes/images/MenuShow.png"/>
+                    </ToggleButton>
+                </r:ToolBarMain>
+            </Grid>
+        </r:DocumentsTabControl.Header>
+        <r:DocumentsTabControl.Navigation>
+            <Border SnapsToDevicePixels="True"
+                    BorderBrush="#808080"
+                    BorderThickness="0 0 1 0">
+                <!--Background="#e6eaee"-->
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#eaedf2" Offset="0" />
+                        <GradientStop Color="#d1d8df" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ScrollViewer x:Name="PART_NavigationPanel"
+                          VerticalScrollBarVisibility="Auto" 
+                          HorizontalScrollBarVisibility="Disabled"
+                          FocusVisualStyle="{x:Null}"
+                          MouseLeftButtonUp="NavigationPanel_MouseLeftButtonUp">
+                    <ScrollViewer.Resources>
+                        <Style TargetType="{x:Type r:TreeView}">
+                            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="#191919" />
+                        </Style>
+                        <!--<Style TargetType="{x:Type r:TreeViewItem}">
+                            <Setter Property="Margin" Value="0 1" />
+                        </Style>-->
+                    </ScrollViewer.Resources>
+                    <ScrollViewer.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Открыть в новой вкладке" Command="Open" InputGestureText=" " CommandParameter="@@НоваяВкладка" />
+                            <MenuItem Header="Открыть в окне" Command="Open" InputGestureText=" " CommandParameter="@@Окно" />
+                        </ContextMenu>
+                    </ScrollViewer.ContextMenu>
+                    <ScrollViewer.Content>
+                        <Binding Path="SelectedItem.Navigation" ElementName="PART_DocumentsHost" Mode="OneWay">
+                            <Binding.TargetNullValue>
+                                <ContentControl Content="{Binding Path=ПользовательскоеМеню, ElementName=MainWindow, Mode=OneWay}" />
+                            </Binding.TargetNullValue>
+                        </Binding>
+                    </ScrollViewer.Content>
+                </ScrollViewer>
+            </Border>
+        </r:DocumentsTabControl.Navigation>
+        <r:DocumentsTabItem x:Name="PART_Сообщения" ToolTip="Сообщения" 
+                            Visibility="Collapsed"
+                            Header="{Binding Path=КоличествоНовыхСообщений, Mode=OneWay, ElementName=MainWindow}" 
+                            IsReadOnly="True" IsFull="True" MinWidth="0"
+                            IsAlert="{Binding Path=КоличествоНовыхСообщений, Mode=OneWay, ElementName=MainWindow, Converter={StaticResource IsAlertConverter}}">
+            <r:DocumentsTabItem.HeaderTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}" ContentStringFormat="{}({0})" />
+                </DataTemplate>
+            </r:DocumentsTabItem.HeaderTemplate>
+            <r:DocumentsTabItem.Icon>
+                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" 
+                        Width="16" Height="16" Stretch="UniformToFill"
+                        Source="/RosControl.Wpf;component/Themes/images/online.png" />
+            </r:DocumentsTabItem.Icon>
+            <msg:МоиСообщения />
+        </r:DocumentsTabItem>
+        <!--<r:DocumentsTabItem x:Name="PART_Задачи" ToolTip="Задачи" 
+                            Header="{Binding Path=КоличествоНовыхЗадач, Mode=OneWay, ElementName=MainWindow}" 
+                            IsReadOnly="True" IsFull="True" MinWidth="0"
+                            IsAlert="{Binding Path=КоличествоНовыхЗадач, Mode=OneWay, ElementName=MainWindow, Converter={StaticResource IsAlertConverter}}">
+            <r:DocumentsTabItem.Visibility>
+                <Binding Path="Права.ЗапретитьРаботуСЗадачами" Mode="OneTime" Source="{x:Static rsu:Client.User}" Converter="{StaticResource VisibilityConverter}" ConverterParameter="False" />
+            </r:DocumentsTabItem.Visibility>
+            <r:DocumentsTabItem.HeaderTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}" ContentStringFormat="{}({0})" />
+                </DataTemplate>
+            </r:DocumentsTabItem.HeaderTemplate>
+            <r:DocumentsTabItem.Icon>
+                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" 
+                                       Width="16" Height="16" Stretch="UniformToFill"
+                                       Source="/RosApplication;component/Themes/images/clock.png" />
+            </r:DocumentsTabItem.Icon>
+            <t:МоиЗадачи />
+        </r:DocumentsTabItem>-->
+        <r:DocumentsTabItem x:Name="ГлавнаяСтраница" Selector.IsSelected="True" Header="{Binding Path=Title, Mode=OneWay, ElementName=MainWindow}" 
+                            IsReadOnly="True" Tag="Главная">
+            <r:DocumentsTabItem.Icon>
+                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" 
+                                       Width="16" Height="16" Stretch="UniformToFill"
+                                       Source="/icon.ico" />
+            </r:DocumentsTabItem.Icon>
+            <r:ГлавнаяСтраница />
+        </r:DocumentsTabItem>
+    </r:DocumentsTabControl>
+
+
+
+    <!--<r:DocumentsTabItem ToolTip="РосИнфоТех" IsReadOnly="True" IsFull="True" MinWidth="0">
+            <r:DocumentsTabItem.Icon>
+                <Image Width="16" Height="16" Stretch="UniformToFill" 
+                    Margin="0,0,0,0" Source="/RosApplication;component/Themes/images/031.png" />
+            </r:DocumentsTabItem.Icon>
+            <r:DocumentsTabItem.Visibility>
+                <Binding Path="Права.СкрытьРекламу" Source="{x:Static rsu:Client.User}" Converter="{StaticResource InvariantBooleanToVisibilityConverter}" />
+            </r:DocumentsTabItem.Visibility>
+            <WebBrowser Source="http://www.itrf.ru" />
+        </r:DocumentsTabItem>-->
+    <!--<Border Background="Black" Opacity="1" TextBlock.Foreground="White" Grid.RowSpan="2">
+        <Border.Visibility>
+            <Binding Path="ПоказатьРабочийСтол" ElementName="MainWindow">
+                <Binding.Converter>
+                    <BooleanToVisibilityConverter />
+                </Binding.Converter>
+            </Binding>
+        </Border.Visibility>
+        <StackPanel VerticalAlignment="Center" >
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="★" Margin="0,-30,0,0" FontSize="110" />
+                <TextBlock Text="РосИнфоТех" FontFamily="Georgia" FontSize="90" />
+            </StackPanel>
+            <r:HyperLink Content="Закрыть" FontSize="20" Margin="0,60,0,0" 
+                             Click="СкрытьРабочийСтол_Click" HorizontalAlignment="Center" />
+        </StackPanel>
+    </Border>-->
+</Page>

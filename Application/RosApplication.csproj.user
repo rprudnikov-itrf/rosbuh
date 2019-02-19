@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectView>ProjectFiles</ProjectView>
+    <PublishUrlHistory>ftp://itrf.ru/wwwroot/update.itrf.ru/|ftp://89.108.72.236/wwwroot/update/4.0/|ftp://89.108.72.236/wwwroot/itrf/wpf.itrf.ru/win/|ftp://itrf.ru/wwwroot/itrf/wpf.itrf.ru/win/|ftp://89.108.93.166/wwwroot/itrf/wpf.itrf.ru/win/</PublishUrlHistory>
+    <InstallUrlHistory>http://update.itrf.ru/|http://client.itrf.ru/win/|http://client.itrf.ru/|http://wpf.itrf.ru/|http://wtp.itrf.ru/</InstallUrlHistory>
+    <SupportUrlHistory>http://client.itrf.ru/install.htm|http://www.itrf.ru</SupportUrlHistory>
+    <UpdateUrlHistory>
+    </UpdateUrlHistory>
+    <BootstrapperUrlHistory>
+    </BootstrapperUrlHistory>
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ErrorReportUrlHistory>http://client.itrf.ru/install.htm</ErrorReportUrlHistory>
+    <DebugSecurityZoneURL>http://client.itrf.ru/</DebugSecurityZoneURL>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartAction>Project</StartAction>
+    <StartURL>
+    </StartURL>
+    <StartProgram>C:\Program Files\Internet Explorer\iexplore.exe</StartProgram>
+    <StartArguments>
+    </StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartAction>Project</StartAction>
+    <StartProgram>C:\Program Files\Internet Explorer\iexplore.exe</StartProgram>
+    <StartArguments>
+    </StartArguments>
+  </PropertyGroup>
+</Project>

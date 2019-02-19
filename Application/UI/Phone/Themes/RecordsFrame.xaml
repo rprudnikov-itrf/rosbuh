@@ -1,0 +1,155 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="clr-namespace:RosControl.UI;assembly=RosControl.Wpf"
+    xmlns:c="clr-namespace:RosControl.Converters;assembly=RosControl.Wpf"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:local="clr-namespace:RosControl.UI">
+
+    <Style TargetType="{x:Type local:RecordsFrame}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:RecordsFrame}">
+                    <r:Window IsScroll="False" IsButton="False" Padding="0" x:Name="PART_Form">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="44" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <r:ToolBar Grid.Row="1" BorderThickness="0,0,0,0" Padding="6" Height="36">
+                                <r:ButtonIcon Margin="0" Icon="ИконкаОбновить" ToolTip="Обновить (F5)" Command="Find" CommandTarget="{Binding ElementName=Table1}" Padding="3,0"/>
+                                <r:Separator Margin="6,0" />
+                                <ComboBox Name="PART_Perriod" MinWidth="40" Style="{DynamicResource {x:Type ComboBox}}" VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                                          SelectedValue="{Binding Path=Perriod, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" SelectedValuePath="Tag">
+                                    <ComboBoxItem Tag="1">за 15 минут</ComboBoxItem>
+                                    <ComboBoxItem Tag="2">за 30 минут</ComboBoxItem>
+                                    <ComboBoxItem Tag="3">за 1 час</ComboBoxItem>
+                                    <ComboBoxItem Tag="0">Сегодня</ComboBoxItem>
+                                    <ComboBoxItem Tag="4">Вчера</ComboBoxItem>
+                                    <ComboBoxItem Tag="5">Последние 50</ComboBoxItem>
+                                    <ComboBoxItem Tag="6">Последние 500</ComboBoxItem>
+                                    <ComboBoxItem Tag="7">Период</ComboBoxItem>
+                                </ComboBox>
+                                <r:RangeDatePicker Name="PART_Range" 
+                                                   Начало="{Binding Path=DateStart, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" 
+                                                   Конец="{Binding Path=DateEnd, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" 
+                                                   Стиль="Время" 
+                                                   Margin="2,0,0,0"
+                                                   Visibility="Collapsed" />
+                                
+                                <r:Separator Margin="6,0" />
+                                <TextBlock Text="Поиск: " VerticalAlignment="Center" />
+                                <r:TextBox x:Name="PART_Filter" Watermark="Номер телефона" Width="140" Margin="0" VerticalContentAlignment="Center" />
+                                <r:Separator Margin="6,0" />
+                                <TextBlock Text="Оператор: " VerticalAlignment="Center" />
+                                <ComboBox Name="PART_Users" ItemsSource="{TemplateBinding Users}" 
+                                          Grid.IsSharedSizeScope="True" 
+                                          MinWidth="50" 
+                                          SelectedValuePath="id"
+                                          SelectedItem="{Binding Path=SelectedUser, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                          Style="{DynamicResource {x:Type ComboBox}}"
+                                          VerticalAlignment="Stretch"
+                                          VerticalContentAlignment="Center">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition MinWidth="40" SharedSizeGroup="sipcolumn" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Text="{Binding Path=sip, StringFormat={}[{0}]}" />
+                                                <TextBlock Grid.Column="1" Text="{Binding name}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </r:ToolBar>
+                            <r:AudioPlayer Grid.Row="0" AutoPlay="True" Url="{Binding Path=SelectedItem[ФайлЗвонка], ElementName=Table1, Mode=OneWay}" />
+
+                            <r:DataGrid
+                                Фильтр="{Binding Path=Text, ElementName=PART_Filter, StringFormat=[РеальныйНомер] like [[%\{0\}%]]}"
+                                Grid.Row="2" IsButton="False" IsContextMenu="False" ClickMode="None" СортироватьПо="[ДатаВремя] Desc" Хранилище="Оперативное" ПоказыватьСтраницы="False" CanUserResizeColumns="True" HorizontalScrollBarVisibility="Auto" 
+                                VerticalScrollBarVisibility="Visible" IsReadOnly="True" CanUserAddRows="False" 
+                                CanUserDeleteRows="False" CanUserResizeRows="False" SelectionMode="Single" SelectionUnit="FullRow" CanUserSortColumns="False" 
+                                CanUserReorderColumns="True" SelectedValuePath="[id]" BorderBrush="#FFD5D5D5" 
+                                BorderThickness="0,0,0,1" Name="Table1">
+                                <r:DataGrid.Параметры>
+                                    <r:ПараметрЗапроса Значение="{Binding ElementName=PART_Perriod, Path=SelectedValue}" Имя="@Perriod" АвтоОбновление="True" />
+                                    <r:ПараметрЗапроса Значение="{Binding ElementName=PART_Users, Path=SelectedValue}" Имя="@SIP" АвтоОбновление="True" />
+                                    <r:ПараметрЗапроса Значение="{Binding ElementName=PART_Range, Path=Начало}" Имя="@start" АвтоОбновление="True" />
+                                    <r:ПараметрЗапроса Значение="{Binding ElementName=PART_Range, Path=Конец}" Имя="@end" АвтоОбновление="True" />
+                                </r:DataGrid.Параметры>
+                                <r:DataGrid.Columns>
+                                    <toolkit:DataGridTextColumn HorizontalAlignment="Center" Header="Дата" IsReadOnly="True" Width="60" MinWidth="60">
+                                        <toolkit:DataGridTextColumn.Binding>
+                                            <Binding Path="[ДатаВремя]" Mode="OneWay" UpdateSourceTrigger="Explicit" StringFormat="dd.MM.yy">
+                                                <Binding.Converter>
+                                                    <c:XmlDataTimeConverter />
+                                                </Binding.Converter>
+                                            </Binding>
+                                        </toolkit:DataGridTextColumn.Binding>
+                                    </toolkit:DataGridTextColumn>
+                                    <toolkit:DataGridTextColumn FontWeight="Bold" HorizontalAlignment="Center" Header="Время" IsReadOnly="True" Width="45" MinWidth="45">
+                                        <toolkit:DataGridTextColumn.Binding>
+                                            <Binding Path="[ДатаВремя]" Mode="OneWay" UpdateSourceTrigger="Explicit" StringFormat="t">
+                                                <Binding.Converter>
+                                                    <c:XmlDataTimeConverter />
+                                                </Binding.Converter>
+                                            </Binding>
+                                        </toolkit:DataGridTextColumn.Binding>
+                                    </toolkit:DataGridTextColumn>
+                                    <toolkit:DataGridTextColumn HorizontalAlignment="Center" Binding="{Binding Path=[ТипЗвонка], Mode=OneWay, UpdateSourceTrigger=Explicit}" Header="Тип" IsReadOnly="True" Width="Auto" MinWidth="120" />
+                                    <toolkit:DataGridTextColumn Binding="{Binding Path=[Кому], Mode=OneWay, UpdateSourceTrigger=Explicit}" Header="Телефон" IsReadOnly="True" Width="Auto" MinWidth="120" />
+                                    <toolkit:DataGridTextColumn HorizontalAlignment="Center" Binding="{Binding Path=[Статус], Mode=OneWay, UpdateSourceTrigger=Explicit}" Header="Статус" IsReadOnly="True" Width="Auto" MinWidth="110" />
+                                    <toolkit:DataGridTextColumn HorizontalAlignment="Center" Binding="{Binding Path=[Длительность], Mode=OneWay, UpdateSourceTrigger=Explicit}" Header="Длительность" IsReadOnly="True" Width="Auto" MinWidth="50" />
+                                    <toolkit:DataGridTextColumn HorizontalAlignment="Center" Binding="{Binding Path=[Кто], Mode=OneWay, UpdateSourceTrigger=Explicit}" Header="Оператор" IsReadOnly="True" Width="Auto" MinWidth="120" />
+                                </r:DataGrid.Columns>
+                                <r:DataGrid.Resources>
+                                    <Style TargetType="toolkit:DataGridColumnHeader" x:Key="DataGridColumnHeaderCenter">
+                                        <Style.Resources>
+                                            <ResourceDictionary />
+                                        </Style.Resources>
+                                        <Setter Property="Control.HorizontalContentAlignment">
+                                            <Setter.Value>
+                                                <x:Static Member="HorizontalAlignment.Center" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                    <Style TargetType="toolkit:DataGridRow" x:Key="{x:Type toolkit:DataGridRow}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=ТипЗвонка}" Value="Входящий">
+                                                <Setter Property="Panel.Background" Value="#3300FF00" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=ТипЗвонка}" Value="Исходящий">
+                                                <Setter Property="Panel.Background" Value="#32FFF600" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Style.Resources>
+                                            <ResourceDictionary />
+                                        </Style.Resources>
+                                    </Style>
+                                </r:DataGrid.Resources>
+                            </r:DataGrid>
+
+                            <StatusBar Grid.Row="3">
+                                <StatusBarItem>
+                                    <Label Padding="3" Content="{Binding Path=Items.Count, ElementName=Table1}" 
+                                           ContentStringFormat="{}Найдено: {0}" 
+                                           FontFamily="Tahoma" FontSize="12" />
+                                </StatusBarItem>
+                            </StatusBar>
+                        </Grid>
+                    </r:Window>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Perriod" Value="7">
+                            <Setter TargetName="PART_Range" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,297 @@
+﻿<UserControl x:Class="RosControl.Designer.РедакторXaml"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    xmlns:rsc="clr-namespace:RosControl.Converters;assembly=RosControl.Wpf"
+    Loaded="UserControl_Loaded" 
+    Name="Editor">
+
+    <UserControl.Resources>
+        <rsc:VisibilityConverter x:Key="boolConverter"/>
+
+        <Style TargetType="{x:Type r:ListBox}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type r:CheckedListBox}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type r:RadioButtonList}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type r:DataGrid}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type r:XmlDataGrid}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type r:ThumbViewer}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type r:ComboBox}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type r:TreeView}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type r:DropDownButton}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type r:CheckBoxList}">
+            <Setter Property="IsDesigner" Value="True" />
+        </Style>
+
+        <ContextMenu x:Key="TextEditor_ContextMenu">
+            <MenuItem Header="Вырезать" Command="Cut" />
+            <MenuItem Header="Копировать" Command="Copy" />
+            <MenuItem Header="Вставить" Command="Paste" />
+            <Separator />
+            <MenuItem Header="Найти..." Command="Find" />
+        </ContextMenu>
+        <ContextMenu x:Key="Designer_ContextMenu">
+            <!--<MenuItem Header="Добавить" Click="ДобавитьContextMenu_Click">
+                <MenuItem.Icon>
+                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" Stretch="None" 
+                           VerticalAlignment="Center"
+                           Source="/RosApplication;component/Themes/images/add.png"/>
+                </MenuItem.Icon>
+                <MenuItem Header="ParamItemControl" Tag="ParamItemControl" />
+            </MenuItem>-->
+            <MenuItem Header="Выделить" ItemsSource="{Binding ParentItemsSource}" 
+                      Click="ВыделитьContextMenu_Click" />
+            <!--<Separator />
+            <MenuItem Header="Выравнимание">
+                <MenuItem.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3" IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </MenuItem.ItemsPanel>
+                <MenuItem Header="[_]" Tag="Left Top" />
+                <MenuItem Header="[_]" Tag="Center Top" />
+                <MenuItem Header="[_]" Tag="Right Top" />
+                <MenuItem Header="[_]" Tag="Left Center" />
+                <MenuItem Header="[_]" Tag="Center Center" />
+                <MenuItem Header="[_]" Tag="Right Center" />
+                <MenuItem Header="[_]" Tag="Left Bottom" />
+                <MenuItem Header="[_]" Tag="Center Bottom" />
+                <MenuItem Header="[_]" Tag="Right Bottom" />
+            </MenuItem>-->
+            <Separator />
+            <MenuItem Header="Показать по условию" Click="СкрытьПоУсловию_Click" />
+            <MenuItem Header="Только чтение по условию" Click="ТолькоЧтениеПоУсловию_Click" />
+            <MenuItem Header="Редактор запросов..." IsEnabled="False" />
+            <MenuItem Header="Редактор колонок..." IsEnabled="False" />
+            <Separator />
+            <MenuItem Header="Удалить" Command="Delete" />
+        </ContextMenu>
+    </UserControl.Resources>
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="Find" Executed="Find_Executed" />
+        <CommandBinding Command="NotACommand" Executed="NotACommand_Executed" />
+        <CommandBinding Command="Redo" Executed="RedoUndo_Executed" />
+        <CommandBinding Command="Undo" Executed="RedoUndo_Executed" />
+        <CommandBinding Command="Save" Executed="Сохранить" CanExecute="IsSaving" />
+    </UserControl.CommandBindings>
+
+    <Grid>
+        <TabControl x:Name="tabControlDesigner" 
+                        TabStripPlacement="Bottom" Padding="0" 
+                        BorderThickness="0,0,0,1" 
+                        Margin="0,0,0,4" 
+                        SelectedValuePath="Name"
+                        PreviewMouseDown="tabControlDesigner_PreviewMouseDown" 
+                        SelectionChanged="tabControlDesigner_SelectionChanged">
+            <TabItem Header="Design" Name="tabDesign">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition x:Name="RightColumn" Width="320" />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                                      CanContentScroll="False"
+                                      Background="White">
+                        <ScrollViewer.Resources>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="Silver" />
+                                <Setter Property="FontStyle" Value="Italic" />
+                                <Setter Property="ToolTip" Value="{Binding Text}" />
+                            </Style>
+                        </ScrollViewer.Resources>
+                        <r:DialogWindow Background="White" VerticalAlignment="Top" 
+                                            MinHeight="380" Margin="20,20,20,20" Title="Диалоговое окно">
+                            <r:КонтентПанель x:Name="PART_КонтентПанель">
+                                <ContentControl x:Name="PART_ContentContanier"
+                                                    FontSize="12" FontFamily="Tahoma" 
+                                                    IsHitTestVisible="False" />
+                            </r:КонтентПанель>
+                        </r:DialogWindow>
+                    </ScrollViewer>
+                    <GridSplitter x:Name="PART_GridSplitter1" Grid.Column="0" Width="4" Background="Transparent" />
+                    <Border Grid.Column="1" Background="#f1eded"
+                BorderBrush="DarkGray" BorderThickness="1,0,0,0">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Top" Padding="4,3,4,2" BorderBrush="#a0a0a0" BorderThickness="0,0,0,1">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="#c2c9da" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <StackPanel Orientation="Horizontal">
+                                    <ListBox Name="PART_ListBox" SelectedIndex="0" SelectedValuePath="Tag" 
+                         Padding="0" BorderThickness="0" Background="Transparent">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="{x:Type ListBoxItem}">
+                                                <Setter Property="Width" Value="22" />
+                                                <Setter Property="Height" Value="22" />
+                                                <Setter Property="Margin" Value="0,0,1,0" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                            <Border Name="PART_Border" BorderThickness="1" BorderBrush="Transparent">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsSelected" Value="True">
+                                                                    <Setter TargetName="PART_Border" Property="BorderBrush" Value="#3399ff" />
+                                                                    <Setter TargetName="PART_Border" Property="Background" Value="#ceedfa" />
+                                                                </Trigger>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="PART_Border" Property="BorderBrush" Value="#3399ff" />
+                                                                    <Setter TargetName="PART_Border" Property="Background" Value="#ceedfa" />
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                        <ListBoxItem Tag="Properties">
+                                            <Image Source="/RosApplication;component/Themes/images/properties.png" Width="16" Height="16" Stretch="None" />
+                                        </ListBoxItem>
+                                        <ListBoxItem Tag="Events">
+                                            <Image Source="/RosApplication;component/Themes/images/events.png" Width="16" Height="16" Stretch="None" />
+                                        </ListBoxItem>
+                                    </ListBox>
+                                </StackPanel>
+                            </Border>
+                            <Grid>
+                                <r:PropertyGrid Name="Property"
+                                        PropertyChanged="propertyGrid_PropertyChanged"
+                                        ButtonCollectionClick="Properties_ButtonCollectionClick">
+                                    <r:PropertyGrid.Visibility>
+                                        <Binding ElementName="PART_ListBox" Path="SelectedValue" ConverterParameter="Properties">
+                                            <Binding.Converter>
+                                                <r:VisibilityConverter />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </r:PropertyGrid.Visibility>
+                                </r:PropertyGrid>
+                                <r:PropertyGrid Name="Event"
+                                        ButtonFileClick="Event_ButtonFileClick">
+                                    <r:PropertyGrid.Visibility>
+                                        <Binding ElementName="PART_ListBox" Path="SelectedValue" ConverterParameter="Events">
+                                            <Binding.Converter>
+                                                <r:VisibilityConverter />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </r:PropertyGrid.Visibility>
+                                </r:PropertyGrid>
+                            </Grid>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Header="XAML" Name="tabXaml">
+                <!--<Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="280" />
+                    </Grid.ColumnDefinitions>-->
+                    <r:TextEditor Name="txtXaml" ContextMenu="{StaticResource TextEditor_ContextMenu}" 
+                                  HighlightingStrategy="Xaml" TextChanged="TextChanged" />
+
+                    <!--<GridSplitter Grid.Column="0" Width="4" Background="Transparent" />
+                    <Border Grid.Column="1" Background="#f1eded" BorderBrush="DarkGray" BorderThickness="1,0,0,0">
+                        <ScrollViewer>
+                            <ScrollViewer.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="Margin" Value="4,2" />
+                                    <Setter Property="Padding" Value="6,2" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                </Style>
+                            </ScrollViewer.Resources>
+                            <StackPanel>
+                                <Button>ButtonIcon</Button>
+                                <Button>ButtonListBox</Button>
+                                <Button>ButtonSpinner</Button>
+                                <Button>Calculators</Button>
+                                <Button>Calender</Button>
+                                <Button>CheckedListBox</Button>
+                                <Button>ColorPicker</Button>
+                                <Button>ComboBox</Button>
+                                <Button>DataGrid</Button>
+                                <Button>DatePicker</Button>
+                                <Button>DropDownButton</Button>
+                                <Button>FileUpload</Button>
+                                <Button>FileUploadMulti</Button>
+                                <Button>FileView</Button>
+                                <Button>GroupBox</Button>
+                                <Button>HyperLink</Button>
+                                <Button>Image</Button>
+                                <Button>ListBox</Button>
+                                <Button>MaskedTextBox</Button>
+                                <Button>NumericUpDown</Button>
+                                <Button>ParamItemControl</Button>
+                                <Button>RadioButtonList</Button>
+                                <Button>RangeRangeDatePicker</Button>
+                                <Button>SearchButton</Button>
+                                <Button>SearchTextBox</Button>
+                                <Button>Separator</Button>
+                                <Button>TabControl</Button>
+                                <Button>TextBox</Button>
+                                <Button>TextBoxChat</Button>
+                                <Button>TextEditor</Button>
+                                <Button>ThumbView</Button>
+                                <Button>TimePicker</Button>
+                                <Button>ToolBar</Button>
+                                <Button>TreeView</Button>
+                                <Button>UniformGrid</Button>
+                                <Button>Window</Button>
+                                <Button>XmlDataGrid</Button>
+                                <Button>Адрес</Button>
+                                <Button>ПечатьОтчетов</Button>
+                                <Button>Путь</Button>
+                                <Button>Чат</Button>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>-->
+            </TabItem>
+            <TabItem Header="Source Code" Name="tabSourceCode">
+                <r:TextEditor Name="txtSourceCode" ContextMenu="{StaticResource TextEditor_ContextMenu}" 
+                                  HighlightingStrategy="Charp" TextChanged="TextChanged" />
+            </TabItem>
+        </TabControl>
+        <Border x:Name="PART_Loadings" 
+                        Background="White" Padding="4,8" TextBlock.FontSize="12" TextBlock.FontFamily="Tahoma"
+                        Grid.Row="1">
+            <Border.Visibility>
+                <Binding Path="IsLoadings" ConverterParameter="True">
+                    <Binding.Converter>
+                        <rsc:VisibilityConverter />
+                    </Binding.Converter>
+                    <Binding.RelativeSource>
+                        <RelativeSource AncestorType="UserControl" />
+                    </Binding.RelativeSource>
+                </Binding>
+            </Border.Visibility>
+            <TextBlock Text="Загрузка, подождите..." VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Center" />
+        </Border>
+    </Grid>
+</UserControl>

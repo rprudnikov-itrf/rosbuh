@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RosService.Data" />
+  <xs:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
+  <xs:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/RosService.Files" />
+  <xs:element name="DownloadRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_file" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="domain" nillable="true" type="xs:string" />
+  <xs:element name="user" nillable="true" type="xs:string" />
+  <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/RosService.Data" name="хранилище" type="q1:Хранилище" />
+  <xs:element name="DownloadResponce">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.microsoft.com/Message" name="FileByteStream" type="q2:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileName" nillable="true" type="xs:string" />
+  <xs:element name="Length" type="xs:long" />
+  <xs:element name="ПолучитьФайлПолностью">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_file" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q3:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьФайлПолностьюResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПолучитьФайлПолностьюResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьФайлПолностьюПоНазванию">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="ИдентификаторФайла" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q4:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьФайлПолностьюПоНазваниюResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПолучитьФайлПолностьюПоНазваниюResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.microsoft.com/Message" name="FileByteStream" type="q5:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="id_node" type="xs:decimal" />
+  <xs:element name="ИдентификаторФайла" nillable="true" type="xs:string" />
+  <xs:element name="ИмяФайла" nillable="true" type="xs:string" />
+  <xs:element name="Описание" nillable="true" type="xs:string" />
+  <xs:element name="UploadResponce">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_file" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьФайлПолностью">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="ИдентификаторФайла" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ИмяФайла" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="stream" nillable="true" type="xs:base64Binary" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q6:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьФайлПолностьюResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="СохранитьФайлПолностьюResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьФайлПолностьюАсинхронно">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="ИдентификаторФайла" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ИмяФайла" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="stream" nillable="true" type="xs:base64Binary" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q7:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОтчетRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеОтчета" nillable="true" type="xs:string" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="Параметры" nillable="true" type="q8:ArrayOfQuery.Параметр" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="ФорматОтчета" type="q9:ФорматОтчета" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОтчетResponce">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.microsoft.com/Message" name="FileByteStream" type="q10:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/RosService.Data" name="MimeType" type="q11:MimeType" />
+  <xs:element name="ОтчетКонструкторRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/RosService.Files" minOccurs="0" name="Шаблон" nillable="true" type="q12:ШаблонОтчета" />
+        <xs:element minOccurs="0" name="Хранилище" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОтчетДанныеRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="НазваниеОтчета" nillable="true" type="xs:string" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="Параметры" nillable="true" type="q13:ArrayOfQuery.Параметр" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьФайлПросмотр">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_file" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RosService.Files" minOccurs="0" name="type" type="q14:ImageType" />
+        <xs:element minOccurs="0" name="width" type="xs:int" />
+        <xs:element minOccurs="0" name="height" type="xs:int" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/RosService.Files" minOccurs="0" name="format" type="q15:ImageFormat" />
+        <xs:element minOccurs="0" name="Качество" type="xs:long" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/RosService.Files" minOccurs="0" name="Конструктор" nillable="true" type="q16:КонструкторИзображения" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьФайлПросмотрResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПолучитьФайлПросмотрResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьФайлПросмотрПоНазванию">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="ИмяФайла" nillable="true" type="xs:string" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/RosService.Files" minOccurs="0" name="type" type="q17:ImageType" />
+        <xs:element minOccurs="0" name="width" type="xs:int" />
+        <xs:element minOccurs="0" name="height" type="xs:int" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/RosService.Files" minOccurs="0" name="format" type="q18:ImageFormat" />
+        <xs:element minOccurs="0" name="Качество" type="xs:long" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/RosService.Files" minOccurs="0" name="Конструктор" nillable="true" type="q19:КонструкторИзображения" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q20:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьФайлПросмотрПоНазваниюResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПолучитьФайлПросмотрПоНазваниюResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMimeType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMimeTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetMimeTypeResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

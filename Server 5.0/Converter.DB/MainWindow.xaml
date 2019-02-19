@@ -1,0 +1,100 @@
+﻿<Window x:Class="Converter.DB.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:p="clr-namespace:Converter.DB.Properties"
+        Title="Converter.DB" Height="500" Width="640"
+        Background="#f0f0f0"
+        FontFamily="Tahoma"
+        FontSize="12"
+        x:Name="main"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="CanMinimize">
+    <Grid Margin="24,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="32" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="48" />
+        </Grid.RowDefinitions>
+
+        <Label FontWeight="Bold" FontSize="14" VerticalAlignment="Center">От куда</Label>
+        <Label FontWeight="Bold" FontSize="14" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">Куда</Label>
+
+        <StackPanel Grid.Row="1" Margin="0,20,0,0">
+            <UniformGrid Columns="2">
+                <Label>Server:</Label>
+                <TextBox VerticalAlignment="Center" Text="{Binding Source={x:Static p:Settings.Default}, Path=FromServer}" Name="FromServer" />
+
+                <Label>Login:</Label>
+                <TextBox VerticalAlignment="Center" Text="{Binding Source={x:Static p:Settings.Default}, Path=FromLogin}" Name="FromLogin" />
+
+                <Label>Password:</Label>
+                <TextBox VerticalAlignment="Center" Text="{Binding Source={x:Static p:Settings.Default}, Path=FromPassword}" Name="FromPassword" />
+
+                <Label>Database:</Label>
+                <TextBox VerticalAlignment="Center" Text="{Binding Source={x:Static p:Settings.Default}, Path=FromDB}" Name="FromDB" />
+            </UniformGrid>
+
+            <StackPanel Margin="5,18,5,5" Orientation="Vertical">
+                <CheckBox Name="Stage0" IsChecked="True">Атрибуты</CheckBox>
+                <CheckBox Name="Stage2" IsChecked="True">Конфигурация</CheckBox>
+                <CheckBox Name="Stage1" IsChecked="True">Оперативное</CheckBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,20,0,0">
+            <UniformGrid Columns="2">
+                <Label>Server:</Label>
+                <TextBox VerticalAlignment="Center" Text="{Binding Source={x:Static p:Settings.Default}, Path=ToServer}" Name="ToServer" />
+
+                <Label>Login:</Label>
+                <TextBox VerticalAlignment="Center" Text="{Binding Source={x:Static p:Settings.Default}, Path=ToLogin}" Name="ToLogin" />
+
+                <Label>Password:</Label>
+                <TextBox VerticalAlignment="Center" Text="{Binding Source={x:Static p:Settings.Default}, Path=ToPassword}" Name="ToPassword" />
+
+                <Label>Database:</Label>
+                <TextBox VerticalAlignment="Center" Text="{Binding Source={x:Static p:Settings.Default}, Path=ToDB}" Name="ToDB" />
+            </UniformGrid>
+
+            <StackPanel Margin="5,18,5,5" Orientation="Vertical">
+                <CheckBox Name="tblNode" IsChecked="True">tblNode</CheckBox>
+                <CheckBox Name="tblValue" IsChecked="True">tblValue</CheckBox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
+            <Grid Margin="0,0,0,40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Путь: " VerticalAlignment="Center" />
+                <TextBox Text="d:\data\" Grid.Column="1" Name="PART_Path" />
+            </Grid>
+            
+            <TextBlock Margin="5" xml:space="preserve"><Run>Кол-во данных: </Run><Run Text="{Binding ElementName=main, Path=Count, StringFormat=N0}" FontWeight="Bold"></Run><Run> / </Run><Run Text="{Binding ElementName=main, Path=Row, StringFormat=N0}" FontWeight="Bold"></Run></TextBlock>
+            <ProgressBar x:Name="ProgressBar1" Height="24" />
+        </StackPanel>
+
+        <Border BorderThickness="1" BorderBrush="Gray"
+                Grid.Row="3" Grid.ColumnSpan="3"
+                Margin="0,8" >
+            <TextBox Text="{Binding ElementName=main, Path=Current}" Background="#f0f0f0" IsReadOnly="True"
+                 TextWrapping="Wrap" Height="48" BorderThickness="0"/>
+        </Border>
+
+        <Button Grid.Column="2" Grid.Row="4"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Padding="8,2"
+                Name="Start"
+                Click="Start_Click">Начать</Button>
+    </Grid>
+</Window>

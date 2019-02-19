@@ -1,0 +1,698 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/RosService.Data" />
+  <xs:element name="СохранитьКешЗначение">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="key" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="timeout" type="xs:int" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОбновитьЗначениеВКеше">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ИмяКеша" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id_nodes" nillable="true" type="q1:ArrayOfdecimal" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q2:ArrayOfKeyValueOfstringanyType" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОбновитьЗначениеВКешеResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокЗависимыхРазделов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q3:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокЗависимыхРазделовResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="СписокЗависимыхРазделовResult" nillable="true" type="q4:ArrayOfDependencyNodeInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокРазделов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_parent" type="xs:decimal" />
+        <xs:element minOccurs="0" name="Тип" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Атрибуты" nillable="true" type="q5:ArrayOfstring" />
+        <xs:element minOccurs="0" name="limit" type="xs:int" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q6:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокРазделовResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="СписокРазделовResult" nillable="true" type="q7:ArrayOfNodeInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьРаздел">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Атрибуты" nillable="true" type="q8:ArrayOfstring" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q9:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьРазделResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="ПолучитьРазделResult" nillable="true" type="q10:NodeInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьРаздел">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_parent" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="тип" nillable="true" type="xs:string" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="значения" nillable="true" type="q11:ArrayOfKeyValueOfstringValue_PZabyj3A" />
+        <xs:element minOccurs="0" name="ДобавитьВИсторию" type="xs:boolean" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q12:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьРазделResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ДобавитьРазделResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Add">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parent" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q13:ArrayOfKeyValueOfstringanyType" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="stage" type="q14:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAsync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parent" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q15:ArrayOfKeyValueOfstringanyType" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="stage" type="q16:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAsyncResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddAsyncResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьРаздел">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ВКорзину" type="xs:boolean" />
+        <xs:element minOccurs="0" name="УдалитьЗависимыеОбъекты" type="xs:boolean" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id_node" nillable="true" type="q17:ArrayOfdecimal" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q18:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьРазделResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьРазделБезПодструктуры">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ВКорзину" type="xs:boolean" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id_node" nillable="true" type="q19:ArrayOfdecimal" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q20:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьРазделБезПодструктурыResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьПодразделы">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ВКорзину" type="xs:boolean" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id_node" nillable="true" type="q21:ArrayOfdecimal" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q22:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьПодразделыResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьРаздел2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ВКорзину" type="xs:boolean" />
+        <xs:element minOccurs="0" name="УдалитьЗависимыеОбъекты" type="xs:boolean" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="запрос" nillable="true" type="q23:Query" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q24:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьРаздел2Response">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ВосстановитьРаздел">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id_node" nillable="true" type="q25:ArrayOfanyType" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q26:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ВосстановитьРазделResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ИзменитьТипРаздела">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="НовыйТип" nillable="true" type="xs:string" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q27:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ИзменитьТипРазделаResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="КопироватьРаздел">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="КопироватьИз" nillable="true" type="q28:URI" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="КопироватьВ" nillable="true" type="q29:URI" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="КопироватьРазделResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="КопироватьРазделResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПереместитьРаздел">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="ПереместитьВРаздел" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="ОбновитьИндексы" type="xs:boolean" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q30:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПереместитьРазделResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keys" nillable="true" type="q31:ArrayOfstring" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="stage" type="q32:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetResult" nillable="true" type="q33:ArrayOfKeyValueOfstringanyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьЗначение">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="attributes" nillable="true" type="q34:ArrayOfstring" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q35:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьЗначениеResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ПолучитьЗначениеResult" nillable="true" type="q36:ArrayOfKeyValueOfstringValue_PZabyj3A" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьЗначениеПростое">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="attribute" nillable="true" type="xs:string" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="stage" type="q37:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьЗначениеПростоеResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПолучитьЗначениеПростоеResult" nillable="true" type="xs:anyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьЗначенияФормы">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Шаблон" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q38:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьЗначенияФормыResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ПолучитьЗначенияФормыResult" nillable="true" type="q39:ArrayOfKeyValueOfstringValue_PZabyj3A" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьКонстанту">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьКонстантуResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПолучитьКонстантуResult" nillable="true" type="xs:anyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Set">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q40:ArrayOfKeyValueOfstringanyType" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="stage" type="q41:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetAsync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q42="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q42:ArrayOfKeyValueOfstringanyType" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="stage" type="q43:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetAsyncResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначение">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="значения" nillable="true" type="q44:ArrayOfKeyValueOfstringValue_PZabyj3A" />
+        <xs:element minOccurs="0" name="ДобавитьВИсторию" type="xs:boolean" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q45:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначениеResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначениеПростое">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="attribute" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="history" type="xs:boolean" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="stage" type="q46:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначениеПростоеResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначениеПоиск">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="запрос" nillable="true" type="q47:Query" />
+        <xs:element xmlns:q48="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="значения" nillable="true" type="q48:ArrayOfKeyValueOfstringValue_PZabyj3A" />
+        <xs:element minOccurs="0" name="ДобавитьВИсторию" type="xs:boolean" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q49:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначениеПоискResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateCacheObject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="q" nillable="true" type="q50:Query" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateCacheObjectResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateCacheObjectResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveCacheObjects">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveCacheObjectsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveCacheObjectsResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначениеПоискАсинхронно">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="запрос" nillable="true" type="q51:Query" />
+        <xs:element xmlns:q52="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="значения" nillable="true" type="q52:ArrayOfKeyValueOfstringValue_PZabyj3A" />
+        <xs:element minOccurs="0" name="ДобавитьВИсторию" type="xs:boolean" />
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q53:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СохранитьЗначениеАсинхронно">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" nillable="true" type="xs:anyType" />
+        <xs:element xmlns:q54="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="значения" nillable="true" type="q54:ArrayOfKeyValueOfstringValue_PZabyj3A" />
+        <xs:element minOccurs="0" name="ДобавитьВИсторию" type="xs:boolean" />
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q55:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьРазделАсинхронно">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_parent" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="тип" nillable="true" type="xs:string" />
+        <xs:element xmlns:q56="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="значения" nillable="true" type="q56:ArrayOfKeyValueOfstringValue_PZabyj3A" />
+        <xs:element minOccurs="0" name="ДобавитьВИсторию" type="xs:boolean" />
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q57:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ДобавитьРазделАсинхронноResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ДобавитьРазделАсинхронноResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьРазделАсинхронно">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ВКорзину" type="xs:boolean" />
+        <xs:element minOccurs="0" name="УдалитьЗависимыеОбъекты" type="xs:boolean" />
+        <xs:element xmlns:q58="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id_node" nillable="true" type="q58:ArrayOfdecimal" />
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q59:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьРазделПоискАсинхронно">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ВКорзину" type="xs:boolean" />
+        <xs:element minOccurs="0" name="УдалитьЗависимыеОбъекты" type="xs:boolean" />
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="запрос" nillable="true" type="q60:Query" />
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q61:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="УдалитьПодразделыАсинхронно">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ВКорзину" type="xs:boolean" />
+        <xs:element xmlns:q62="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id_node" nillable="true" type="q62:ArrayOfdecimal" />
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q63:Хранилище" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокФайлов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q64:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СписокФайловResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="СписокФайловResult" nillable="true" type="q65:ArrayOfФайлИнформация" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="КоличествоФайлов">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q66:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="КоличествоФайловResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="КоличествоФайловResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Поиск">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="запрос" nillable="true" type="q67:Query" />
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q68:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПоискResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="ПоискResult" nillable="true" type="q69:TableValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПоискРазделаПоИдентификаторуОбъекта">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ИдентификаторОбъекта" nillable="true" type="xs:string" />
+        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q70:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПоискРазделаПоИдентификаторуОбъектаResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПоискРазделаПоИдентификаторуОбъектаResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПоискРазделаПоКлючу">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HashCode" nillable="true" type="xs:string" />
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q71:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПоискРазделаПоКлючуResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПоискРазделаПоКлючуResult" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПоискИстории">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="запрос" nillable="true" type="q72:Query" />
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q73:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПоискИсторииResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="ПоискИсторииResult" nillable="true" type="q74:TableValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьИсторию">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q75:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьИсториюResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="ПолучитьИсториюResult" nillable="true" type="q76:TableValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Проиндексировать">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="хранилище" type="q77:Хранилище" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="async" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПроиндексироватьResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ОтправитьПисьмо">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Кому" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Тема" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Содержание" nillable="true" type="xs:string" />
+        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/RosService.Data" minOccurs="0" name="СписокФайлов" nillable="true" type="q78:ArrayOfФайл" />
+        <xs:element minOccurs="0" name="IsBodyHtml" type="xs:boolean" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьКешЗначение">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="key" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ПолучитьКешЗначениеResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ПолучитьКешЗначениеResult" nillable="true" type="xs:anyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

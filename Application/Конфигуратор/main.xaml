@@ -1,0 +1,261 @@
+﻿<Page x:Class="RosApplication.Конфигуратор.Main"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:rsu="clr-namespace:RosService;assembly=RosService.Client"
+    xmlns:command="clr-namespace:RosApplication.Command"
+    xmlns:c="clr-namespace:RosApplication.Конфигуратор"
+    x:Name="MainWindow"
+    Initialized="Page_Initialized"
+    Unloaded="MainWindow_Unloaded"
+    ShowsNavigationUI="False"
+    KeepAlive="False">
+    <Page.Resources>
+        <r:InvariantBooleanToVisibilityConverter x:Key="InvariantBooleanToVisibilityConverter" />
+    </Page.Resources>
+    <!--<Page.CommandBindings>
+        <CommandBinding Command="Find" Executed="Find_Executed" />
+    </Page.CommandBindings>-->
+
+    <r:DocumentsTabControl Name="PART_Documents"
+                           IsNavigation="True" 
+                           NavigationWidth="200">
+        <r:DocumentsTabControl.Header>
+            <r:ToolBarMain
+                TextOptions.TextFormattingMode="Display" 
+                TextOptions.TextRenderingMode="ClearType">
+                <Menu VerticalAlignment="Center"
+                      Margin="0,1,0,0">
+                    <MenuItem Header="Файл">
+                        <MenuItem Header="Импорт данных..." Click="MenuItem_Click" />
+                        <!--<MenuItem Header="Экспорт данных..." IsEnabled="False" />-->
+                        <Separator />
+                        <MenuItem Header="Выход" Command="command:ApplicationCommand.Файл" CommandParameter="ЗавершениеРаботы" />
+                    </MenuItem>
+                    <MenuItem Header="Вид">
+                        <MenuItem Header="Архив" Command="command:ApplicationCommand.Вид" CommandParameter="Архив" />
+                        <Separator />
+                        <MenuItem Header="Журналы" Command="command:ApplicationCommand.Вид" CommandParameter="Журналы" />
+                        <MenuItem Header="Отчеты" Command="command:ApplicationCommand.Вид" CommandParameter="Отчеты" />
+                        <MenuItem Header="Справочники" Command="command:ApplicationCommand.Вид" CommandParameter="Справочники" />
+                        <!--<Separator />
+                                <MenuItem Header="Настройки..." />-->
+                    </MenuItem>
+                    <MenuItem Header="Сервис">
+                        <MenuItem Header="Поиск и замена" Click="Find_Click">
+                            <MenuItem.Icon>
+                                <Image Source="/RosControl.Wpf;component/Themes/images/old-view-refresh.png" 
+                                                        RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                                        Width="16" Height="16" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Редактор значений..." Click="РедакторЗначений">
+                            <MenuItem.Icon>
+                                <Image Source="/RosControl.Wpf;component/Themes/images/database.png" 
+                                                        RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                                        Width="16" Height="16" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator />
+                        <MenuItem Header="Диспетчер задач" Click="ДиспетчерЗадач" />
+                        <MenuItem Header="Журнал удалений" Click="ЖурналУдалений" />
+                        <Separator />
+                        <MenuItem Header="Обновить конфигурацию" Click="КомпилироватьКонфигурацию" />
+                        <!--<Separator />
+                                <MenuItem Header="Создать конфигурацию" Tag="СоздатьКонфигурацию" Click="Сервис_Click"/>
+                                <MenuItem Header="Очистить конфигурацию" Tag="ОчиститьКонфигурацию" IsEnabled="True" Click="Сервис_Click"/>
+                                <Separator />-->
+                        <MenuItem Header="Проиндексировать" Tag="Проиндексировать" Click="Сервис_Click">
+                            <!--<MenuItem Header="Базу данных" Tag="Проиндексировать" Click="Сервис_Click" />
+                            <MenuItem Header="Телефонные номера" Click="СоздатьТелефонныеИндексы_Click" />-->
+                        </MenuItem>
+                        <!--<MenuItem Header="Освободить память GC.Collect()" Click="ОсвободитьПамять_Click"/>-->
+                        <MenuItem Header="Выключить блокирование" IsCheckable="True" Click="Выключить" />
+                        </MenuItem>
+                    <MenuItem Header="Помощь">
+                        <MenuItem Header="Справка" Command="command:ApplicationCommand.Справка">
+                            <MenuItem.Icon>
+                                <Image  RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" Stretch="None" Source="/RosControl.Wpf;component/Themes/images/help.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator />
+                        <MenuItem Header="Режим тестирования" Name="IsDebug" IsCheckable="True" Click="MenuItem_Click_1" />
+                        <Separator />
+                        <!--<MenuItem Header="Проверить обновления" CommandParameter="ПроверитьОбновления" Command="command:ApplicationCommand.Справка" />-->
+                        <MenuItem Header="Техническая поддержка" CommandParameter="ТехническаяПоддержка" Command="command:ApplicationCommand.Справка" />
+                        <MenuItem Header="О программе" CommandParameter="ОПрограмме" Command="command:ApplicationCommand.Справка" />
+                    </MenuItem>
+                </Menu>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel.Visibility>
+                        <Binding Path="SelectedItem.Content" ElementName="PART_Documents" Mode="OneWay" ConverterParameter="RosControl.Designer.РедакторXaml">
+                            <Binding.Converter>
+                                <c:ConverterРедакторXaml />
+                            </Binding.Converter>
+                        </Binding>
+                    </StackPanel.Visibility>
+                    <r:Separator Margin="6 5" />
+                    <r:ToolBarButton Content="Сохранить" Command="Save" CommandTarget="{Binding Path=SelectedItem.Content, Mode=OneWay, ElementName=PART_Documents}" />
+                    <r:Separator Margin="6 5" />
+                    <r:ToolBarButton ToolTip="Отменить (Ctrl+Z)" Padding="2,0" Margin="0,0,0,0" Command="Undo"
+                                             CommandTarget="{Binding Path=SelectedItem.Content, Mode=OneWay, ElementName=PART_Documents}">
+                        <r:ToolBarButton.Content>
+                            <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16"
+                                        Stretch="Uniform" Source="/RosControl.Wpf;component/Themes/images/Undo.png"/>
+                        </r:ToolBarButton.Content>
+                    </r:ToolBarButton>
+                    <r:ToolBarButton ToolTip="Вернуть (Ctrl+Y)" Padding="2,0" Margin="0,0,0,0" Command="Redo"
+                                             CommandTarget="{Binding Path=SelectedItem.Content, Mode=OneWay, ElementName=PART_Documents}">
+                        <r:ToolBarButton.Content>
+                            <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" 
+                                        Stretch="Uniform" Source="/RosControl.Wpf;component/Themes/images/Redo.png"/>
+                        </r:ToolBarButton.Content>
+                    </r:ToolBarButton>
+                    <r:ToolBarButton ToolTip="Форматировать весь документ" Padding="0 0 2 0" Margin="0" Command="NotACommand"
+                                             CommandParameter="ФорматироватьВесьДокумент"
+                                             CommandTarget="{Binding Path=SelectedItem.Content, Mode=OneWay, ElementName=PART_Documents}">
+                        <r:ToolBarButton.Content>
+                            <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" 
+                                           Stretch="None" Source="/RosControl.Wpf;component/Themes/images/xml_parse.png"/>
+                        </r:ToolBarButton.Content>
+                    </r:ToolBarButton>
+                    <r:Separator Margin="6 5" />
+                    <r:ToolBarButton Content="Копировать" Command="NotACommand" CommandParameter="Копировать"
+                                     CommandTarget="{Binding Path=SelectedItem.Content, Mode=OneWay, ElementName=PART_Documents}">
+                        <r:ToolBarButton.Icon>
+                            <Image RenderOptions.BitmapScalingMode="NearestNeighbor" VerticalAlignment="Center" Margin="0,2,0,0"
+                                        Width="16" Height="16" Stretch="None" Source="/RosApplication;component/Themes/images/Шаблон.png" />
+                        </r:ToolBarButton.Icon>
+                    </r:ToolBarButton>
+                    <r:Separator Margin="6 5" />
+                    <r:ToolBarButton Content="Просмотр"
+                                    CommandTarget="{Binding Path=SelectedItem.Content, Mode=OneWay, ElementName=PART_Documents}"
+                                    Command="NotACommand" CommandParameter="Ввод">
+                        <r:ToolBarButton.Icon>
+                            <Image  RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" Margin="0,2,0,0"
+                                        VerticalAlignment="Center" Stretch="None" Source="/RosApplication;component/Themes/images/Выполнить.png" />
+                        </r:ToolBarButton.Icon>
+                    </r:ToolBarButton>
+                    <!--<r:ToolBarButton Content="Ввод"
+                                    CommandTarget="{Binding Path=SelectedItem.Content, Mode=OneWay, ElementName=PART_Documents}"
+                                    Command="NotACommand" CommandParameter="Ввод">
+                        <r:ToolBarButton.Icon>
+                            <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" Margin="0,2,0,0"
+                                        VerticalAlignment="Center" Stretch="None" Source="/RosApplication;component/Themes/images/start.png" />
+                        </r:ToolBarButton.Icon>
+                    </r:ToolBarButton>-->
+                </StackPanel>
+                <r:Separator Margin="4 5" />
+                <!--<r:ToolBarButton Content="Обновить конфигурацию" Margin="0,0,4,0" Click="КомпилироватьКонфигурацию">
+                            <r:ToolBarButton.Icon>
+                                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="0,2,0,0" Width="16" Height="16" Stretch="None" Source="/RosApplication;component/Themes/images/database_refresh.png"/>
+                            </r:ToolBarButton.Icon>
+                        </r:ToolBarButton>-->
+                <r:ToolBarButton Content="Состояние кеша" Margin="0,0,0,0" Click="СостояниеКеша_Click">
+                    <r:ToolBarButton.Icon>
+                        <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="0,1,0,0" Width="16" Height="16" Stretch="None" Source="/RosControl.Wpf;component/Themes/images/layers-stack-arrange.png"/>
+                    </r:ToolBarButton.Icon>
+                </r:ToolBarButton>
+                <r:Separator Margin="4 5" />
+                <r:ToolBarButton Content="Проводник" CommandParameter="Проводник" Command="command:ApplicationCommand.Вид">
+                    <r:ToolBarButton.Icon>
+                        <Image Width="16" Height="16" Stretch="UniformToFill"
+                                   RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                   Margin="0,1,2,0" Source="/RosControl.Wpf;component/Themes/images/FolderUp.png"/>
+                    </r:ToolBarButton.Icon>
+                </r:ToolBarButton>
+                <r:ToolBarButton Content="Поиск" Command="command:ApplicationCommand.Поиск">
+                    <r:ToolBarButton.Icon>
+                        <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" Stretch="None" Source="/RosApplication;component/Themes/images/search.png"/>
+                    </r:ToolBarButton.Icon>
+                </r:ToolBarButton>
+
+                <!--<Button DockPanel.Dock="Right" Padding="4,0,4,1" Margin="0,0,0,0" HorizontalAlignment="Right" Command="command:ApplicationCommand.Справка">
+                    <Button.Content>
+                        <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" Stretch="None" Source="/RosControl.Wpf;component/Themes/images/help.png"/>
+                    </Button.Content>
+                </Button>-->
+                <ToggleButton DockPanel.Dock="Right" 
+                              IsChecked="{Binding Path=SelectedItem.IsNavigation, ElementName=PART_Documents, Mode=TwoWay}"
+                              Visibility="{Binding Path=SelectedItem.IsFull, ElementName=PART_Documents, Mode=OneWay, Converter={StaticResource InvariantBooleanToVisibilityConverter}}"
+                              Padding="4,0,4,0" Margin="0,0,6,0" ToolTip="Скрыть меню"
+                              HorizontalAlignment="Right">
+                    <Image x:Name="PART_Image" Width="16" Height="16" Stretch="None" 
+                                        RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="0 1 0 0"
+                                        Source="/RosApplication;component/Themes/images/MenuShow.png"/>
+                </ToggleButton>
+            </r:ToolBarMain>
+        </r:DocumentsTabControl.Header>
+        <r:DocumentsTabControl.Navigation>
+            <!--<r:NavigationPanel Хранилище="Конфигурация" BorderThickness="0,0,1,0">
+                <r:NavigationPanel.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="/RosControl.Wpf;component/Themes/NavigationGroupBox.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </r:NavigationPanel.Resources>
+            </r:NavigationPanel>-->
+            <Border SnapsToDevicePixels="True"
+                    BorderBrush="#808080"
+                    Background="#e6eaee" 
+                    BorderThickness="0 0 1 0">
+                <r:TreeView x:Name="БыстроеМеню" 
+                            MouseLeftButtonUp="TreeView_MouseLeftButtonUp" 
+                            SelectedValuePath="Tag"
+                            Background="Transparent"
+                            Foreground="#191919"
+                            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <r:TreeView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Открыть в новой вкладке" Command="Open" InputGestureText=" " CommandParameter="@@НоваяВкладка" />
+                            <MenuItem Header="Открыть в окне" Command="Open" InputGestureText=" " CommandParameter="@@Окно" />
+                        </ContextMenu>
+                    </r:TreeView.ContextMenu>
+                    <r:TreeView.Resources>
+                        <Style TargetType="{x:Type r:TreeViewItem}">
+                            <Setter Property="Margin" Value="0 1" />
+                        </Style>
+                    </r:TreeView.Resources>
+                    <r:TreeViewItemSeparator Header="АДМИНИСТРИРОВАНИЕ" IsExpanded="True">
+                        <r:TreeViewItem Header="Пользователи" IconType="Пользователь" Tag="Пользователи" />
+                        <r:TreeViewItem Header="Группы" Tag="ГруппыПользователей" IconType="ГруппаПользователей"/>
+                    </r:TreeViewItemSeparator>
+                    <r:TreeViewItemSeparator Header="ЖУРНАЛЫ" IsExpanded="True">
+                        <r:TreeViewItem Header="События и ошибки" IconType="Exception" Tag="ЖурналСобытий" />
+                        <r:TreeViewItem Header="Бланки отчетов" IconType="Журнал" Tag="ЖурналБланковОтчетов" />
+                        <r:TreeViewItem Header="Созданные объекты" IconType="Журнал" Tag="ЖурналСозданныхОбъектов" />
+                        <!--<r:TreeViewItem Header="Справочники" IconType="54" Tag="СправочникиПользователя" ОткрытьВОкне="True" />
+                        <r:TreeViewItem Header="Отчеты" IconType="54" Tag="ОтчетыПользователя" ОткрытьВОкне="True" />-->
+                    </r:TreeViewItemSeparator>
+                    <r:TreeViewItemSeparator Header="ОБМЕН ДАННЫМИ" IsExpanded="True">
+                        <r:TreeViewItem Header="Веб-сервисы" IconType="1001" Tag="ВебСервисы" />
+                    </r:TreeViewItemSeparator>
+                    <r:TreeViewItemSeparator Header="НАСТРОЙКИ" IsExpanded="True">
+                        <r:TreeViewItem Header="Окно авторизации" IconType="1387" Tag="/ОкноАвторизации" />
+                    </r:TreeViewItemSeparator>
+                    <!--<r:TreeViewItemSeparator Header="ПРОЧЕЕ" IsExpanded="True">
+                        <r:TreeViewItem Header="Статистика" IsIcon="False" Tag="Статистика">
+                            <r:TreeViewItem.Icon>
+                                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" 
+                                                   Stretch="UniformToFill" StretchDirection="Both" 
+                                                   Source="/RosControl.Wpf;component/Themes/images/file_empty.png"/>
+                            </r:TreeViewItem.Icon>
+                        </r:TreeViewItem>
+                        <r:TreeViewItem Header="Загрузить Ros.API" IsIcon="False" Tag="API">
+                            <r:TreeViewItem.Icon>
+                                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" 
+                                                   Stretch="UniformToFill" StretchDirection="Both" 
+                                                   Source="/RosControl.Wpf;component/Themes/images/file_empty.png"/>
+                            </r:TreeViewItem.Icon>
+                        </r:TreeViewItem>
+                    </r:TreeViewItemSeparator>-->
+                </r:TreeView>
+            </Border>
+        </r:DocumentsTabControl.Navigation>
+        <r:DocumentsTabItem Header="{Binding Path=Title, ElementName=MainWindow, Mode=OneWay}" IsReadOnly="True" MinWidth="200">
+            <c:ObjectBrowser />
+        </r:DocumentsTabItem>
+    </r:DocumentsTabControl>
+</Page>

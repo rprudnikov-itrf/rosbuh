@@ -1,0 +1,56 @@
+﻿<Window x:Class="RosApplication.Конфигуратор.Службы.ОткрытьЗапрос"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:r="http://itrf.ru/2009/xaml"
+        xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+        WindowStartupLocation="CenterScreen" SizeToContent="Manual"
+        Title="Открыть.." Height="500" Width="640"
+        Initialized="Window_Initialized">
+    <r:Window x:Name="Form" IsWhiteBackground="False" IsButton="True" 
+              IsScroll="False" ПоказатьКнопкуФайл="False" Padding="0"
+              FooterHeight="0.35*" ButtonCancelText="Отмена" ButtonCompliteText="Открыть"
+              BackgroundFooter="#EAEAEB">
+        <ListBox x:Name="Path" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 BorderThickness="0" SelectionChanged="Path_SelectionChanged"
+                 MouseDoubleClick="Path_MouseDoubleClick">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <r:UniformGrid Orientation="Vertical" Columns="2"
+                                   IsItemsHost="True" 
+                                   VerticalAlignment="Top" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="3,1">
+                        <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Source="/RosApplication;component/Themes/images/rql.png" Margin="0,0,2,0"
+                               Stretch="Uniform" StretchDirection="Both" Width="16" Height="16"/>
+                        <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                        <TextBlock VerticalAlignment="Center">
+                            <TextBlock.Text>
+                                <Binding Path=".">
+                                    <Binding.Converter>
+                                        <r:FileNameConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <r:Window.Footer>
+            <Border BorderThickness="0,1,0,0" BorderBrush="Gray">
+                <r:TextEditor x:Name="PART_Query" 
+                    Background="Transparent"
+                    HighlightingStrategy="Sql" 
+                    BorderThickness="0"
+                    Margin="8"
+                    ShowLineNumbers="False"
+                    Text="{Binding Path=Запрос, ElementName=PART_DataGrid, Mode=TwoWay}"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+            </Border>
+        </r:Window.Footer>
+    </r:Window>
+</Window>

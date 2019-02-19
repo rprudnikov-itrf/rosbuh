@@ -1,0 +1,2839 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ConfigurationClient" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IConfiguration_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IConfiguration_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IConfiguration1_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <gzip:GZipEncoding xmlns:gzip="http://schemas.microsoft.com/ws/06/2004/mspolicy/netgzip1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IConfiguration_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetNamedPipeBinding_IConfiguration_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/RosService.Configuration" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/RosService.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IConfiguration_УдалитьКешированныеЗначения_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьКешированныеЗначения" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_УдалитьКешированныеЗначения_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьКешированныеЗначенияResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ЖурналУдалений_InputMessage">
+    <wsdl:part name="parameters" element="tns:ЖурналУдалений" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ЖурналУдалений_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ЖурналУдаленийResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПолучитьТип_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьТип" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПолучитьТип_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьТипResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокТипов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокТипов" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокТипов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокТиповResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокНаследуемыхТипов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокНаследуемыхТипов" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокНаследуемыхТипов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокНаследуемыхТиповResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокАтрибутов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокАтрибутов" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокАтрибутов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокАтрибутовResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокКатегорий_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокКатегорий" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокКатегорий_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокКатегорийResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПолучитьЗначение_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьЗначение" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПолучитьЗначение_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьЗначениеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СохранитьЗначение_InputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначение" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СохранитьЗначение_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначениеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_УдалитьТип_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьТип" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_УдалитьТип_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьТипResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_УдалитьАтрибут_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьАтрибут" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_УдалитьАтрибут_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьАтрибутResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПроверитьНаследование_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПроверитьНаследование" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПроверитьНаследование_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПроверитьНаследованиеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Binder_СписокСвязей_InputMessage">
+    <wsdl:part name="parameters" element="tns:Binder_СписокСвязей" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Binder_СписокСвязей_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Binder_СписокСвязейResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Binder_СохранитьСвязь_InputMessage">
+    <wsdl:part name="parameters" element="tns:Binder_СохранитьСвязь" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Binder_СохранитьСвязь_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Binder_СохранитьСвязьResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Binder_УдалитьСвязи_InputMessage">
+    <wsdl:part name="parameters" element="tns:Binder_УдалитьСвязи" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Binder_УдалитьСвязи_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Binder_УдалитьСвязиResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Event_СписокСобытий_InputMessage">
+    <wsdl:part name="parameters" element="tns:Event_СписокСобытий" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Event_СписокСобытий_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Event_СписокСобытийResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Event_СохранитьСобытие_InputMessage">
+    <wsdl:part name="parameters" element="tns:Event_СохранитьСобытие" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Event_СохранитьСобытие_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Event_СохранитьСобытиеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Event_УдалитьСобытие_InputMessage">
+    <wsdl:part name="parameters" element="tns:Event_УдалитьСобытие" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Event_УдалитьСобытие_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Event_УдалитьСобытиеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Процесс_СоздатьПроцесс_InputMessage">
+    <wsdl:part name="parameters" element="tns:Процесс_СоздатьПроцесс" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Процесс_СоздатьПроцесс_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Процесс_СоздатьПроцессResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Процесс_ОбновитьСостояниеПроцесса_InputMessage">
+    <wsdl:part name="parameters" element="tns:Процесс_ОбновитьСостояниеПроцесса" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Процесс_ОбновитьСостояниеПроцесса_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Процесс_ОбновитьСостояниеПроцессаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Процесс_ЗавершитьПроцесс_InputMessage">
+    <wsdl:part name="parameters" element="tns:Процесс_ЗавершитьПроцесс" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Процесс_ЗавершитьПроцесс_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Процесс_ЗавершитьПроцессResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Процесс_ОшибкаВПроцессе_InputMessage">
+    <wsdl:part name="parameters" element="tns:Процесс_ОшибкаВПроцессе" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Процесс_ОшибкаВПроцессе_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Процесс_ОшибкаВПроцессеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПолучитьФорму_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФорму" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПолучитьФорму_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФормуResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_КопироватьТипДанных_InputMessage">
+    <wsdl:part name="parameters" element="tns:КопироватьТипДанных" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_КопироватьТипДанных_OutputMessage">
+    <wsdl:part name="parameters" element="tns:КопироватьТипДанныхResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Сервис_ДобавитьВебСервис_InputMessage">
+    <wsdl:part name="parameters" element="tns:Сервис_ДобавитьВебСервис" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Сервис_ДобавитьВебСервис_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Сервис_ДобавитьВебСервисResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Сервис_СписокВебСервисов_InputMessage">
+    <wsdl:part name="parameters" element="tns:Сервис_СписокВебСервисов" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Сервис_СписокВебСервисов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Сервис_СписокВебСервисовResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ДобавитьТип_InputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьТип" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ДобавитьТип_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьТипResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ДобавитьАтрибут_InputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьАтрибут" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ДобавитьАтрибут_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьАтрибутResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ОписаниеВИмя_InputMessage">
+    <wsdl:part name="parameters" element="tns:ОписаниеВИмя" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ОписаниеВИмя_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ОписаниеВИмяResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_КомпилироватьКонфигурацию_InputMessage">
+    <wsdl:part name="parameters" element="tns:КомпилироватьКонфигурацию" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_КомпилироватьКонфигурацию_OutputMessage">
+    <wsdl:part name="parameters" element="tns:КомпилироватьКонфигурациюResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокДоменов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокДоменов" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокДоменов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокДоменовResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ЖурналСобытийДобавитьОшибку_InputMessage">
+    <wsdl:part name="parameters" element="tns:ЖурналСобытийДобавитьОшибку" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ОтправитьИнструкцию_InputMessage">
+    <wsdl:part name="parameters" element="tns:ОтправитьИнструкцию" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ОтправитьПисьмоВТехническуюПоддержку_InputMessage">
+    <wsdl:part name="parameters" element="tns:ОтправитьПисьмоВТехническуюПоддержку" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ОтправитьПисьмоВТехническуюПоддержку_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ОтправитьПисьмоВТехническуюПоддержкуResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПолучитьIpАдресСоединения_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьIpАдресСоединения" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_ПолучитьIpАдресСоединения_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьIpАдресСоединенияResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокЖурналов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокЖурналов" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокЖурналов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокЖурналовResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокОтчетов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокОтчетов" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокОтчетов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокОтчетовResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокСправочников_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокСправочников" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокСправочников_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокСправочниковResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Авторизация_InputMessage">
+    <wsdl:part name="parameters" element="tns:Авторизация" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Авторизация_OutputMessage">
+    <wsdl:part name="parameters" element="tns:АвторизацияResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_АвторизацияПродлитьСессиюПользователя_InputMessage">
+    <wsdl:part name="parameters" element="tns:АвторизацияПродлитьСессиюПользователя" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_АвторизацияБлокировки_InputMessage">
+    <wsdl:part name="parameters" element="tns:АвторизацияБлокировки" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокКешированныхОбъектов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокКешированныхОбъектов" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_СписокКешированныхОбъектов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокКешированныхОбъектовResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_УдалитьКешированныеОбъекты_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьКешированныеОбъекты" />
+  </wsdl:message>
+  <wsdl:message name="IConfiguration_УдалитьКешированныеОбъекты_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьКешированныеОбъектыResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IConfiguration">
+    <wsdl:operation name="УдалитьКешированныеЗначения">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/УдалитьКешированныеЗначения" message="tns:IConfiguration_УдалитьКешированныеЗначения_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/УдалитьКешированныеЗначенияResponse" message="tns:IConfiguration_УдалитьКешированныеЗначения_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналУдалений">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ЖурналУдалений" message="tns:IConfiguration_ЖурналУдалений_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ЖурналУдаленийResponse" message="tns:IConfiguration_ЖурналУдалений_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьТип">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ПолучитьТип" message="tns:IConfiguration_ПолучитьТип_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ПолучитьТипResponse" message="tns:IConfiguration_ПолучитьТип_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокТипов">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СписокТипов" message="tns:IConfiguration_СписокТипов_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СписокТиповResponse" message="tns:IConfiguration_СписокТипов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокНаследуемыхТипов">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СписокНаследуемыхТипов" message="tns:IConfiguration_СписокНаследуемыхТипов_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СписокНаследуемыхТиповResponse" message="tns:IConfiguration_СписокНаследуемыхТипов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокАтрибутов">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СписокАтрибутов" message="tns:IConfiguration_СписокАтрибутов_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СписокАтрибутовResponse" message="tns:IConfiguration_СписокАтрибутов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокКатегорий">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СписокКатегорий" message="tns:IConfiguration_СписокКатегорий_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СписокКатегорийResponse" message="tns:IConfiguration_СписокКатегорий_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ПолучитьЗначение" message="tns:IConfiguration_ПолучитьЗначение_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ПолучитьЗначениеResponse" message="tns:IConfiguration_ПолучитьЗначение_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СохранитьЗначение" message="tns:IConfiguration_СохранитьЗначение_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СохранитьЗначениеResponse" message="tns:IConfiguration_СохранитьЗначение_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьТип">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/УдалитьТип" message="tns:IConfiguration_УдалитьТип_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/УдалитьТипResponse" message="tns:IConfiguration_УдалитьТип_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьАтрибут">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/УдалитьАтрибут" message="tns:IConfiguration_УдалитьАтрибут_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/УдалитьАтрибутResponse" message="tns:IConfiguration_УдалитьАтрибут_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьНаследование">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ПроверитьНаследование" message="tns:IConfiguration_ПроверитьНаследование_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ПроверитьНаследованиеResponse" message="tns:IConfiguration_ПроверитьНаследование_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СписокСвязей">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Binder_СписокСвязей" message="tns:IConfiguration_Binder_СписокСвязей_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Binder_СписокСвязейResponse" message="tns:IConfiguration_Binder_СписокСвязей_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СохранитьСвязь">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Binder_СохранитьСвязь" message="tns:IConfiguration_Binder_СохранитьСвязь_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Binder_СохранитьСвязьResponse" message="tns:IConfiguration_Binder_СохранитьСвязь_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Binder_УдалитьСвязи">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Binder_УдалитьСвязи" message="tns:IConfiguration_Binder_УдалитьСвязи_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Binder_УдалитьСвязиResponse" message="tns:IConfiguration_Binder_УдалитьСвязи_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Event_СписокСобытий">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Event_СписокСобытий" message="tns:IConfiguration_Event_СписокСобытий_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Event_СписокСобытийResponse" message="tns:IConfiguration_Event_СписокСобытий_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Event_СохранитьСобытие">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Event_СохранитьСобытие" message="tns:IConfiguration_Event_СохранитьСобытие_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Event_СохранитьСобытиеResponse" message="tns:IConfiguration_Event_СохранитьСобытие_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Event_УдалитьСобытие">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Event_УдалитьСобытие" message="tns:IConfiguration_Event_УдалитьСобытие_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Event_УдалитьСобытиеResponse" message="tns:IConfiguration_Event_УдалитьСобытие_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_СоздатьПроцесс">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Процесс_СоздатьПроцесс" message="tns:IConfiguration_Процесс_СоздатьПроцесс_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Процесс_СоздатьПроцессResponse" message="tns:IConfiguration_Процесс_СоздатьПроцесс_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОбновитьСостояниеПроцесса">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Процесс_ОбновитьСостояниеПроцесса" message="tns:IConfiguration_Процесс_ОбновитьСостояниеПроцесса_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Процесс_ОбновитьСостояниеПроцессаResponse" message="tns:IConfiguration_Процесс_ОбновитьСостояниеПроцесса_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ЗавершитьПроцесс">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Процесс_ЗавершитьПроцесс" message="tns:IConfiguration_Процесс_ЗавершитьПроцесс_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Процесс_ЗавершитьПроцессResponse" message="tns:IConfiguration_Процесс_ЗавершитьПроцесс_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОшибкаВПроцессе">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Процесс_ОшибкаВПроцессе" message="tns:IConfiguration_Процесс_ОшибкаВПроцессе_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Процесс_ОшибкаВПроцессеResponse" message="tns:IConfiguration_Процесс_ОшибкаВПроцессе_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФорму">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ПолучитьФорму" message="tns:IConfiguration_ПолучитьФорму_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ПолучитьФормуResponse" message="tns:IConfiguration_ПолучитьФорму_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьТипДанных">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/КопироватьТипДанных" message="tns:IConfiguration_КопироватьТипДанных_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/КопироватьТипДанныхResponse" message="tns:IConfiguration_КопироватьТипДанных_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_ДобавитьВебСервис">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Сервис_ДобавитьВебСервис" message="tns:IConfiguration_Сервис_ДобавитьВебСервис_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Сервис_ДобавитьВебСервисResponse" message="tns:IConfiguration_Сервис_ДобавитьВебСервис_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_СписокВебСервисов">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Сервис_СписокВебСервисов" message="tns:IConfiguration_Сервис_СписокВебСервисов_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/Сервис_СписокВебСервисовResponse" message="tns:IConfiguration_Сервис_СписокВебСервисов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьТип">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ДобавитьТип" message="tns:IConfiguration_ДобавитьТип_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ДобавитьТипResponse" message="tns:IConfiguration_ДобавитьТип_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьАтрибут">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ДобавитьАтрибут" message="tns:IConfiguration_ДобавитьАтрибут_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ДобавитьАтрибутResponse" message="tns:IConfiguration_ДобавитьАтрибут_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ОписаниеВИмя">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ОписаниеВИмя" message="tns:IConfiguration_ОписаниеВИмя_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ОписаниеВИмяResponse" message="tns:IConfiguration_ОписаниеВИмя_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="КомпилироватьКонфигурацию">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/КомпилироватьКонфигурацию" message="tns:IConfiguration_КомпилироватьКонфигурацию_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/КомпилироватьКонфигурациюResponse" message="tns:IConfiguration_КомпилироватьКонфигурацию_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокДоменов">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СписокДоменов" message="tns:IConfiguration_СписокДоменов_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СписокДоменовResponse" message="tns:IConfiguration_СписокДоменов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналСобытийДобавитьОшибку">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ЖурналСобытийДобавитьОшибку" message="tns:IConfiguration_ЖурналСобытийДобавитьОшибку_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьИнструкцию">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ОтправитьИнструкцию" message="tns:IConfiguration_ОтправитьИнструкцию_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмоВТехническуюПоддержку">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ОтправитьПисьмоВТехническуюПоддержку" message="tns:IConfiguration_ОтправитьПисьмоВТехническуюПоддержку_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ОтправитьПисьмоВТехническуюПоддержкуResponse" message="tns:IConfiguration_ОтправитьПисьмоВТехническуюПоддержку_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьIpАдресСоединения">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/ПолучитьIpАдресСоединения" message="tns:IConfiguration_ПолучитьIpАдресСоединения_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/ПолучитьIpАдресСоединенияResponse" message="tns:IConfiguration_ПолучитьIpАдресСоединения_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокЖурналов">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СписокЖурналов" message="tns:IConfiguration_СписокЖурналов_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СписокЖурналовResponse" message="tns:IConfiguration_СписокЖурналов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокОтчетов">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СписокОтчетов" message="tns:IConfiguration_СписокОтчетов_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СписокОтчетовResponse" message="tns:IConfiguration_СписокОтчетов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокСправочников">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СписокСправочников" message="tns:IConfiguration_СписокСправочников_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СписокСправочниковResponse" message="tns:IConfiguration_СписокСправочников_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Авторизация">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Авторизация" message="tns:IConfiguration_Авторизация_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/АвторизацияResponse" message="tns:IConfiguration_Авторизация_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияПродлитьСессиюПользователя">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/АвторизацияПродлитьСессиюПользователя" message="tns:IConfiguration_АвторизацияПродлитьСессиюПользователя_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияБлокировки">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/АвторизацияБлокировки" message="tns:IConfiguration_АвторизацияБлокировки_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/Ping" message="tns:IConfiguration_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/PingResponse" message="tns:IConfiguration_Ping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокКешированныхОбъектов">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/СписокКешированныхОбъектов" message="tns:IConfiguration_СписокКешированныхОбъектов_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/СписокКешированныхОбъектовResponse" message="tns:IConfiguration_СписокКешированныхОбъектов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьКешированныеОбъекты">
+      <wsdl:input wsaw:Action="http://tempuri.org/IConfiguration/УдалитьКешированныеОбъекты" message="tns:IConfiguration_УдалитьКешированныеОбъекты_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IConfiguration/УдалитьКешированныеОбъектыResponse" message="tns:IConfiguration_УдалитьКешированныеОбъекты_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IConfiguration" type="tns:IConfiguration">
+    <wsp:PolicyReference URI="#WSHttpBinding_IConfiguration_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="УдалитьКешированныеЗначения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеЗначения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналУдалений">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналУдалений" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокНаследуемыхТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокНаследуемыхТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокАтрибутов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокАтрибутов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКатегорий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКатегорий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СохранитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьНаследование">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПроверитьНаследование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СписокСвязей">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СписокСвязей" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СохранитьСвязь">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СохранитьСвязь" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_УдалитьСвязи">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_УдалитьСвязи" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СписокСобытий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СписокСобытий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СохранитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СохранитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_УдалитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_УдалитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_СоздатьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_СоздатьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОбновитьСостояниеПроцесса">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОбновитьСостояниеПроцесса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ЗавершитьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ЗавершитьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОшибкаВПроцессе">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОшибкаВПроцессе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФорму">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьФорму" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьТипДанных">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КопироватьТипДанных" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_ДобавитьВебСервис">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_ДобавитьВебСервис" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_СписокВебСервисов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_СписокВебСервисов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОписаниеВИмя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОписаниеВИмя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КомпилироватьКонфигурацию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КомпилироватьКонфигурацию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокДоменов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокДоменов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналСобытийДобавитьОшибку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналСобытийДобавитьОшибку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьИнструкцию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьИнструкцию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмоВТехническуюПоддержку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьПисьмоВТехническуюПоддержку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьIpАдресСоединения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьIpАдресСоединения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЖурналов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокЖурналов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокОтчетов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокОтчетов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокСправочников">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокСправочников" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Авторизация">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Авторизация" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияПродлитьСессиюПользователя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияПродлитьСессиюПользователя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияБлокировки">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияБлокировки" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКешированныхОбъектов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКешированныхОбъектов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьКешированныеОбъекты">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеОбъекты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IConfiguration" type="tns:IConfiguration">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="УдалитьКешированныеЗначения">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеЗначения" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналУдалений">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ЖурналУдалений" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьТип">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьТип" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокТипов">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СписокТипов" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокНаследуемыхТипов">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СписокНаследуемыхТипов" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокАтрибутов">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СписокАтрибутов" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКатегорий">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СписокКатегорий" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьЗначение" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СохранитьЗначение" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьТип">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/УдалитьТип" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьАтрибут">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/УдалитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьНаследование">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ПроверитьНаследование" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СписокСвязей">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Binder_СписокСвязей" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СохранитьСвязь">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Binder_СохранитьСвязь" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_УдалитьСвязи">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Binder_УдалитьСвязи" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СписокСобытий">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Event_СписокСобытий" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СохранитьСобытие">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Event_СохранитьСобытие" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_УдалитьСобытие">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Event_УдалитьСобытие" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_СоздатьПроцесс">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Процесс_СоздатьПроцесс" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОбновитьСостояниеПроцесса">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОбновитьСостояниеПроцесса" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ЗавершитьПроцесс">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ЗавершитьПроцесс" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОшибкаВПроцессе">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОшибкаВПроцессе" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФорму">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьФорму" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьТипДанных">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/КопироватьТипДанных" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_ДобавитьВебСервис">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Сервис_ДобавитьВебСервис" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_СписокВебСервисов">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Сервис_СписокВебСервисов" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьТип">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьТип" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьАтрибут">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОписаниеВИмя">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ОписаниеВИмя" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КомпилироватьКонфигурацию">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/КомпилироватьКонфигурацию" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокДоменов">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СписокДоменов" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналСобытийДобавитьОшибку">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ЖурналСобытийДобавитьОшибку" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьИнструкцию">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьИнструкцию" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмоВТехническуюПоддержку">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьПисьмоВТехническуюПоддержку" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьIpАдресСоединения">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьIpАдресСоединения" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЖурналов">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СписокЖурналов" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокОтчетов">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СписокОтчетов" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокСправочников">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СписокСправочников" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Авторизация">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Авторизация" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияПродлитьСессиюПользователя">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияПродлитьСессиюПользователя" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияБлокировки">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияБлокировки" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКешированныхОбъектов">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/СписокКешированныхОбъектов" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьКешированныеОбъекты">
+      <soap:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеОбъекты" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IConfiguration" type="tns:IConfiguration">
+    <wsp:PolicyReference URI="#CustomBinding_IConfiguration_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="УдалитьКешированныеЗначения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеЗначения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналУдалений">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналУдалений" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокНаследуемыхТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокНаследуемыхТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокАтрибутов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокАтрибутов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКатегорий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКатегорий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СохранитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьНаследование">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПроверитьНаследование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СписокСвязей">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СписокСвязей" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СохранитьСвязь">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СохранитьСвязь" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_УдалитьСвязи">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_УдалитьСвязи" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СписокСобытий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СписокСобытий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СохранитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СохранитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_УдалитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_УдалитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_СоздатьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_СоздатьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОбновитьСостояниеПроцесса">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОбновитьСостояниеПроцесса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ЗавершитьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ЗавершитьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОшибкаВПроцессе">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОшибкаВПроцессе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФорму">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьФорму" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьТипДанных">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КопироватьТипДанных" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_ДобавитьВебСервис">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_ДобавитьВебСервис" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_СписокВебСервисов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_СписокВебСервисов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОписаниеВИмя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОписаниеВИмя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КомпилироватьКонфигурацию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КомпилироватьКонфигурацию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокДоменов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокДоменов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналСобытийДобавитьОшибку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналСобытийДобавитьОшибку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьИнструкцию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьИнструкцию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмоВТехническуюПоддержку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьПисьмоВТехническуюПоддержку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьIpАдресСоединения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьIpАдресСоединения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЖурналов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокЖурналов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокОтчетов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокОтчетов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокСправочников">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокСправочников" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Авторизация">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Авторизация" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияПродлитьСессиюПользователя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияПродлитьСессиюПользователя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияБлокировки">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияБлокировки" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКешированныхОбъектов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКешированныхОбъектов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьКешированныеОбъекты">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеОбъекты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IConfiguration1" type="tns:IConfiguration">
+    <wsp:PolicyReference URI="#CustomBinding_IConfiguration1_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="УдалитьКешированныеЗначения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеЗначения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналУдалений">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналУдалений" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокНаследуемыхТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокНаследуемыхТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокАтрибутов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокАтрибутов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКатегорий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКатегорий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СохранитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьНаследование">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПроверитьНаследование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СписокСвязей">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СписокСвязей" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СохранитьСвязь">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СохранитьСвязь" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_УдалитьСвязи">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_УдалитьСвязи" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СписокСобытий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СписокСобытий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СохранитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СохранитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_УдалитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_УдалитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_СоздатьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_СоздатьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОбновитьСостояниеПроцесса">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОбновитьСостояниеПроцесса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ЗавершитьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ЗавершитьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОшибкаВПроцессе">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОшибкаВПроцессе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФорму">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьФорму" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьТипДанных">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КопироватьТипДанных" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_ДобавитьВебСервис">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_ДобавитьВебСервис" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_СписокВебСервисов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_СписокВебСервисов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОписаниеВИмя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОписаниеВИмя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КомпилироватьКонфигурацию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КомпилироватьКонфигурацию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокДоменов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокДоменов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналСобытийДобавитьОшибку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналСобытийДобавитьОшибку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьИнструкцию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьИнструкцию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмоВТехническуюПоддержку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьПисьмоВТехническуюПоддержку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьIpАдресСоединения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьIpАдресСоединения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЖурналов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокЖурналов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокОтчетов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокОтчетов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокСправочников">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокСправочников" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Авторизация">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Авторизация" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияПродлитьСессиюПользователя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияПродлитьСессиюПользователя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияБлокировки">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияБлокировки" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКешированныхОбъектов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКешированныхОбъектов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьКешированныеОбъекты">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеОбъекты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IConfiguration" type="tns:IConfiguration">
+    <wsp:PolicyReference URI="#NetTcpBinding_IConfiguration_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="УдалитьКешированныеЗначения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеЗначения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналУдалений">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналУдалений" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокНаследуемыхТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокНаследуемыхТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокАтрибутов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокАтрибутов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКатегорий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКатегорий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СохранитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьНаследование">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПроверитьНаследование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СписокСвязей">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СписокСвязей" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СохранитьСвязь">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СохранитьСвязь" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_УдалитьСвязи">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_УдалитьСвязи" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СписокСобытий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СписокСобытий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СохранитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СохранитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_УдалитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_УдалитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_СоздатьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_СоздатьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОбновитьСостояниеПроцесса">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОбновитьСостояниеПроцесса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ЗавершитьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ЗавершитьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОшибкаВПроцессе">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОшибкаВПроцессе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФорму">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьФорму" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьТипДанных">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КопироватьТипДанных" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_ДобавитьВебСервис">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_ДобавитьВебСервис" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_СписокВебСервисов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_СписокВебСервисов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОписаниеВИмя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОписаниеВИмя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КомпилироватьКонфигурацию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КомпилироватьКонфигурацию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокДоменов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокДоменов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналСобытийДобавитьОшибку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналСобытийДобавитьОшибку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьИнструкцию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьИнструкцию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмоВТехническуюПоддержку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьПисьмоВТехническуюПоддержку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьIpАдресСоединения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьIpАдресСоединения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЖурналов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокЖурналов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокОтчетов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокОтчетов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокСправочников">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокСправочников" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Авторизация">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Авторизация" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияПродлитьСессиюПользователя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияПродлитьСессиюПользователя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияБлокировки">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияБлокировки" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКешированныхОбъектов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКешированныхОбъектов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьКешированныеОбъекты">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеОбъекты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetNamedPipeBinding_IConfiguration" type="tns:IConfiguration">
+    <wsp:PolicyReference URI="#NetNamedPipeBinding_IConfiguration_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="УдалитьКешированныеЗначения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеЗначения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналУдалений">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналУдалений" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокНаследуемыхТипов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокНаследуемыхТипов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокАтрибутов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокАтрибутов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКатегорий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКатегорий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СохранитьЗначение" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьНаследование">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПроверитьНаследование" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СписокСвязей">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СписокСвязей" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_СохранитьСвязь">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_СохранитьСвязь" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Binder_УдалитьСвязи">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Binder_УдалитьСвязи" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СписокСобытий">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СписокСобытий" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_СохранитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_СохранитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Event_УдалитьСобытие">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Event_УдалитьСобытие" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_СоздатьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_СоздатьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОбновитьСостояниеПроцесса">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОбновитьСостояниеПроцесса" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ЗавершитьПроцесс">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ЗавершитьПроцесс" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Процесс_ОшибкаВПроцессе">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Процесс_ОшибкаВПроцессе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФорму">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьФорму" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьТипДанных">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КопироватьТипДанных" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_ДобавитьВебСервис">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_ДобавитьВебСервис" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Сервис_СписокВебСервисов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Сервис_СписокВебСервисов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьТип">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьТип" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьАтрибут">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ДобавитьАтрибут" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОписаниеВИмя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОписаниеВИмя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КомпилироватьКонфигурацию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/КомпилироватьКонфигурацию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокДоменов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокДоменов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЖурналСобытийДобавитьОшибку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ЖурналСобытийДобавитьОшибку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьИнструкцию">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьИнструкцию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмоВТехническуюПоддержку">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ОтправитьПисьмоВТехническуюПоддержку" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьIpАдресСоединения">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/ПолучитьIpАдресСоединения" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЖурналов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокЖурналов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокОтчетов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокОтчетов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокСправочников">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокСправочников" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Авторизация">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Авторизация" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияПродлитьСессиюПользователя">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияПродлитьСессиюПользователя" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="АвторизацияБлокировки">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/АвторизацияБлокировки" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокКешированныхОбъектов">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/СписокКешированныхОбъектов" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьКешированныеОбъекты">
+      <soap12:operation soapAction="http://tempuri.org/IConfiguration/УдалитьКешированныеОбъекты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConfigurationClient">
+    <wsdl:port name="WSHttpBinding_IConfiguration" binding="tns:WSHttpBinding_IConfiguration">
+      <soap12:address location="http://localhost:8080/RosService/Configuration" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Configuration</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IConfiguration" binding="tns:BasicHttpBinding_IConfiguration">
+      <soap:address location="http://localhost:8080/RosService/Configuration/basic" />
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IConfiguration" binding="tns:CustomBinding_IConfiguration">
+      <soap12:address location="http://localhost:8080/RosService/Configuration/binary" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Configuration/binary</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IConfiguration1" binding="tns:CustomBinding_IConfiguration1">
+      <soap12:address location="http://localhost:8080/RosService/Configuration/gzip" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Configuration/gzip</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IConfiguration" binding="tns:NetTcpBinding_IConfiguration">
+      <soap12:address location="net.tcp://localhost/RosService/Configuration/tcp" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost/RosService/Configuration/tcp</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetNamedPipeBinding_IConfiguration" binding="tns:NetNamedPipeBinding_IConfiguration">
+      <soap12:address location="net.pipe://localhost/RosService/Configuration/pipe" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/RosService/Configuration/pipe</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

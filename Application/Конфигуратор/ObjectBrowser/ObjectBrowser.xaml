@@ -1,0 +1,269 @@
+﻿<UserControl x:Class="RosApplication.Конфигуратор.ObjectBrowser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    xmlns:o="clr-namespace:RosApplication.Конфигуратор"
+    xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase" 
+    Loaded="ObjectBrowser_Loaded" Unloaded="ObjectBrowser_Unloaded"
+    Name="Форма">
+
+    <!--<UserControl.CommandBindings>
+        <CommandBinding Command="Save" Executed="Сохранить" />
+    </UserControl.CommandBindings>-->
+
+    <UserControl.Resources>
+        <o:WHConverter x:Key="_WHConverter" />
+        <ContextMenu x:Key="ContextMenuKey" Placement="Absolute">
+            <ContextMenu.CommandBindings>
+                <CommandBinding Command="NotACommand" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute" />
+            </ContextMenu.CommandBindings>
+            <MenuItem Header="Добавить">
+                <MenuItem Header="Тип данных..." Command="NotACommand" CommandParameter="ДобавитьТипДанных" />
+                <MenuItem Header="Атрибут..." Command="NotACommand" CommandParameter="ДобавитьАтрибут"/>
+            </MenuItem>
+            <MenuItem Header="Удалить" Command="NotACommand" CommandParameter="УдалитьТипДанных"></MenuItem>
+            <Separator />
+            <MenuItem Header="Редактировать шаблон" Command="NotACommand" CommandParameter="РедактироватьШаблон">
+                <MenuItem.Icon>
+                    <Image Source="/RosControl.Wpf;component/Themes/images/xml_parse.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Копировать имя" Command="NotACommand" CommandParameter="КопироватьИмя"></MenuItem>
+            <MenuItem Header="Копировать атрибуты" Command="NotACommand" CommandParameter="КопироватьАтрибуты"></MenuItem>
+            <Separator />
+            <MenuItem Header="Копировать из..." Click="КопироватьТипДанных_Click"></MenuItem>
+            <Separator></Separator>
+            <MenuItem Header="Обновить" Command="NotACommand" CommandParameter="Обновить"></MenuItem>
+        </ContextMenu>
+
+        <CollectionViewSource x:Key="TypeItemSource" Source="{Binding Path=СписокТипов, ElementName=Форма}"
+                              Filter="CollectionViewSource_Filter">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Namespace" />
+            </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <cm:SortDescription PropertyName="Namespace" Direction="Ascending" />
+                <cm:SortDescription PropertyName="Описание" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+        <Style x:Key="TreeViewItem1" TargetType="r:TreeViewItem">
+            <Setter Property="Header" Value="{Binding Name}" />
+            <!--<Setter Property="DefaultSource" Value="/RosControl.Wpf;component/Themes/images/class.gif" />-->
+            <!--<Setter Property="Icon" Value="/RosControl.Wpf;component/Themes/images/Категория.png" />-->
+        </Style>
+        <Style x:Key="TreeViewItem2" TargetType="r:TreeViewItem">
+            <Setter Property="Header" Value="{Binding Name}" />
+            <Setter Property="IsExpanded" Value="True" />
+            <!--<Setter Property="DefaultSource" Value="/RosControl.Wpf;component/Themes/images/class.gif" />-->
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="240" />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="DarkGray" BorderThickness="0,0,1,0">
+            <DockPanel>
+                <Border DockPanel.Dock="Top" Background="#f1eded" BorderThickness="0,0,0,1" BorderBrush="DarkGray" Padding="4">
+                    <r:SearchTextBox Name="Фильтр" IsAutoComplite="False" DelayTime="30" 
+                                     TextSearched="Фильтр_TextSearched"
+                                     МинимальноеКоличествоСимволов="2" 
+                                     Padding="1"/>
+                </Border>
+                <Border BorderThickness="0,1,0,0" Background="#c0ffa4" BorderBrush="DarkGray" DockPanel.Dock="Bottom" Padding="8,6">
+                    <StackPanel>
+                        <TextBlock Text="Загрузка ресурсов:" />
+                        <TextBlock Name="PART_DownloadResources" />
+                    </StackPanel>
+                    <Border.Visibility>
+                        <Binding Path="IsFileGroupDownloaded">
+                            <Binding.Converter>
+                                <BooleanToVisibilityConverter />
+                            </Binding.Converter>
+                            <Binding.RelativeSource>
+                                <RelativeSource Mode="FindAncestor" AncestorLevel="1" AncestorType="UserControl" />
+                            </Binding.RelativeSource>
+                        </Binding>
+                    </Border.Visibility>
+                </Border>
+                <Grid>
+                    <r:TreeView Name="Дерево" BorderThickness="0,0,0,0" 
+                                MouseUp="Дерево_MouseLeftButtonUp"
+                                MouseDoubleClick="Дерево_MouseDoubleClick"
+                                ContextMenu="{StaticResource ContextMenuKey}"
+                                SelectedValuePath="Name"
+                                ItemsSource="{Binding Path=Groups, Source={StaticResource TypeItemSource}}"
+                                ItemContainerStyle="{StaticResource TreeViewItem1}">
+                        <r:TreeView.CommandBindings>
+                            <CommandBinding Command="Delete" Executed="Delete_Executed" />
+                        </r:TreeView.CommandBindings>
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Items}">
+                                <HierarchicalDataTemplate.ItemContainerStyle>
+                                    <Style TargetType="r:TreeViewItem">
+                                        <Setter Property="IconType" Value="{Binding Name}" />
+                                        <Setter Property="Tag" Value="{Binding Name}" />
+                                        <Setter Property="Header" Value="{Binding Описание}" />
+                                    </Style>
+                                </HierarchicalDataTemplate.ItemContainerStyle>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </r:TreeView>
+                    <Border Background="White">
+                        <TextBlock Text="Загрузка, подождите..." Margin="8" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                        <Border.Visibility>
+                            <Binding Path="IsLoading">
+                                <Binding.Converter>
+                                    <BooleanToVisibilityConverter />
+                                </Binding.Converter>
+                                <Binding.RelativeSource>
+                                    <RelativeSource Mode="FindAncestor" AncestorLevel="1" AncestorType="UserControl" />
+                                </Binding.RelativeSource>
+                            </Binding>
+                        </Border.Visibility>
+                    </Border>
+                </Grid>
+            </DockPanel>
+        </Border>
+        <GridSplitter Width="4" Background="Transparent" />
+        <DockPanel Grid.Column="1">
+            <DockPanel.Visibility>
+                <Binding Path="SelectedValue" ElementName="Дерево" 
+                         FallbackValue="Collapsed" TargetNullValue="Collapsed">
+                    <Binding.Converter>
+                        <r:NotNullOrZeroVisibilityConverter />
+                    </Binding.Converter>
+                </Binding>
+            </DockPanel.Visibility>
+
+            <StackPanel DockPanel.Dock="Top" Margin="8,6" Orientation="Horizontal" TextBlock.FontFamily="Tahoma" TextBlock.FontSize="12">
+                <!--<r:HyperLink Content="Сохранить" Command="Save" Margin="0,0,10,0"></r:HyperLink>-->
+                <r:HyperLink Content="Загрузить иконку..." Click="ЗагрузитьИконку_Click" Margin="0,0,10,0"></r:HyperLink>
+                <r:DropDownButton Click="DropDownButton_Click">
+                    <r:DropDownButton.Template>
+                        <ControlTemplate TargetType="{x:Type r:DropDownButton}">
+                            <r:HyperLink Name="PART_Button" Content="Размер окна" />
+                        </ControlTemplate>
+                    </r:DropDownButton.Template>
+                    <r:DropDownButton.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="425 × 344" Tag="425,344" />
+                            <MenuItem Header="520 x 380" Tag="520,380" />
+                            <MenuItem Header="640 × 505" Tag="640,505" />
+                            <Separator />
+                            <MenuItem Header="840 x 640" Tag="840,640" />
+                            <MenuItem Header="960 × 745" Tag="960,745" />
+                            <MenuItem Header="1000 x 720" Tag="1000,720" />
+                            <Separator />
+                            <MenuItem Header="50% x 50%" Tag="50%,50%" />
+                            <MenuItem Header="80% x 99%" Tag="80%,99%" />
+                            <MenuItem Header="1000 x 99%" Tag="1000,99%" />
+                            <Separator />
+                            <MenuItem Header="580 x Auto" Tag="580,Auto" />
+                            <MenuItem Header="*" Tag="*" />
+                            <ContextMenu.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding}" />
+                                        <Border BorderThickness="1" BorderBrush="Gray" Background="Silver"
+                                                Width="{Binding Path=Tag, Converter={StaticResource _WHConverter}, ConverterParameter=w}"
+                                                Height="{Binding Path=Tag, Converter={StaticResource _WHConverter}, ConverterParameter=h}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ContextMenu.ItemTemplate>
+                        </ContextMenu>
+                    </r:DropDownButton.ContextMenu>
+                </r:DropDownButton>
+                <TextBlock Text="{Binding Path=РазмерОкна, ElementName=Форма, StringFormat={}({0}), TargetNullValue=Пусто}"
+                           VerticalAlignment="Center" Foreground="Gray" Margin="4 0 0 0" FontSize="11"/>
+
+                <Label Content="{Binding Path=Обновление, ElementName=Форма, TargetNullValue=Нет}" Foreground="Gray" Padding="0" Margin="12 0 0 0" 
+                       VerticalAlignment="Center" FontSize="11"
+                       ContentStringFormat="{}Обновление: {0}" />
+            </StackPanel>
+
+
+            <CheckBox Name="IsSystemAtribute" Content="Скрыть системные атрибуты" 
+                    Margin="6,4" HorizontalAlignment="Left"
+                    IsChecked="True"
+                    DockPanel.Dock="Bottom"
+                    Click="IsSystemAtribute_Click" 
+                    FontFamily="Tahoma"/>
+
+            <ScrollViewer CanContentScroll="False" VerticalScrollBarVisibility="Visible">
+                <Grid>
+                    <Border Padding="10,8,10,24">
+                        <r:ClassDiagram Name="Диаграмма" 
+                            Width="380"
+                            VerticalAlignment="Top"
+                            TypeName="Class"
+                            OverridesDefaultStyle="True"
+                            SnapsToDevicePixels="True"
+                            SelectedValuePath="Name"
+                            BaseTypeName="{Binding Path=SelectedItem.BaseType, ElementName=Дерево}"
+                            ContextMenu="{StaticResource ContextMenuKey}"
+                            MouseUp="Диаграмма_MouseLeftButtonUp"
+                            ItemsSource="{Binding Path=СписокАтрибутов, ElementName=Форма}"
+                            Header="{Binding Path=SelectedItem.Name, ElementName=Дерево}"   
+                            TextSearch.TextPath="Name">
+                            <r:ClassDiagram.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="20" SnapsToDevicePixels="True">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20" />
+                                            <ColumnDefinition Width="20" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Name="PART_Image" Grid.Column="1" 
+                                            VerticalAlignment="Top" 
+                                            HorizontalAlignment="Left"
+                                            Source="/RosControl.Wpf;component/Themes/images/fields.png" 
+                                            Margin="0,4,0,0"
+                                            Stretch="None" />
+                                        <TextBlock Name="PART_Text" Grid.Column="2" Margin="0,0,8,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" SnapsToDevicePixels="True">
+                                    <TextBlock.Text>
+                                        <MultiBinding>
+                                            <MultiBinding.StringFormat>{0} : {1}</MultiBinding.StringFormat>
+                                            <Binding Path="Name"/>                                               
+                                            <Binding Path="BaseType"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                        </TextBlock>
+                                    </Grid>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsReadOnly}" Value="True">
+                                            <Setter TargetName="PART_Image" Property="Source" Value="/RosControl.Wpf;component/Themes/images/fields_green.png" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </r:ClassDiagram.ItemTemplate>
+                        </r:ClassDiagram>
+                    </Border>
+                    <Border Background="White">
+                        <TextBlock Text="Загрузка, подождите..." Margin="8" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                        <Border.Visibility>
+                            <Binding Path="IsLoadingClass">
+                                <Binding.Converter>
+                                    <BooleanToVisibilityConverter />
+                                </Binding.Converter>
+                                <Binding.RelativeSource>
+                                    <RelativeSource Mode="FindAncestor" AncestorLevel="1" AncestorType="UserControl" />
+                                </Binding.RelativeSource>
+                            </Binding>
+                        </Border.Visibility>
+                    </Border>
+                </Grid>
+            </ScrollViewer>
+        </DockPanel>
+
+        <r:PropertyGrid Grid.Column="2" Name="РедакторСвойств"
+                        ButtonFileClick="РедакторСвойств_ЗагрузитьФайл"
+                        PropertyChanged="РедакторСвойств_PropertyChanged"
+                        BorderBrush="DarkGray" BorderThickness="1,0,0,0"/>
+        <GridSplitter Grid.Column="1" Width="4" Background="Transparent" />
+    </Grid>
+</UserControl>

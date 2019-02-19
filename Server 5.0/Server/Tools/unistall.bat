@@ -1,0 +1,1 @@
+%windir%\Microsoft.NET\Framework\v2.0.50727\InstallUtil -u ../rosservice_srv.exe

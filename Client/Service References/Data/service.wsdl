@@ -1,0 +1,2773 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DataClient" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IData_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IData_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IData1_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <gzip:GZipEncoding xmlns:gzip="http://schemas.microsoft.com/ws/06/2004/mspolicy/netgzip1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IData_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetNamedPipeBinding_IData_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/RosService.Data" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/RosService.Configuration" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IData_СохранитьКешЗначение_InputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьКешЗначение" />
+  </wsdl:message>
+  <wsdl:message name="IData_ОбновитьЗначениеВКеше_InputMessage">
+    <wsdl:part name="parameters" element="tns:ОбновитьЗначениеВКеше" />
+  </wsdl:message>
+  <wsdl:message name="IData_ОбновитьЗначениеВКеше_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ОбновитьЗначениеВКешеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_СписокЗависимыхРазделов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокЗависимыхРазделов" />
+  </wsdl:message>
+  <wsdl:message name="IData_СписокЗависимыхРазделов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокЗависимыхРазделовResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_СписокРазделов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокРазделов" />
+  </wsdl:message>
+  <wsdl:message name="IData_СписокРазделов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокРазделовResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьРаздел_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьРаздел" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьРаздел_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьРазделResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ДобавитьРаздел_InputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьРаздел" />
+  </wsdl:message>
+  <wsdl:message name="IData_ДобавитьРаздел_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьРазделResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_Add_InputMessage">
+    <wsdl:part name="parameters" element="tns:Add" />
+  </wsdl:message>
+  <wsdl:message name="IData_Add_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_AddAsync_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAsync" />
+  </wsdl:message>
+  <wsdl:message name="IData_AddAsync_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAsyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьРаздел_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьРаздел" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьРаздел_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьРазделResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьРазделБезПодструктуры_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьРазделБезПодструктуры" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьРазделБезПодструктуры_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьРазделБезПодструктурыResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьПодразделы_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьПодразделы" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьПодразделы_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьПодразделыResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьРаздел2_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьРаздел2" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьРаздел2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьРаздел2Response" />
+  </wsdl:message>
+  <wsdl:message name="IData_ВосстановитьРаздел_InputMessage">
+    <wsdl:part name="parameters" element="tns:ВосстановитьРаздел" />
+  </wsdl:message>
+  <wsdl:message name="IData_ВосстановитьРаздел_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ВосстановитьРазделResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ИзменитьТипРаздела_InputMessage">
+    <wsdl:part name="parameters" element="tns:ИзменитьТипРаздела" />
+  </wsdl:message>
+  <wsdl:message name="IData_ИзменитьТипРаздела_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ИзменитьТипРазделаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_КопироватьРаздел_InputMessage">
+    <wsdl:part name="parameters" element="tns:КопироватьРаздел" />
+  </wsdl:message>
+  <wsdl:message name="IData_КопироватьРаздел_OutputMessage">
+    <wsdl:part name="parameters" element="tns:КопироватьРазделResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПереместитьРаздел_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПереместитьРаздел" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПереместитьРаздел_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПереместитьРазделResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_Get_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get" />
+  </wsdl:message>
+  <wsdl:message name="IData_Get_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьЗначение_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьЗначение" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьЗначение_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьЗначениеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьЗначениеПростое_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьЗначениеПростое" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьЗначениеПростое_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьЗначениеПростоеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьЗначенияФормы_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьЗначенияФормы" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьЗначенияФормы_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьЗначенияФормыResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьКонстанту_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьКонстанту" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьКонстанту_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьКонстантуResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_Set_InputMessage">
+    <wsdl:part name="parameters" element="tns:Set" />
+  </wsdl:message>
+  <wsdl:message name="IData_Set_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_SetAsync_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAsync" />
+  </wsdl:message>
+  <wsdl:message name="IData_SetAsync_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAsyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_СохранитьЗначение_InputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначение" />
+  </wsdl:message>
+  <wsdl:message name="IData_СохранитьЗначение_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначениеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_СохранитьЗначениеПростое_InputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначениеПростое" />
+  </wsdl:message>
+  <wsdl:message name="IData_СохранитьЗначениеПростое_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначениеПростоеResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_СохранитьЗначениеПоиск_InputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначениеПоиск" />
+  </wsdl:message>
+  <wsdl:message name="IData_СохранитьЗначениеПоиск_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначениеПоискResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_UpdateCacheObject_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCacheObject" />
+  </wsdl:message>
+  <wsdl:message name="IData_UpdateCacheObject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCacheObjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_SaveCacheObjects_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCacheObjects" />
+  </wsdl:message>
+  <wsdl:message name="IData_SaveCacheObjects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCacheObjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_СохранитьЗначениеПоискАсинхронно_InputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначениеПоискАсинхронно" />
+  </wsdl:message>
+  <wsdl:message name="IData_СохранитьЗначениеАсинхронно_InputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьЗначениеАсинхронно" />
+  </wsdl:message>
+  <wsdl:message name="IData_ДобавитьРазделАсинхронно_InputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьРазделАсинхронно" />
+  </wsdl:message>
+  <wsdl:message name="IData_ДобавитьРазделАсинхронно_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьРазделАсинхронноResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьРазделАсинхронно_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьРазделАсинхронно" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьРазделПоискАсинхронно_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьРазделПоискАсинхронно" />
+  </wsdl:message>
+  <wsdl:message name="IData_УдалитьПодразделыАсинхронно_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьПодразделыАсинхронно" />
+  </wsdl:message>
+  <wsdl:message name="IData_СписокФайлов_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписокФайлов" />
+  </wsdl:message>
+  <wsdl:message name="IData_СписокФайлов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписокФайловResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_КоличествоФайлов_InputMessage">
+    <wsdl:part name="parameters" element="tns:КоличествоФайлов" />
+  </wsdl:message>
+  <wsdl:message name="IData_КоличествоФайлов_OutputMessage">
+    <wsdl:part name="parameters" element="tns:КоличествоФайловResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_Поиск_InputMessage">
+    <wsdl:part name="parameters" element="tns:Поиск" />
+  </wsdl:message>
+  <wsdl:message name="IData_Поиск_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПоискРазделаПоИдентификаторуОбъекта_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискРазделаПоИдентификаторуОбъекта" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПоискРазделаПоИдентификаторуОбъекта_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискРазделаПоИдентификаторуОбъектаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПоискРазделаПоКлючу_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискРазделаПоКлючу" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПоискРазделаПоКлючу_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискРазделаПоКлючуResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПоискИстории_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискИстории" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПоискИстории_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПоискИсторииResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьИсторию_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьИсторию" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьИсторию_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьИсториюResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_Проиндексировать_InputMessage">
+    <wsdl:part name="parameters" element="tns:Проиндексировать" />
+  </wsdl:message>
+  <wsdl:message name="IData_Проиндексировать_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПроиндексироватьResponse" />
+  </wsdl:message>
+  <wsdl:message name="IData_ОтправитьПисьмо_InputMessage">
+    <wsdl:part name="parameters" element="tns:ОтправитьПисьмо" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьКешЗначение_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьКешЗначение" />
+  </wsdl:message>
+  <wsdl:message name="IData_ПолучитьКешЗначение_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьКешЗначениеResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IData">
+    <wsdl:operation name="СохранитьКешЗначение">
+      <wsdl:input wsaw:Action="SK" message="tns:IData_СохранитьКешЗначение_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьЗначениеВКеше">
+      <wsdl:input wsaw:Action="UV" message="tns:IData_ОбновитьЗначениеВКеше_InputMessage" />
+      <wsdl:output wsaw:Action="UV" message="tns:IData_ОбновитьЗначениеВКеше_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокЗависимыхРазделов">
+      <wsdl:input wsaw:Action="QND" message="tns:IData_СписокЗависимыхРазделов_InputMessage" />
+      <wsdl:output wsaw:Action="QND" message="tns:IData_СписокЗависимыхРазделов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокРазделов">
+      <wsdl:input wsaw:Action="QN" message="tns:IData_СписокРазделов_InputMessage" />
+      <wsdl:output wsaw:Action="QN" message="tns:IData_СписокРазделов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьРаздел">
+      <wsdl:input wsaw:Action="GN" message="tns:IData_ПолучитьРаздел_InputMessage" />
+      <wsdl:output wsaw:Action="GN" message="tns:IData_ПолучитьРаздел_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРаздел">
+      <wsdl:input wsaw:Action="A" message="tns:IData_ДобавитьРаздел_InputMessage" />
+      <wsdl:output wsaw:Action="A" message="tns:IData_ДобавитьРаздел_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <wsdl:input wsaw:Action="A2" message="tns:IData_Add_InputMessage" />
+      <wsdl:output wsaw:Action="A2" message="tns:IData_Add_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAsync">
+      <wsdl:input wsaw:Action="AA2" message="tns:IData_AddAsync_InputMessage" />
+      <wsdl:output wsaw:Action="AA2" message="tns:IData_AddAsync_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел">
+      <wsdl:input wsaw:Action="D" message="tns:IData_УдалитьРаздел_InputMessage" />
+      <wsdl:output wsaw:Action="D" message="tns:IData_УдалитьРаздел_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделБезПодструктуры">
+      <wsdl:input wsaw:Action="DW" message="tns:IData_УдалитьРазделБезПодструктуры_InputMessage" />
+      <wsdl:output wsaw:Action="DW" message="tns:IData_УдалитьРазделБезПодструктуры_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделы">
+      <wsdl:input wsaw:Action="DC" message="tns:IData_УдалитьПодразделы_InputMessage" />
+      <wsdl:output wsaw:Action="DC" message="tns:IData_УдалитьПодразделы_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел2">
+      <wsdl:input wsaw:Action="DQ" message="tns:IData_УдалитьРаздел2_InputMessage" />
+      <wsdl:output wsaw:Action="DQ" message="tns:IData_УдалитьРаздел2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ВосстановитьРаздел">
+      <wsdl:input wsaw:Action="RESTORE" message="tns:IData_ВосстановитьРаздел_InputMessage" />
+      <wsdl:output wsaw:Action="RESTORE" message="tns:IData_ВосстановитьРаздел_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ИзменитьТипРаздела">
+      <wsdl:input wsaw:Action="ETYPE" message="tns:IData_ИзменитьТипРаздела_InputMessage" />
+      <wsdl:output wsaw:Action="ETYPE" message="tns:IData_ИзменитьТипРаздела_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьРаздел">
+      <wsdl:input wsaw:Action="COPY" message="tns:IData_КопироватьРаздел_InputMessage" />
+      <wsdl:output wsaw:Action="COPY" message="tns:IData_КопироватьРаздел_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПереместитьРаздел">
+      <wsdl:input wsaw:Action="MOVE" message="tns:IData_ПереместитьРаздел_InputMessage" />
+      <wsdl:output wsaw:Action="MOVE" message="tns:IData_ПереместитьРаздел_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <wsdl:input wsaw:Action="GF2" message="tns:IData_Get_InputMessage" />
+      <wsdl:output wsaw:Action="GF2" message="tns:IData_Get_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <wsdl:input wsaw:Action="GF" message="tns:IData_ПолучитьЗначение_InputMessage" />
+      <wsdl:output wsaw:Action="GF" message="tns:IData_ПолучитьЗначение_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначениеПростое">
+      <wsdl:input wsaw:Action="G" message="tns:IData_ПолучитьЗначениеПростое_InputMessage" />
+      <wsdl:output wsaw:Action="G" message="tns:IData_ПолучитьЗначениеПростое_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначенияФормы">
+      <wsdl:input wsaw:Action="FORM" message="tns:IData_ПолучитьЗначенияФормы_InputMessage" />
+      <wsdl:output wsaw:Action="FORM" message="tns:IData_ПолучитьЗначенияФормы_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКонстанту">
+      <wsdl:input wsaw:Action="CONST" message="tns:IData_ПолучитьКонстанту_InputMessage" />
+      <wsdl:output wsaw:Action="CONST" message="tns:IData_ПолучитьКонстанту_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <wsdl:input wsaw:Action="SF2" message="tns:IData_Set_InputMessage" />
+      <wsdl:output wsaw:Action="SF2" message="tns:IData_Set_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAsync">
+      <wsdl:input wsaw:Action="SFA2" message="tns:IData_SetAsync_InputMessage" />
+      <wsdl:output wsaw:Action="SFA2" message="tns:IData_SetAsync_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <wsdl:input wsaw:Action="SF" message="tns:IData_СохранитьЗначение_InputMessage" />
+      <wsdl:output wsaw:Action="SF" message="tns:IData_СохранитьЗначение_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПростое">
+      <wsdl:input wsaw:Action="S" message="tns:IData_СохранитьЗначениеПростое_InputMessage" />
+      <wsdl:output wsaw:Action="S" message="tns:IData_СохранитьЗначениеПростое_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоиск">
+      <wsdl:input wsaw:Action="SQ" message="tns:IData_СохранитьЗначениеПоиск_InputMessage" />
+      <wsdl:output wsaw:Action="SQ" message="tns:IData_СохранитьЗначениеПоиск_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCacheObject">
+      <wsdl:input wsaw:Action="UCO" message="tns:IData_UpdateCacheObject_InputMessage" />
+      <wsdl:output wsaw:Action="UCO" message="tns:IData_UpdateCacheObject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveCacheObjects">
+      <wsdl:input wsaw:Action="SCO" message="tns:IData_SaveCacheObjects_InputMessage" />
+      <wsdl:output wsaw:Action="SCO" message="tns:IData_SaveCacheObjects_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоискАсинхронно">
+      <wsdl:input wsaw:Action="SQA" message="tns:IData_СохранитьЗначениеПоискАсинхронно_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеАсинхронно">
+      <wsdl:input wsaw:Action="SFA" message="tns:IData_СохранитьЗначениеАсинхронно_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРазделАсинхронно">
+      <wsdl:input wsaw:Action="AA" message="tns:IData_ДобавитьРазделАсинхронно_InputMessage" />
+      <wsdl:output wsaw:Action="AA" message="tns:IData_ДобавитьРазделАсинхронно_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделАсинхронно">
+      <wsdl:input wsaw:Action="DA" message="tns:IData_УдалитьРазделАсинхронно_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделПоискАсинхронно">
+      <wsdl:input wsaw:Action="DQA" message="tns:IData_УдалитьРазделПоискАсинхронно_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделыАсинхронно">
+      <wsdl:input wsaw:Action="DCA" message="tns:IData_УдалитьПодразделыАсинхронно_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписокФайлов">
+      <wsdl:input wsaw:Action="FILES" message="tns:IData_СписокФайлов_InputMessage" />
+      <wsdl:output wsaw:Action="FILES" message="tns:IData_СписокФайлов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="КоличествоФайлов">
+      <wsdl:input wsaw:Action="FCOUNT" message="tns:IData_КоличествоФайлов_InputMessage" />
+      <wsdl:output wsaw:Action="FCOUNT" message="tns:IData_КоличествоФайлов_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Поиск">
+      <wsdl:input wsaw:Action="Q" message="tns:IData_Поиск_InputMessage" />
+      <wsdl:output wsaw:Action="Q" message="tns:IData_Поиск_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоИдентификаторуОбъекта">
+      <wsdl:input wsaw:Action="QU" message="tns:IData_ПоискРазделаПоИдентификаторуОбъекта_InputMessage" />
+      <wsdl:output wsaw:Action="QU" message="tns:IData_ПоискРазделаПоИдентификаторуОбъекта_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоКлючу">
+      <wsdl:input wsaw:Action="QG" message="tns:IData_ПоискРазделаПоКлючу_InputMessage" />
+      <wsdl:output wsaw:Action="QG" message="tns:IData_ПоискРазделаПоКлючу_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПоискИстории">
+      <wsdl:input wsaw:Action="QH" message="tns:IData_ПоискИстории_InputMessage" />
+      <wsdl:output wsaw:Action="QH" message="tns:IData_ПоискИстории_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьИсторию">
+      <wsdl:input wsaw:Action="GH" message="tns:IData_ПолучитьИсторию_InputMessage" />
+      <wsdl:output wsaw:Action="GH" message="tns:IData_ПолучитьИсторию_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Проиндексировать">
+      <wsdl:input wsaw:Action="INDEXED" message="tns:IData_Проиндексировать_InputMessage" />
+      <wsdl:output wsaw:Action="INDEXED" message="tns:IData_Проиндексировать_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмо">
+      <wsdl:input wsaw:Action="MSG" message="tns:IData_ОтправитьПисьмо_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКешЗначение">
+      <wsdl:input wsaw:Action="GK" message="tns:IData_ПолучитьКешЗначение_InputMessage" />
+      <wsdl:output wsaw:Action="GK" message="tns:IData_ПолучитьКешЗначение_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IData" type="tns:IData">
+    <wsp:PolicyReference URI="#WSHttpBinding_IData_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="СохранитьКешЗначение">
+      <soap12:operation soapAction="SK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьЗначениеВКеше">
+      <soap12:operation soapAction="UV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЗависимыхРазделов">
+      <soap12:operation soapAction="QND" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокРазделов">
+      <soap12:operation soapAction="QN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьРаздел">
+      <soap12:operation soapAction="GN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРаздел">
+      <soap12:operation soapAction="A" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="A2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAsync">
+      <soap12:operation soapAction="AA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел">
+      <soap12:operation soapAction="D" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделБезПодструктуры">
+      <soap12:operation soapAction="DW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделы">
+      <soap12:operation soapAction="DC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел2">
+      <soap12:operation soapAction="DQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВосстановитьРаздел">
+      <soap12:operation soapAction="RESTORE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИзменитьТипРаздела">
+      <soap12:operation soapAction="ETYPE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьРаздел">
+      <soap12:operation soapAction="COPY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПереместитьРаздел">
+      <soap12:operation soapAction="MOVE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap12:operation soapAction="GF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="GF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначениеПростое">
+      <soap12:operation soapAction="G" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначенияФормы">
+      <soap12:operation soapAction="FORM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКонстанту">
+      <soap12:operation soapAction="CONST" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap12:operation soapAction="SF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAsync">
+      <soap12:operation soapAction="SFA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="SF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПростое">
+      <soap12:operation soapAction="S" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоиск">
+      <soap12:operation soapAction="SQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCacheObject">
+      <soap12:operation soapAction="UCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCacheObjects">
+      <soap12:operation soapAction="SCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоискАсинхронно">
+      <soap12:operation soapAction="SQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеАсинхронно">
+      <soap12:operation soapAction="SFA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРазделАсинхронно">
+      <soap12:operation soapAction="AA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделАсинхронно">
+      <soap12:operation soapAction="DA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделПоискАсинхронно">
+      <soap12:operation soapAction="DQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделыАсинхронно">
+      <soap12:operation soapAction="DCA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СписокФайлов">
+      <soap12:operation soapAction="FILES" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КоличествоФайлов">
+      <soap12:operation soapAction="FCOUNT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Поиск">
+      <soap12:operation soapAction="Q" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоИдентификаторуОбъекта">
+      <soap12:operation soapAction="QU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоКлючу">
+      <soap12:operation soapAction="QG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискИстории">
+      <soap12:operation soapAction="QH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьИсторию">
+      <soap12:operation soapAction="GH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Проиндексировать">
+      <soap12:operation soapAction="INDEXED" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмо">
+      <soap12:operation soapAction="MSG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКешЗначение">
+      <soap12:operation soapAction="GK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IData" type="tns:IData">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="СохранитьКешЗначение">
+      <soap:operation soapAction="SK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьЗначениеВКеше">
+      <soap:operation soapAction="UV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЗависимыхРазделов">
+      <soap:operation soapAction="QND" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокРазделов">
+      <soap:operation soapAction="QN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьРаздел">
+      <soap:operation soapAction="GN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРаздел">
+      <soap:operation soapAction="A" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="A2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAsync">
+      <soap:operation soapAction="AA2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел">
+      <soap:operation soapAction="D" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделБезПодструктуры">
+      <soap:operation soapAction="DW" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделы">
+      <soap:operation soapAction="DC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел2">
+      <soap:operation soapAction="DQ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВосстановитьРаздел">
+      <soap:operation soapAction="RESTORE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИзменитьТипРаздела">
+      <soap:operation soapAction="ETYPE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьРаздел">
+      <soap:operation soapAction="COPY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПереместитьРаздел">
+      <soap:operation soapAction="MOVE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap:operation soapAction="GF2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap:operation soapAction="GF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначениеПростое">
+      <soap:operation soapAction="G" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначенияФормы">
+      <soap:operation soapAction="FORM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКонстанту">
+      <soap:operation soapAction="CONST" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap:operation soapAction="SF2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAsync">
+      <soap:operation soapAction="SFA2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap:operation soapAction="SF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПростое">
+      <soap:operation soapAction="S" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоиск">
+      <soap:operation soapAction="SQ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCacheObject">
+      <soap:operation soapAction="UCO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCacheObjects">
+      <soap:operation soapAction="SCO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоискАсинхронно">
+      <soap:operation soapAction="SQA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеАсинхронно">
+      <soap:operation soapAction="SFA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРазделАсинхронно">
+      <soap:operation soapAction="AA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделАсинхронно">
+      <soap:operation soapAction="DA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделПоискАсинхронно">
+      <soap:operation soapAction="DQA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделыАсинхронно">
+      <soap:operation soapAction="DCA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СписокФайлов">
+      <soap:operation soapAction="FILES" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КоличествоФайлов">
+      <soap:operation soapAction="FCOUNT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Поиск">
+      <soap:operation soapAction="Q" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоИдентификаторуОбъекта">
+      <soap:operation soapAction="QU" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоКлючу">
+      <soap:operation soapAction="QG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискИстории">
+      <soap:operation soapAction="QH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьИсторию">
+      <soap:operation soapAction="GH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Проиндексировать">
+      <soap:operation soapAction="INDEXED" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмо">
+      <soap:operation soapAction="MSG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКешЗначение">
+      <soap:operation soapAction="GK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IData" type="tns:IData">
+    <wsp:PolicyReference URI="#CustomBinding_IData_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="СохранитьКешЗначение">
+      <soap12:operation soapAction="SK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьЗначениеВКеше">
+      <soap12:operation soapAction="UV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЗависимыхРазделов">
+      <soap12:operation soapAction="QND" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокРазделов">
+      <soap12:operation soapAction="QN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьРаздел">
+      <soap12:operation soapAction="GN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРаздел">
+      <soap12:operation soapAction="A" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="A2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAsync">
+      <soap12:operation soapAction="AA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел">
+      <soap12:operation soapAction="D" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделБезПодструктуры">
+      <soap12:operation soapAction="DW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделы">
+      <soap12:operation soapAction="DC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел2">
+      <soap12:operation soapAction="DQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВосстановитьРаздел">
+      <soap12:operation soapAction="RESTORE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИзменитьТипРаздела">
+      <soap12:operation soapAction="ETYPE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьРаздел">
+      <soap12:operation soapAction="COPY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПереместитьРаздел">
+      <soap12:operation soapAction="MOVE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap12:operation soapAction="GF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="GF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначениеПростое">
+      <soap12:operation soapAction="G" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначенияФормы">
+      <soap12:operation soapAction="FORM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКонстанту">
+      <soap12:operation soapAction="CONST" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap12:operation soapAction="SF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAsync">
+      <soap12:operation soapAction="SFA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="SF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПростое">
+      <soap12:operation soapAction="S" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоиск">
+      <soap12:operation soapAction="SQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCacheObject">
+      <soap12:operation soapAction="UCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCacheObjects">
+      <soap12:operation soapAction="SCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоискАсинхронно">
+      <soap12:operation soapAction="SQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеАсинхронно">
+      <soap12:operation soapAction="SFA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРазделАсинхронно">
+      <soap12:operation soapAction="AA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделАсинхронно">
+      <soap12:operation soapAction="DA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделПоискАсинхронно">
+      <soap12:operation soapAction="DQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделыАсинхронно">
+      <soap12:operation soapAction="DCA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СписокФайлов">
+      <soap12:operation soapAction="FILES" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КоличествоФайлов">
+      <soap12:operation soapAction="FCOUNT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Поиск">
+      <soap12:operation soapAction="Q" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоИдентификаторуОбъекта">
+      <soap12:operation soapAction="QU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоКлючу">
+      <soap12:operation soapAction="QG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискИстории">
+      <soap12:operation soapAction="QH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьИсторию">
+      <soap12:operation soapAction="GH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Проиндексировать">
+      <soap12:operation soapAction="INDEXED" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмо">
+      <soap12:operation soapAction="MSG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКешЗначение">
+      <soap12:operation soapAction="GK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IData1" type="tns:IData">
+    <wsp:PolicyReference URI="#CustomBinding_IData1_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="СохранитьКешЗначение">
+      <soap12:operation soapAction="SK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьЗначениеВКеше">
+      <soap12:operation soapAction="UV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЗависимыхРазделов">
+      <soap12:operation soapAction="QND" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокРазделов">
+      <soap12:operation soapAction="QN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьРаздел">
+      <soap12:operation soapAction="GN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРаздел">
+      <soap12:operation soapAction="A" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="A2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAsync">
+      <soap12:operation soapAction="AA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел">
+      <soap12:operation soapAction="D" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделБезПодструктуры">
+      <soap12:operation soapAction="DW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделы">
+      <soap12:operation soapAction="DC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел2">
+      <soap12:operation soapAction="DQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВосстановитьРаздел">
+      <soap12:operation soapAction="RESTORE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИзменитьТипРаздела">
+      <soap12:operation soapAction="ETYPE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьРаздел">
+      <soap12:operation soapAction="COPY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПереместитьРаздел">
+      <soap12:operation soapAction="MOVE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap12:operation soapAction="GF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="GF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначениеПростое">
+      <soap12:operation soapAction="G" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначенияФормы">
+      <soap12:operation soapAction="FORM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКонстанту">
+      <soap12:operation soapAction="CONST" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap12:operation soapAction="SF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAsync">
+      <soap12:operation soapAction="SFA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="SF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПростое">
+      <soap12:operation soapAction="S" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоиск">
+      <soap12:operation soapAction="SQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCacheObject">
+      <soap12:operation soapAction="UCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCacheObjects">
+      <soap12:operation soapAction="SCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоискАсинхронно">
+      <soap12:operation soapAction="SQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеАсинхронно">
+      <soap12:operation soapAction="SFA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРазделАсинхронно">
+      <soap12:operation soapAction="AA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделАсинхронно">
+      <soap12:operation soapAction="DA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделПоискАсинхронно">
+      <soap12:operation soapAction="DQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделыАсинхронно">
+      <soap12:operation soapAction="DCA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СписокФайлов">
+      <soap12:operation soapAction="FILES" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КоличествоФайлов">
+      <soap12:operation soapAction="FCOUNT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Поиск">
+      <soap12:operation soapAction="Q" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоИдентификаторуОбъекта">
+      <soap12:operation soapAction="QU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоКлючу">
+      <soap12:operation soapAction="QG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискИстории">
+      <soap12:operation soapAction="QH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьИсторию">
+      <soap12:operation soapAction="GH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Проиндексировать">
+      <soap12:operation soapAction="INDEXED" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмо">
+      <soap12:operation soapAction="MSG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКешЗначение">
+      <soap12:operation soapAction="GK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IData" type="tns:IData">
+    <wsp:PolicyReference URI="#NetTcpBinding_IData_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="СохранитьКешЗначение">
+      <soap12:operation soapAction="SK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьЗначениеВКеше">
+      <soap12:operation soapAction="UV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЗависимыхРазделов">
+      <soap12:operation soapAction="QND" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокРазделов">
+      <soap12:operation soapAction="QN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьРаздел">
+      <soap12:operation soapAction="GN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРаздел">
+      <soap12:operation soapAction="A" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="A2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAsync">
+      <soap12:operation soapAction="AA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел">
+      <soap12:operation soapAction="D" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделБезПодструктуры">
+      <soap12:operation soapAction="DW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделы">
+      <soap12:operation soapAction="DC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел2">
+      <soap12:operation soapAction="DQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВосстановитьРаздел">
+      <soap12:operation soapAction="RESTORE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИзменитьТипРаздела">
+      <soap12:operation soapAction="ETYPE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьРаздел">
+      <soap12:operation soapAction="COPY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПереместитьРаздел">
+      <soap12:operation soapAction="MOVE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap12:operation soapAction="GF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="GF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначениеПростое">
+      <soap12:operation soapAction="G" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначенияФормы">
+      <soap12:operation soapAction="FORM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКонстанту">
+      <soap12:operation soapAction="CONST" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap12:operation soapAction="SF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAsync">
+      <soap12:operation soapAction="SFA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="SF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПростое">
+      <soap12:operation soapAction="S" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоиск">
+      <soap12:operation soapAction="SQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCacheObject">
+      <soap12:operation soapAction="UCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCacheObjects">
+      <soap12:operation soapAction="SCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоискАсинхронно">
+      <soap12:operation soapAction="SQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеАсинхронно">
+      <soap12:operation soapAction="SFA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРазделАсинхронно">
+      <soap12:operation soapAction="AA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделАсинхронно">
+      <soap12:operation soapAction="DA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделПоискАсинхронно">
+      <soap12:operation soapAction="DQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделыАсинхронно">
+      <soap12:operation soapAction="DCA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СписокФайлов">
+      <soap12:operation soapAction="FILES" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КоличествоФайлов">
+      <soap12:operation soapAction="FCOUNT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Поиск">
+      <soap12:operation soapAction="Q" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоИдентификаторуОбъекта">
+      <soap12:operation soapAction="QU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоКлючу">
+      <soap12:operation soapAction="QG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискИстории">
+      <soap12:operation soapAction="QH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьИсторию">
+      <soap12:operation soapAction="GH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Проиндексировать">
+      <soap12:operation soapAction="INDEXED" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмо">
+      <soap12:operation soapAction="MSG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКешЗначение">
+      <soap12:operation soapAction="GK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetNamedPipeBinding_IData" type="tns:IData">
+    <wsp:PolicyReference URI="#NetNamedPipeBinding_IData_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="СохранитьКешЗначение">
+      <soap12:operation soapAction="SK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьЗначениеВКеше">
+      <soap12:operation soapAction="UV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокЗависимыхРазделов">
+      <soap12:operation soapAction="QND" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписокРазделов">
+      <soap12:operation soapAction="QN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьРаздел">
+      <soap12:operation soapAction="GN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРаздел">
+      <soap12:operation soapAction="A" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap12:operation soapAction="A2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAsync">
+      <soap12:operation soapAction="AA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел">
+      <soap12:operation soapAction="D" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделБезПодструктуры">
+      <soap12:operation soapAction="DW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделы">
+      <soap12:operation soapAction="DC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРаздел2">
+      <soap12:operation soapAction="DQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВосстановитьРаздел">
+      <soap12:operation soapAction="RESTORE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИзменитьТипРаздела">
+      <soap12:operation soapAction="ETYPE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КопироватьРаздел">
+      <soap12:operation soapAction="COPY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПереместитьРаздел">
+      <soap12:operation soapAction="MOVE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap12:operation soapAction="GF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначение">
+      <soap12:operation soapAction="GF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначениеПростое">
+      <soap12:operation soapAction="G" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьЗначенияФормы">
+      <soap12:operation soapAction="FORM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКонстанту">
+      <soap12:operation soapAction="CONST" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Set">
+      <soap12:operation soapAction="SF2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAsync">
+      <soap12:operation soapAction="SFA2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначение">
+      <soap12:operation soapAction="SF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПростое">
+      <soap12:operation soapAction="S" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоиск">
+      <soap12:operation soapAction="SQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCacheObject">
+      <soap12:operation soapAction="UCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCacheObjects">
+      <soap12:operation soapAction="SCO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеПоискАсинхронно">
+      <soap12:operation soapAction="SQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьЗначениеАсинхронно">
+      <soap12:operation soapAction="SFA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьРазделАсинхронно">
+      <soap12:operation soapAction="AA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделАсинхронно">
+      <soap12:operation soapAction="DA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьРазделПоискАсинхронно">
+      <soap12:operation soapAction="DQA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьПодразделыАсинхронно">
+      <soap12:operation soapAction="DCA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="СписокФайлов">
+      <soap12:operation soapAction="FILES" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="КоличествоФайлов">
+      <soap12:operation soapAction="FCOUNT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Поиск">
+      <soap12:operation soapAction="Q" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоИдентификаторуОбъекта">
+      <soap12:operation soapAction="QU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискРазделаПоКлючу">
+      <soap12:operation soapAction="QG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПоискИстории">
+      <soap12:operation soapAction="QH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьИсторию">
+      <soap12:operation soapAction="GH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Проиндексировать">
+      <soap12:operation soapAction="INDEXED" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОтправитьПисьмо">
+      <soap12:operation soapAction="MSG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьКешЗначение">
+      <soap12:operation soapAction="GK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataClient">
+    <wsdl:port name="WSHttpBinding_IData" binding="tns:WSHttpBinding_IData">
+      <soap12:address location="http://localhost:8080/RosService/Data" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Data</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IData" binding="tns:BasicHttpBinding_IData">
+      <soap:address location="http://localhost:8080/RosService/Data/basic" />
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IData" binding="tns:CustomBinding_IData">
+      <soap12:address location="http://localhost:8080/RosService/Data/binary" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Data/binary</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IData1" binding="tns:CustomBinding_IData1">
+      <soap12:address location="http://localhost:8080/RosService/Data/gzip" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Data/gzip</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IData" binding="tns:NetTcpBinding_IData">
+      <soap12:address location="net.tcp://localhost/RosService/Data/tcp" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost/RosService/Data/tcp</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetNamedPipeBinding_IData" binding="tns:NetNamedPipeBinding_IData">
+      <soap12:address location="net.pipe://localhost/RosService/Data/pipe" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/RosService/Data/pipe</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

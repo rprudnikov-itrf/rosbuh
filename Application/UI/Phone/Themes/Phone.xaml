@@ -1,0 +1,71 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:RosControl.UI">
+
+    <ControlTemplate x:Key="PhoneSetup" TargetType="local:Phone">
+        <Border SnapsToDevicePixels="True" Background="#1A1A1A" Padding="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <TextBlock Foreground="White" FontSize="11" TextWrapping="Wrap" TextAlignment="Center">Для работы с телефоном нажмите кнопку "Установить". Размер загружаемых обновлений 39Мб.</TextBlock>
+
+                <Button x:Name="PART_btnLoad" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Grid.Row="1" Padding="12,5">Установить</Button>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="PhoneDownload" TargetType="local:Phone">
+        <Border SnapsToDevicePixels="True" Background="#1A1A1A" Padding="8">
+            <Label Content="{TemplateBinding ProgressPercentage}" ContentStringFormat="Загружено: {0}%" 
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Foreground="White" />
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="PhoneReboot" TargetType="local:Phone">
+        <Border SnapsToDevicePixels="True" Background="#1A1A1A" Padding="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <TextBlock Foreground="White" FontSize="11" TextWrapping="Wrap" TextAlignment="Center">Для продолжения работы необходимо перезагрузить программу.</TextBlock>
+
+                <Button x:Name="PART_btnReboot" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Grid.Row="1" Padding="12,5">Перезагрузить</Button>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+
+    <Style TargetType="local:Phone">
+        <Setter Property="FontFamily" Value="Tahoma" />
+        <Setter Property="Height" Value="280" />
+        <Setter Property="MinWidth" Value="200" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:Phone">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="PhoneSetupState" Value="Setup">
+                <Setter Property="Template" Value="{StaticResource PhoneSetup}" />
+            </Trigger>
+            <Trigger Property="PhoneSetupState" Value="Download">
+                <Setter Property="Template" Value="{StaticResource PhoneDownload}" />
+            </Trigger>
+            <Trigger Property="PhoneSetupState" Value="Reboot">
+                <Setter Property="Template" Value="{StaticResource PhoneReboot}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

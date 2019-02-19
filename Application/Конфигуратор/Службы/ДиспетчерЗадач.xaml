@@ -1,0 +1,135 @@
+﻿<Window x:Class="RosApplication.Конфигуратор.Службы.ДиспетчерЗадач"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:r="http://itrf.ru/2009/xaml"
+        xmlns:c="clr-namespace:RosApplication.Конфигуратор.Службы"
+        xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+        Title="Диспетчер задач" Height="540" Width="600"
+        WindowStartupLocation="CenterScreen"
+        Name="Main">
+    <Window.Resources>
+        <c:IntConverter x:Key="intConverter" />
+        <c:TimerConverter x:Key="timerConverter" />
+        <r:DataTimeConverter x:Key="dataTimeConverter" />
+
+        <CollectionViewSource x:Key="ProcItemSource" Source="{Binding Path=ItemsProc, ElementName=Main}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="[ДатаСозданияОбъекта]" Converter="{StaticResource dataTimeConverter}" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
+    <r:Window x:Name="Form" IsWhiteBackground="False" IsButton="True" 
+              IsScroll="False" ПоказатьКнопкуФайл="False" IsCompliteButton="False"
+              Padding="0">
+        <r:Window.Buttons>
+            <StackPanel Orientation="Horizontal">
+                <r:DropDownButton Типы="Процесс" ИсключитьБазовыйТип="True" Margin="0 0 4 0">Выполнить</r:DropDownButton>
+                <Button Click="Обновить_Click">Обновить</Button>
+            </StackPanel>
+        </r:Window.Buttons>
+        <ListBox Name="PART_ListBox" ItemsSource="{Binding Source={StaticResource ProcItemSource}}"
+                 BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 Margin="-1" SelectedValuePath="[id_node]"
+                 SelectionMode="Extended">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить" Command="Delete" />
+                </ContextMenu>
+            </ListBox.ContextMenu>
+            <ListBox.CommandBindings>
+                <CommandBinding Command="Delete" Executed="CommandBinding_Executed" />
+            </ListBox.CommandBindings>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border x:Name="PART_Border" BorderThickness="0 0 0 1" BorderBrush="#cccccc"
+                                        Background="Transparent" Cursor="Hand" Padding="0 3 4 3"
+                                        SnapsToDevicePixels="True">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="28" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="90" />
+                                            <ColumnDefinition Width="70" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Button Command="Delete" Template="{DynamicResource DocumentsTabItemCloseButton}"
+                                                Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                ToolTip="Скрыть" CommandParameter="{Binding [id_node]}"/>
+
+                                        <TextBlock  Grid.Column="1" Text="{Binding [Описание]}" TextTrimming="WordEllipsis" />
+                                        <StackPanel Grid.Column="1" Grid.Row="1" Margin="0 2 0 0" Orientation="Horizontal">
+                                            <TextBlock Text="{Binding [СтатусПроцесса]}" Foreground="Gray"/>
+                                            <TextBlock Text="{Binding [ВремяРаботыПроцесса], StringFormat={}\, {0}}" Foreground="Gray"/>                                            
+                                            <!--<TextBlock Text="{Binding Path=., Converter={StaticResource timerConverter}}" Foreground="Gray"/>-->
+                                        </StackPanel>
+
+                                        <TextBlock Grid.Column="2" Grid.RowSpan="2" 
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center" 
+                                                   Text="{Binding [ДатаСозданияОбъекта], StringFormat=G}"
+                                                   TextWrapping="Wrap" TextAlignment="Center" Foreground="Gray"
+                                                   FontSize="11" ToolTip="Дата начала"/>                                        
+
+                                        <TextBlock Grid.Column="3" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center" 
+                                                   Text="{Binding [ТекущееСостояниеПроцесса], StringFormat={}{0:f2}%}"
+                                                   FontSize="11"/>
+                                        <ProgressBar Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"
+                                                     Maximum="100" 
+                                                     Value="{Binding [ТекущееСостояниеПроцесса], Converter={StaticResource intConverter}}" 
+                                                     Margin="0 2 0 0" Height="12" />
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding [СтатусПроцесса]}" Value="В работе">
+                                        <Setter TargetName="PART_Border"  Property="Background" Value="Yellow" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding [СтатусПроцесса]}" Value="Завершен">
+                                        <Setter TargetName="PART_Border"  Property="Background" Value="#ccffcc" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding [СтатусПроцесса]}" Value="Ошибка">
+                                        <Setter TargetName="PART_Border"  Property="Background" Value="#ffcccc" />
+                                    </DataTrigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="PART_Border" Property="Background" Value="#bbe4fd" />
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="GroupItem">
+                            <Setter Property="Margin" Value="0" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="GroupItem">
+                                        <StackPanel>
+                                            <Border BorderThickness="0 0 0 1" BorderBrush="#cccccc"
+                                                            Padding="6 6 6 2">
+                                                <TextBlock FontWeight="Bold" Text="{Binding Name}" FontSize="11" Foreground="#000" />
+                                            </Border>
+                                            <ItemsPresenter />
+                                        </StackPanel>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+        </ListBox>
+    </r:Window>
+</Window>

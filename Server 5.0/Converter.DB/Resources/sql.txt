@@ -1,0 +1,535 @@
+SET NUMERIC_ROUNDABORT OFF
+GO
+SET ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIELDS_NULL, ARITHABORT, QUOTED_IDENTIFIER, ANSI_NULLS ON
+GO
+IF EXISTS (SELECT * FROM tempdb..sysobjects WHERE id=OBJECT_ID('tempdb..#tmpErrors')) DROP TABLE #tmpErrors
+GO
+CREATE TABLE #tmpErrors (Error int)
+GO
+SET XACT_ABORT ON
+GO
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+GO
+BEGIN TRANSACTION
+GO
+CREATE TABLE [dbo].[assembly_tblValueString]
+(
+[id_value] [decimal] (18, 0) NOT NULL IDENTITY(1, 1),
+[id_node] [decimal] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL,
+[string_value] [ntext] COLLATE Cyrillic_General_CI_AS NULL,
+[string_value_index] [varchar] (512) COLLATE Cyrillic_General_CI_AS NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_assembly_tblValueString_hide] DEFAULT ((0))
+)  ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[assembly_tblValueString] ADD CONSTRAINT [PK_assembly_tblValueString] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type], [id_value] DESC) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[tblValueString]
+(
+[id_value] [decimal] (18, 0) NOT NULL IDENTITY(1, 1),
+[id_node] [decimal] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL,
+[string_value] [ntext] COLLATE Cyrillic_General_CI_AS NULL,
+[string_value_index] [varchar] (512) COLLATE Cyrillic_General_CI_AS NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_tblValueString_hide] DEFAULT ((0)) 
+)  ON [STRING_DATA]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[tblValueString] ADD CONSTRAINT [PK_tblValueString] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type], [id_value] DESC) ON [STRING_DATA]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_tblValueString_string_value_index] ON [dbo].[tblValueString] ([string_value_index]) ON [STRING_INDEX]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[tblValueBool]
+(
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_tblValueBool_type] DEFAULT (''),
+[double_value] [bit] NOT NULL CONSTRAINT [DF_tblValueBool_double_value] DEFAULT ((0)),
+[hide] [bit] NOT NULL CONSTRAINT [DF_tblValueBool_hide] DEFAULT ((0))
+) ON [BOOL_DATA]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[tblValueBool] ADD CONSTRAINT [PK_tblValueBool_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type]) ON [BOOL_DATA]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_tblValueBool] ON [dbo].[tblValueBool] ([double_value]) ON [BOOL_INDEX]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[tblValueByte]
+(
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_tblValueByte_type] DEFAULT (''),
+[byte_value] [varbinary] (max) NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_tblValueByte_hide] DEFAULT ((0))
+) ON [BYTE_DATA]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[tblValueByte] ADD CONSTRAINT [PK_tblValueByte_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type]) ON [BYTE_DATA]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[tblValueDate]
+(
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_tblValueDate_type] DEFAULT (''),
+[datetime_value] [datetime] NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_tblValueDate_hide] DEFAULT ((0))
+) ON [DATE_DATA] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[tblValueDate] ADD CONSTRAINT [PK_tblValueDate_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type]) ON [DATE_DATA] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_tblValueDate_date_value] ON [dbo].[tblValueDate] ([datetime_value] DESC) ON [DATE_INDEX] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[tblValueDouble]
+(
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_tblValueDouble_type] DEFAULT (''),
+[double_value] [numeric] (28, 13) NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_tblValueDouble_hide] DEFAULT ((0))
+) ON [DOUBEL_DATA] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[tblValueDouble] ADD CONSTRAINT [PK_tblValueDouble_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type]) ON [DOUBEL_DATA] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_tblValueDouble_double_value] ON [dbo].[tblValueDouble] ([double_value]) ON [DOUBLE_INDEX]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[assembly_tblValueBool]
+(
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_assembly_tblValueBool_type] DEFAULT (''),
+[double_value] [bit] NOT NULL CONSTRAINT [DF_assembly_tblValueBool_double_value] DEFAULT ((0)),
+[hide] [bit] NOT NULL CONSTRAINT [DF_assembly_tblValueBool_hide] DEFAULT ((0))
+) ON [BOOL_DATA]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[assembly_tblValueBool] ADD CONSTRAINT [PK_assembly_tblValueBool_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type]) ON [BOOL_DATA]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[assembly_tblValueByte]
+(
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_assembly_tblValueByte_type] DEFAULT (''),
+[byte_value] [varbinary] (max) NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_assembly_tblValueByte_hide] DEFAULT ((0))
+) ON [ASSEMBLY] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[assembly_tblValueByte] ADD CONSTRAINT [PK_assembly_tblValueByte_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type]) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[assembly_tblValueDate]
+(
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_assembly_tblValueDate_type] DEFAULT (''),
+[datetime_value] [datetime] NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_assembly_tblValueDate_hide] DEFAULT ((0))
+) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[assembly_tblValueDate] ADD CONSTRAINT [PK_assembly_tblValueDate_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type]) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[assembly_tblValueDouble]
+(
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_assembly_tblValueDouble_type] DEFAULT (''),
+[double_value] [numeric] (28, 13) NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_assembly_tblValueDouble_hide] DEFAULT ((0))
+) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[assembly_tblValueDouble] ADD CONSTRAINT [PK_assembly_tblValueDouble_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type]) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[assembly_tblValueHref]
+(
+[id_value] [decimal] (18, 0) NOT NULL IDENTITY(1, 1),
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_assembly_tblValueHref_type] DEFAULT (''),
+[double_value] [numeric] (28, 13) NULL,
+[string_value_index] [varchar] (512) COLLATE Cyrillic_General_CI_AS NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_assembly_tblValueHref_hide] DEFAULT ((0))
+) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[assembly_tblValueHref] ADD CONSTRAINT [PK_assembly_tblValueHref_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type], [id_value] DESC) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[tblValueHref]
+(
+[id_value] [decimal] (18, 0) NOT NULL IDENTITY(1, 1),
+[id_node] [numeric] (18, 0) NOT NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_tblValueHref_type] DEFAULT (''),
+[double_value] [numeric] (28, 13) NULL,
+[string_value_index] [varchar] (512) COLLATE Cyrillic_General_CI_AS NULL,
+[hide] [bit] NOT NULL CONSTRAINT [DF_tblValueHref_hide] DEFAULT ((0))
+) ON [HREF_DATA] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[tblValueHref] ADD CONSTRAINT [PK_tblValueHref_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type], [id_value] DESC) ON [HREF_DATA] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_tblValueHref_double_value] ON [dbo].[tblValueHref] ([double_value] DESC) ON [HREF_INDEX] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[assembly_tblNode]
+(
+[id_node] [numeric] (18, 0) NOT NULL IDENTITY(1, 1),
+[id_parent] [numeric] (18, 0) NOT NULL,
+[HashCode] [varchar] (900) COLLATE Cyrillic_General_CI_AS NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_assembly_tblNode_nvarchar(128)] DEFAULT (''),
+[hide] [bit] NULL CONSTRAINT [DF_assembly_tblNode_hide] DEFAULT ((0)),
+[GuidCode] [uniqueidentifier] NOT NULL CONSTRAINT [DF_assembly_tblNode_GuidCode] DEFAULT (newsequentialid())
+) ON [ASSEMBLY] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[assembly_tblNode] ADD CONSTRAINT [PK_sys_tblNode] PRIMARY KEY CLUSTERED  ([id_node]) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_assembly_tblNode_41_366624349__K2_K1_K3] ON [dbo].[assembly_tblNode] ([id_parent], [id_node], [type]) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_assembly_tblNode_41_366624349__K2_K3_K1] ON [dbo].[assembly_tblNode] ([id_parent], [type], [id_node]) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_sys_tblNode_2] ON [dbo].[assembly_tblNode] ([type], [id_node]) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_assembly_tblNode_1] ON [dbo].[assembly_tblNode] ([id_parent]) ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_sys_tblNode] ON [dbo].[assembly_tblNode] ([type], [id_parent])  ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_assembly_tblNode] ON [dbo].[assembly_tblNode] ([HashCode])  ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_sys_tblNode_1] ON [dbo].[assembly_tblNode] ([type])  ON [ASSEMBLY]
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating [dbo].[tblNode]'
+GO
+CREATE TABLE [dbo].[tblNode]
+(
+[id_node] [numeric] (18, 0) NOT NULL IDENTITY(1, 1),
+[id_parent] [numeric] (18, 0) NOT NULL,
+[HashCode] [varchar] (900) COLLATE Cyrillic_General_CI_AS NULL,
+[type] [nvarchar] (128) COLLATE Cyrillic_General_CI_AS NOT NULL,
+[hide] [bit] NULL CONSTRAINT [DF_tblNode_hide] DEFAULT ((0)),
+[GuidCode] [uniqueidentifier] NOT NULL CONSTRAINT [DF_tblNode_GuidCode] DEFAULT (newsequentialid())
+) ON [NODE_DATA] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+ALTER TABLE [dbo].[tblNode] ADD CONSTRAINT [PK_tblNode_id_node_type] PRIMARY KEY CLUSTERED  ([id_node] DESC, [type]) ON [NODE_DATA] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_tblNode_id_parent] ON [dbo].[tblNode] ([id_parent] DESC) ON [NODE_INDEX] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE NONCLUSTERED INDEX [IX_HashCode] ON [dbo].[tblNode] ([HashCode]) ON [NODE_INDEX] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+CREATE TABLE [dbo].[assembly_tblAttribute]
+(
+[id_attribute] [numeric] (18, 0) NOT NULL IDENTITY(1, 1),
+[Namespace] [varchar] (512) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_sys_tblAttribute_Namesapce] DEFAULT (''),
+[id_parent] [numeric] (18, 0) NOT NULL CONSTRAINT [DF_sys_tblAttribute_id_parent] DEFAULT ((0)),
+[id_type] [numeric] (18, 0) NOT NULL,
+[HashCode] [nvarchar] (256) COLLATE Cyrillic_General_CI_AS NOT NULL,
+[TypeHashCode] [nvarchar] (256) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_sys_tblAttribute_TypeHashCode] DEFAULT (''),
+[Name] [nvarchar] (256) COLLATE Cyrillic_General_CI_AS NOT NULL,
+[Описание] [varchar] (1024) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_sys_tblAttribute_Описание_1] DEFAULT (''),
+[MemberType] [int] NOT NULL CONSTRAINT [DF_sys_tblAttribute_MemberType] DEFAULT ((0)),
+[RegisterType] [nvarchar] (30) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_sys_tblAttribute_Register] DEFAULT (''),
+[BaseType] [nvarchar] (512) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_sys_tblAttribute_BaseType_Описание] DEFAULT (''),
+[ReflectedType] [nvarchar] (512) COLLATE Cyrillic_General_CI_AS NOT NULL CONSTRAINT [DF_sys_tblAttribute_ReflectedType_Описание] DEFAULT (''),
+[IsReadOnly] [bit] NOT NULL CONSTRAINT [DF_sys_tblAttribute_IsReadOnly] DEFAULT ((0)),
+[IsAutoIncrement] [bit] NOT NULL CONSTRAINT [DF_sys_tblAttribute_IsAutoIncrement] DEFAULT ((0)),
+[IsSystem] [bit] NOT NULL CONSTRAINT [DF_sys_tblAttribute_IsSystem_1] DEFAULT ((0)),
+[IsSetDefaultValue] [bit] NOT NULL CONSTRAINT [DF_assembly_tblAttribute_IsSetDefaultValue] DEFAULT ((0)),
+[id_node] [decimal] (18, 0) NOT NULL CONSTRAINT [DF_assembly_tblAttribute_id_node] DEFAULT ((0))
+) ON [ASSEMBLY] 
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating primary key [PK_sys_tblTypeCompile] on [dbo].[assembly_tblAttribute]'
+GO
+ALTER TABLE [dbo].[assembly_tblAttribute] ADD CONSTRAINT [PK_sys_tblTypeCompile] PRIMARY KEY CLUSTERED  ([id_attribute])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating index [_dta_index_assembly_tblAttribute_26_719055__K3_K9_K7_1_4_6] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_assembly_tblAttribute_26_719055__K3_K9_K7_1_4_6] ON [dbo].[assembly_tblAttribute] ([id_parent], [MemberType], [Name]) INCLUDE ([id_attribute], [id_type], [TypeHashCode])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating index [_dta_index_assembly_tblAttribute_41_1097875078__K3_K7_K1_5_9_10] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_assembly_tblAttribute_41_1097875078__K3_K7_K1_5_9_10] ON [dbo].[assembly_tblAttribute] ([id_parent], [Name], [id_attribute]) INCLUDE ([HashCode], [MemberType], [RegisterType])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating index [_dta_index_assembly_tblAttribute_26_719055__K3_K7_K1_6] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_assembly_tblAttribute_26_719055__K3_K7_K1_6] ON [dbo].[assembly_tblAttribute] ([id_parent], [Name], [id_attribute]) INCLUDE ([TypeHashCode])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating statistics [_dta_stat_1097875078_1_3] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE STATISTICS [_dta_stat_1097875078_1_3] ON [dbo].[assembly_tblAttribute] ([id_attribute], [id_parent])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating index [IX_assembly_tblAttribute_2] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE NONCLUSTERED INDEX [IX_assembly_tblAttribute_2] ON [dbo].[assembly_tblAttribute] ([id_parent], [MemberType], [TypeHashCode])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating index [IX_assembly_tblAttribute] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_assembly_tblAttribute] ON [dbo].[assembly_tblAttribute] ([id_parent], [Name])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating index [_dta_index_assembly_tblAttribute_41_719055__K9_K3_K4_6] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_assembly_tblAttribute_41_719055__K9_K3_K4_6] ON [dbo].[assembly_tblAttribute] ([MemberType], [id_parent], [id_type]) INCLUDE ([TypeHashCode])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating statistics [_dta_stat_1097875078_3_4] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE STATISTICS [_dta_stat_1097875078_3_4] ON [dbo].[assembly_tblAttribute] ([id_parent], [id_type])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating statistics [_dta_stat_1097875078_7_3_4_9] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE STATISTICS [_dta_stat_1097875078_7_3_4_9] ON [dbo].[assembly_tblAttribute] ([Name], [id_parent], [id_type], [MemberType])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating statistics [_dta_stat_1097875078_9_3_6] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE STATISTICS [_dta_stat_1097875078_9_3_6] ON [dbo].[assembly_tblAttribute] ([MemberType], [id_parent], [TypeHashCode])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating statistics [_dta_stat_1097875078_6_4_9] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE STATISTICS [_dta_stat_1097875078_6_4_9] ON [dbo].[assembly_tblAttribute] ([TypeHashCode], [id_type], [MemberType])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating index [IX_assembly_tblAttribute_1] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE NONCLUSTERED INDEX [IX_assembly_tblAttribute_1] ON [dbo].[assembly_tblAttribute] ([TypeHashCode])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Creating statistics [_dta_stat_1097875078_7_9] on [dbo].[assembly_tblAttribute]'
+GO
+CREATE STATISTICS [_dta_stat_1097875078_7_9] ON [dbo].[assembly_tblAttribute] ([Name], [MemberType])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Adding constraints to [dbo].[assembly_tblValueString]'
+GO
+ALTER TABLE [dbo].[assembly_tblValueString] ADD CONSTRAINT [IX_assembly_tblValueString_id_value] UNIQUE NONCLUSTERED  ([id_value] DESC)
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Adding constraints to [dbo].[tblNode]'
+GO
+ALTER TABLE [dbo].[tblNode] ADD CONSTRAINT [IX_tblNode_GuidCode] UNIQUE NONCLUSTERED  ([GuidCode])
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+PRINT N'Adding constraints to [dbo].[tblValueString]'
+GO
+ALTER TABLE [dbo].[tblValueString] ADD CONSTRAINT [IX_tblValueString_id_value] UNIQUE NONCLUSTERED  ([id_value] DESC)
+GO
+IF @@ERROR<>0 AND @@TRANCOUNT>0 ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT=0 BEGIN INSERT INTO #tmpErrors (Error) SELECT 1 BEGIN TRANSACTION END
+GO
+IF EXISTS (SELECT * FROM #tmpErrors) ROLLBACK TRANSACTION
+GO
+IF @@TRANCOUNT>0 BEGIN
+PRINT 'The database update succeeded'
+COMMIT TRANSACTION
+END
+ELSE PRINT 'The database update failed'
+GO
+DROP TABLE #tmpErrors
+GO

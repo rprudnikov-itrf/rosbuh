@@ -1,0 +1,15 @@
+﻿<Window x:Class="RosApplication.UI.Windows.TransferWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RosControl.UI"
+        xmlns:r="clr-namespace:RosControl.UI;assembly=RosControl.Wpf"
+        Height="160" Width="300" WindowStartupLocation="CenterScreen"
+        Title="Перевод разговора">
+    
+    <r:Window HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              IsWhiteBackground="False"
+              Complite="Window_Complite">
+        <r:TextBox Name="Phone" Watermark="Номер телефона" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+    </r:Window>
+</Window>

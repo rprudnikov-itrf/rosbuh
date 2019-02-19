@@ -1,0 +1,100 @@
+﻿<Window x:Class="RosApplication.Конфигуратор.ДобавитьАтрибут"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:app="clr-namespace:RosApplication.Конфигуратор"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    Title="Добавить атрибут" Height="440" Width="620" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen"
+    x:Name="Window" Loaded="Window_Loaded">
+    <r:Window Complite="Window_Complite" IsWhiteBackground="False" IsScroll="False" ПоказатьКнопкуФайл="False">
+        <StackPanel Grid.IsSharedSizeScope="True">
+            <Label HorizontalAlignment="Left" Margin="0,0,0,12" Padding="0" FontSize="20" FontFamily="Times New Roman" FontWeight="Bold">Добавить атрибут</Label>
+            <r:ParamItemControl Header="Добавить в:" Padding="0,0,46,0">
+                <TextBox Name="ДобавитьВ" IsReadOnly="True" Foreground="Gray" VerticalAlignment="Top" />
+            </r:ParamItemControl>
+            <r:ParamItemControl Header="Название:">
+                <r:SearchTextBox ValueChanged="Описание_ValueChanged"
+                                 PopupHeight="100" 
+                                 SelectedTextPath="[НазваниеОбъекта]" 
+                                 SelectedValuePath="[ИмяТипаДанных]" 
+                                 Name="Описание" VerticalAlignment="Top" 
+                                 IsAutoComplite="True" Хранилище="Конфигурация" 
+                                 ТипДанных="ТипДанных" ПоисковыйАтрибут="НазваниеОбъекта" 
+                                 КоличествоВыводимыхДанных="10" 
+                                 HeadersVisibility="None"
+                                 СкрытьЕслиПусто="True"
+                                 LostFocus="Описание_LostFocus"
+                                 DelayTime="100" 
+                                 МинимальноеКоличествоСимволов="2">
+                    <r:SearchTextBox.Columns>
+                        <r:SearchTextBoxColumn Attribute="НазваниеОбъекта" DisplayName="Название" Visible="True" Width="320" />
+                        <r:SearchTextBoxColumn Attribute="БазовыйТип" Binding="{Binding [БазовыйТип.НазваниеОбъекта]}"  Width="140" />
+                        <r:SearchTextBoxColumn Attribute="ИмяТипаДанных" Visible="False" />
+                        <r:SearchTextBoxColumn Attribute="КатегорияТипаДанных" Visible="False" />
+                    </r:SearchTextBox.Columns>
+                </r:SearchTextBox>
+            </r:ParamItemControl>
+            <StackPanel>
+                <StackPanel.Visibility>
+                    <Binding Path="SelectedItem" ElementName="Описание" ConverterParameter="">
+                        <Binding.Converter>
+                            <r:VisibilityConverter />
+                        </Binding.Converter>
+                    </Binding>
+                </StackPanel.Visibility>
+                <r:ParamItemControl Header="Имя:">
+                    <TextBox Name="Имя" />
+                </r:ParamItemControl>
+                <r:ParamItemControl Header="Тип данных:" VerticalContentAlignment="Top">
+
+                    <!--<Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <r:ComboBox SelectedValue="string" Margin="0,0,0,6" Name="ТипДанных" Background="White" 
+                                    BorderBrush="Silver" VerticalAlignment="Top" 
+                                    DisplayMemberPath="Описание" SelectedValuePath="Name"
+                                    ГруппироватьПо="Namespace">
+                                    <r:ComboBox.ItemContainerStyle>
+                                        <Style TargetType="ComboBoxItem">
+                                            <Setter Property="MaxWidth" Value="450" />
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                        </Style>
+                                    </r:ComboBox.ItemContainerStyle>
+                                </r:ComboBox>
+                                <CheckBox Name="Массив" Content="Массив" Grid.Column="1" Margin="4 0 0 0" 
+                                          VerticalAlignment="Center" />
+                            </Grid>-->
+                    <r:RadioButtonList Name="ТипДанных" Orientation="Vertical" SelectedValuePath="Content">
+                        <r:RadioButtonList.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <r:UniformGrid Columns="2" Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </r:RadioButtonList.ItemsPanel>
+                        <!--<r:RadioButtonList.SelectedValue>
+                            <Binding Path="SelectedValue" ElementName="ТипДанных" Mode="TwoWay" />
+                        </r:RadioButtonList.SelectedValue>-->
+                        <ListBoxItem Selector.IsSelected="True">string</ListBoxItem>
+                        <ListBoxItem>double</ListBoxItem>
+                        <ListBoxItem>int</ListBoxItem>
+                        <ListBoxItem>datetime</ListBoxItem>
+                        <ListBoxItem>bool</ListBoxItem>
+                        <ListBoxItem>byte</ListBoxItem>
+                        <ListBoxItem>ссылка</ListBoxItem>
+                    </r:RadioButtonList>
+                </r:ParamItemControl>
+            </StackPanel>
+            <r:ParamItemControl Header="Тип данных:" VerticalContentAlignment="Top">
+                <r:ParamItemControl.Visibility>
+                    <Binding Path="SelectedItem" ElementName="Описание" ConverterParameter="">
+                        <Binding.Converter>
+                            <r:NotVisibilityConverter />
+                        </Binding.Converter>
+                    </Binding>
+                </r:ParamItemControl.Visibility>
+                <!--<r:HyperLink Name="ТипДанныхОписание" />-->
+                <TextBox IsReadOnly="True" Name="ТипДанныхОписание" />
+            </r:ParamItemControl>
+        </StackPanel>
+    </r:Window>
+</Window>

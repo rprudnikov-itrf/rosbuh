@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A5F67579-480B-486B-A3ED-FB78E37039F6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RosApplication</RootNamespace>
+    <AssemblyName>RosApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <ManifestKeyFile>key-rosinfotech.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>219A6F1741A5E5488387F6161ECE8A8C57CC153E</ManifestCertificateThumbprint>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <ManifestTimestampUrl>
+    </ManifestTimestampUrl>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <PublishUrl>ftp://itrf.ru/wwwroot/update.itrf.ru/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Background</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>true</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://update.itrf.ru/</InstallUrl>
+    <SupportUrl>http://client.itrf.ru/install.htm</SupportUrl>
+    <ErrorReportUrl>http://client.itrf.ru/install.htm</ErrorReportUrl>
+    <TargetCulture>ru-RU</TargetCulture>
+    <ProductName>Рос.Бухгалтерия</ProductName>
+    <PublisherName>РосИнфоТех</PublisherName>
+    <SuiteName>Рос.Бухгалтерия - РосИнфоТех</SuiteName>
+    <MinimumRequiredVersion>2.5.7.923</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>index.htm</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>254</ApplicationRevision>
+    <ApplicationVersion>5.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <!--<AppConfig>app.config</AppConfig>-->
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <!--<AppConfig>app.publishe.config</AppConfig>-->
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\dll\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=1.6.0.0, Culture=neutral, PublicKeyToken=c4a44cf09a269b5d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WindowsMediaFormat">
+      <HintPath>..\dll\NAudio.WindowsMediaFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.5.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="RosApplication.Configuration">
+      <HintPath>..\dll\RosApplication.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+    </Reference>
+    <Reference Include="System.ServiceModel">
+    </Reference>
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+    </Reference>
+    <Reference Include="VoIPSDK, Version=10.0.4.193, Culture=neutral, PublicKeyToken=4812fb35129b8487, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>H:\Ozeki Voip\VoIPSDK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+    </Reference>
+    <Reference Include="PresentationCore">
+    </Reference>
+    <Reference Include="PresentationFramework">
+    </Reference>
+    <Reference Include="WPFToolkit, Version=4.0.0.0, Culture=neutral, PublicKeyToken=716f7c06b326790b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SDK\Toolkit-release\bin\Release\WPFToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="app.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="UI\Phone\Themes\RecordsFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Phone\Themes\PhoneControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Phone\Themes\Phone.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Phone\Windows\RecordsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Phone\Windows\TransferWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Клиент\СоздатьНовыйАккаунт.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Клиент\Чат\МоиСообщения.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Клиент\Чат\ОтправитьНескольким.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Конфигуратор\КешОбъектов\ОчиститьКешированныеОбъекты.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Конфигуратор\ПроиндексироватьДанные.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\ObjectBrowser\AddExistingAttribute.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Клиент\НастройкиАвторизации.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\ObjectBrowser\КопироватьТипДанных.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\РедакторКода\РедакторXaml.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\ObjectBrowser\ДобавитьАтрибут.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\ObjectBrowser\ДобавитьТипДанных.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="logon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Клиент\main.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\ObjectBrowser\ObjectBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\РедакторКода\СкрытьПоУсловию.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\РедакторКода\ТолькоДляЧтенияПоУсловию.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Конфигуратор\Службы\ДиспетчерЗадач.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Конфигуратор\Службы\ДиспетчерОкон.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Конфигуратор\Службы\ЖурналУдалений.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Конфигуратор\Службы\ОткрытьЗапрос.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Конфигуратор\Службы\ПоискИЗамена.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Конфигуратор\Службы\РедакторЗапросов.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Конфигуратор\КешОбъектов\СписокКешированныхОбъектов.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Конфигуратор\Статистика.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="app.xaml.cs">
+      <DependentUpon>app.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Phone\Phone.cs" />
+    <Compile Include="UI\Phone\PhoneControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Phone\RecordsFrame.cs" />
+    <Compile Include="UI\Phone\Windows\RecordsWindow.xaml.cs">
+      <DependentUpon>RecordsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Phone\Windows\TransferWindow.xaml.cs">
+      <DependentUpon>TransferWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Клиент\main.xaml.cs">
+      <DependentUpon>main.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Command\CommandBinding.cs" />
+    <Compile Include="Клиент\СоздатьНовыйАккаунт.xaml.cs">
+      <DependentUpon>СоздатьНовыйАккаунт.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Клиент\Чат\МоиСообщения.xaml.cs">
+      <DependentUpon>МоиСообщения.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Клиент\Чат\ОтправитьНескольким.xaml.cs">
+      <DependentUpon>ОтправитьНескольким.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\КешОбъектов\ОчиститьКешированныеОбъекты.xaml.cs">
+      <DependentUpon>ОчиститьКешированныеОбъекты.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\ПроиндексироватьДанные.xaml.cs">
+      <DependentUpon>ПроиндексироватьДанные.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\ObjectBrowser\AddExistingAttribute.xaml.cs">
+      <DependentUpon>AddExistingAttribute.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Клиент\НастройкиАвторизации.xaml.cs">
+      <DependentUpon>НастройкиАвторизации.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\ObjectBrowser\КопироватьТипДанных.xaml.cs">
+      <DependentUpon>КопироватьТипДанных.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\РедакторКода\РедакторXaml.xaml.cs">
+      <DependentUpon>РедакторXaml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\ObjectBrowser\ДобавитьАтрибут.xaml.cs">
+      <DependentUpon>ДобавитьАтрибут.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\ObjectBrowser\ДобавитьТипДанных.xaml.cs">
+      <DependentUpon>ДобавитьТипДанных.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="logon.xaml.cs">
+      <DependentUpon>logon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\ObjectBrowser\ObjectBrowser.xaml.cs">
+      <DependentUpon>ObjectBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\main.xaml.cs">
+      <DependentUpon>main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\РедакторКода\СкрытьПоУсловию.xaml.cs">
+      <DependentUpon>СкрытьПоУсловию.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\РедакторКода\ТолькоДляЧтенияПоУсловию.xaml.cs">
+      <DependentUpon>ТолькоДляЧтенияПоУсловию.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\Службы\ДиспетчерЗадач.xaml.cs">
+      <DependentUpon>ДиспетчерЗадач.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\Службы\ДиспетчерОкон.xaml.cs">
+      <DependentUpon>ДиспетчерОкон.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\Службы\ЖурналУдалений.xaml.cs">
+      <DependentUpon>ЖурналУдалений.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\Службы\ОткрытьЗапрос.xaml.cs">
+      <DependentUpon>ОткрытьЗапрос.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\Службы\ПоискИЗамена.xaml.cs">
+      <DependentUpon>ПоискИЗамена.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\Службы\РедакторЗапросов.xaml.cs">
+      <DependentUpon>РедакторЗапросов.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\КешОбъектов\СписокКешированныхОбъектов.xaml.cs">
+      <DependentUpon>СписокКешированныхОбъектов.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Конфигуратор\Статистика.xaml.cs">
+      <DependentUpon>Статистика.xaml</DependentUpon>
+    </Compile>
+    <None Include="key.snk" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <AppDesigner Include="Properties\" />
+    <None Include="key-rosinfotech.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль Microsoft .NET Framework 4 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Установщик Windows 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\mailru.png" />
+    <Resource Include="UI\Phone\Images\back.png" />
+    <Resource Include="UI\Phone\Images\ico1.png" />
+    <Resource Include="UI\Phone\Images\ico2.png" />
+    <Resource Include="UI\Phone\Images\ico3.png" />
+    <Resource Include="UI\Phone\Images\ico4.png" />
+    <Resource Include="UI\Phone\Images\replay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="RosApplication.Configuration">
+      <Visible>False</Visible>
+      <Group>Resources</Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="RosService.Client">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="VoIPSDK">
+      <Visible>False</Visible>
+      <Group>VoIPSDK</Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\add.png" />
+    <Resource Include="Themes\images\allfolder.png" />
+    <Resource Include="Themes\images\database_refresh.png" />
+    <Resource Include="Themes\images\error_list.png" />
+    <Resource Include="Themes\images\events.png" />
+    <Resource Include="Themes\images\mail.gif" />
+    <Resource Include="Themes\images\newmail.png" />
+    <Resource Include="Themes\images\object_browser.png" />
+    <Resource Include="Themes\images\output.png" />
+    <Resource Include="Themes\images\password.png" />
+    <Resource Include="Themes\images\properties.png" />
+    <Resource Include="Themes\images\search.png" />
+    <Resource Include="Themes\images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\хранилище.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\Выполнить.png" />
+    <Resource Include="Themes\images\Шаблон.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\031.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <FileAssociation Include=".itrf">
+      <Visible>False</Visible>
+      <Description>Документ - Рос.Бухгалтерия</Description>
+      <Progid>RosApplication.5</Progid>
+      <DefaultIcon>icon.ico</DefaultIcon>
+    </FileAssociation>
+    <FileAssociation Include=".rql">
+      <Visible>False</Visible>
+      <Description>Язык запросов RQL</Description>
+      <Progid>RosApplication.5</Progid>
+      <DefaultIcon>icon.ico</DefaultIcon>
+    </FileAssociation>
+    <FileAssociation Include=".rs">
+      <Visible>False</Visible>
+      <Description>Ключ - Рос.Бухгалтерия</Description>
+      <Progid>RosApplication.5</Progid>
+      <DefaultIcon>icon.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\icon_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\diagram_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\yandex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\icon_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\MenuHide.png" />
+    <Resource Include="Themes\images\MenuShow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\clock.png" />
+    <Resource Include="Themes\images\clock_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\close2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\flag.png" />
+    <Resource Include="Themes\images\flag_ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\flag_header.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\files.png" />
+    <Resource Include="Themes\images\hight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\hight2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\star_fav.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\msg\user-28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\bullet_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\searchbox\apple_search_box_cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\searchbox\apple_search_box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="rql.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\1326225596_disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\images\rql.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\RosClient.csproj">
+      <Project>{73A33F71-BD61-4F93-85D1-0B168ED899C6}</Project>
+      <Name>RosClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Control\RosControl.csproj">
+      <Project>{1289B33F-E200-4F3B-8E5F-5D2DAA38D4F8}</Project>
+      <Name>RosControl</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ringback.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ringtone.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Phone\Images\star.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <StartArguments />
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

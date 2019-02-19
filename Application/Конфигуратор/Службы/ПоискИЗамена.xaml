@@ -1,0 +1,201 @@
+﻿<Window x:Class="RosApplication.Конфигуратор.Службы.ПоискИЗамена"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:r="http://itrf.ru/2009/xaml"
+        xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+        Title="Поиск и замена" Height="580" Width="900" 
+        WindowStartupLocation="CenterScreen" SizeToContent="Manual"
+        x:Name="Window" Initialized="Window_Initialized">
+    <r:Window x:Name="Form" IsWhiteBackground="False" IsButton="False" 
+              IsScroll="False" ПоказатьКнопкуФайл="False"
+              Padding="0" FocusManager.FocusedElement="{Binding ElementName=PART_Query}"
+              Loaded="Form_Loaded"
+              StyleHeaderTemplate="Separator"
+              HeaderPadding="8,4"
+              BackgroundHeader="#EAEAEB">
+        <r:Window.CommandBindings>
+            <CommandBinding Command="Save" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute" />
+            <CommandBinding Command="Open" Executed="Open_Executed" CanExecute="CommandBinding_CanExecute" />
+        </r:Window.CommandBindings>
+        <r:Window.Header>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=Title, ElementName=Window}" FontWeight="Bold" VerticalAlignment="Center" />
+                <r:Separator Margin="18,0,6,0" />
+                <Button Padding="5,1,4,1" Command="Open" HorizontalAlignment="Left" ToolTip="Открыть">
+                    <Image Width="16" Height="16" Stretch="UniformToFill" 
+                               Source="/RosControl.Wpf;component/Themes/images/folder_horizontal_open.png"
+                               RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                </Button>
+                <r:Separator Margin="6,0" />
+                <Button Padding="4,1,6,1" Command="Save" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image RenderOptions.BitmapScalingMode="NearestNeighbor" 
+                               Width="16" Height="16" Margin="0,0,3,0"
+                               VerticalAlignment="Center" Stretch="None" 
+                               Source="/RosApplication;component/Themes/images/1326225596_disk.png" />
+                        <TextBlock Text="Сохранить" />
+                    </StackPanel>
+                </Button>
+                <r:Separator Margin="6,0" />
+                <ComboBox x:Name="Хранилище" SelectedValuePath="Content" Width="120">
+                    <ComboBoxItem Selector.IsSelected="True">Оперативное</ComboBoxItem>
+                    <ComboBoxItem>Конфигурация</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </r:Window.Header>
+        <TabControl Background="{Binding Path=Background, ElementName=Form}"
+                    BorderThickness="0 1 0 0"
+                    Padding="0" Margin="0 4 0 0">
+            <TabItem Header="Поиск">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="10">
+                        <StackPanel>
+                            <Label Padding="0 2" Margin="0">Запрос:</Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox IsHitTestVisible="False" />
+                                <r:TextEditor x:Name="PART_Query" 
+                                            HighlightingStrategy="Sql" 
+                                            BorderThickness="0"
+                                            Margin="4 2"
+                                            ShowLineNumbers="False"
+                                            Text="{Binding Path=Запрос, ElementName=PART_DataGrid, Mode=TwoWay}"
+                                            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                                <!--<TextBox Name="PART_Query" Text="{Binding Path=Запрос, ElementName=PART_DataGrid, Mode=TwoWay}"
+                                         TextWrapping="Wrap"/>-->
+                                <StackPanel Grid.Column="1" Margin="6 0 0 0" Width="120">
+                                    <StackPanel Margin="0 0 0 4" Orientation="Horizontal">
+                                        <Button Margin="0 0 4 0" Click="РедакторЗапросов" ToolTip="Редактор запросов" 
+                                            HorizontalAlignment="Left" Padding="3 1">...</Button>
+                                        <Button Click="ОбновитьКэш" ToolTip="Обновить запрос в кэше" 
+                                            HorizontalAlignment="Left" Padding="3 1">Кешировать</Button>
+                                    </StackPanel>
+                                    <Button Command="Find" CommandTarget="{Binding ElementName=PART_DataGrid}">Найти</Button>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                    <!--Запрос="[Типы=Контрагент;Колонки=(НазваниеОбъекта,ДатаСозданияОбъекта,РедакторРаздела)]"-->
+                    <r:DataGrid x:Name="PART_DataGrid" Grid.Row="1"
+                                IsReadOnly="True" IsButton="False" 
+                                BorderThickness="0 1 0 0"
+                                Searched="PART_DataGrid_Searched"
+                                CanUserDeleteRows="True"
+                                ClipboardCopyMode="ExcludeHeader"
+                                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                ЗапросChanged="PART_DataGrid_ЗапросChanged"
+                                ПоказатьКнопкуРежимРедактирования="True"
+                                ПоказатьВыборСтраницы="True"
+                                Хранилище="{Binding ElementName=Хранилище, Path=SelectedValue}">
+                        <r:DataGrid.Columns>
+                            <toolkit:DataGridTextColumn Header=" " Width="*"/>
+                        </r:DataGrid.Columns>
+                    </r:DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Замена">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="10">
+                        <StackPanel>
+                            <Label Padding="0 2" Margin="0">Запрос:</Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Name="PART_ЗаменаЗапрос" Text="{Binding Path=Запрос, ElementName=PART_DataGrid, Mode=TwoWay}"
+                                         TextWrapping="Wrap" IsReadOnly="False" />
+                                <StackPanel Grid.Column="1" Margin="6 0 0 0" Width="120">
+                                    <Button Margin="0 0 0 4" Click="РедакторЗапросов" ToolTip="Редактор запросов"
+                                        HorizontalAlignment="Left" Padding="3 1" IsEnabled="False"
+                                        Visibility="Hidden">...</Button>
+                                    <Button x:Name="PART_Замена" Click="Замена">Заменить все</Button>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                    <Border Grid.Row="1" Padding="10 6" BorderThickness="0 1 0 0" BorderBrush="Silver">
+                        <ItemsControl ItemsSource="{Binding Path=Items, ElementName=Window}" Grid.IsSharedSizeScope="True">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <r:ParamItemControl VerticalContentAlignment="Top">
+                                        <r:ParamItemControl.Header>
+                                            <CheckBox Content="{Binding Name}" ContentStringFormat="{}{0}:"
+                                                      IsChecked="{Binding IsEdit}" VerticalAlignment="Center" />
+                                        </r:ParamItemControl.Header>
+
+                                        <!--<TextBox Name="PART_TextBox" Text="{Binding Value}" AcceptsReturn="True" 
+                                                    AcceptsTab="True" VerticalScrollBarVisibility="Auto" MaxHeight="100" />-->
+                                        <ComboBox Name="PART_TextBox" Text="{Binding Value}" IsEnabled="False" IsEditable="True"
+                                                    ItemsSource="{Binding Path=Items, ElementName=Window}"
+                                                    DisplayMemberPath="FullName"  />
+
+                                        <!--<Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Name="PART_TextBox" Text="{Binding Value}" IsReadOnly="True" AcceptsReturn="True" />
+                                            <CheckBox Name="PART_CheckBox" Content="=Атрибут" Grid.Column="1" IsEnabled="False" />
+                                        </Grid>-->
+                                    </r:ParamItemControl>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsEdit}" Value="True">
+                                            <Setter TargetName="PART_TextBox" Property="IsEnabled" Value="True" />
+                                            <!--<Setter TargetName="PART_CheckBox" Property="IsEnabled" Value="True" />-->
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Удалить">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="10">
+                        <StackPanel>
+                            <Label Padding="0 2" Margin="0">Запрос:</Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Name="PART_ЗапросУдалить" Text="{Binding Path=Запрос, ElementName=PART_DataGrid, Mode=TwoWay}"
+                                         TextWrapping="Wrap" IsReadOnly="False"/>
+                                <StackPanel Grid.Column="1" Margin="6 0 0 0" Width="120">
+                                    <Button Margin="0 0 0 4" Click="РедакторЗапросов" ToolTip="Редактор запросов" 
+                                            HorizontalAlignment="Left" Padding="3 1" IsEnabled="False"
+                                            Visibility="Hidden">...</Button>
+                                    <Button Name="КнопкаУдалить" Click="Удалить">Удалить</Button>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel>
+                            <CheckBox Name="Корзина" IsChecked="False" Margin="0 8 0 0">Удалить в корзину</CheckBox>
+                            <CheckBox Name="Связи" IsChecked="False" Margin="0 4 0 0" Visibility="Collapsed">Удалить связанные объекты</CheckBox>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </r:Window>
+</Window>

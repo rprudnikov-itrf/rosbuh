@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RosService.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RosService.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Пользователь">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Группа" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ГруппаРаздел" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Интерфейс" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Логин" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="МестоПоиска" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ПоисковыйАтрибут" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Права" type="tns:ПраваПользователя" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Роли" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Тип" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Пользователь" nillable="true" type="tns:Пользователь" />
+  <xs:simpleType name="ПраваПользователя">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Пусто">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ДобавлениеРазделов" />
+          <xs:enumeration value="УдалениеРазделов" />
+          <xs:enumeration value="РедактированиеРазделов" />
+          <xs:enumeration value="ПоказатьВсеДерево" />
+          <xs:enumeration value="ПоказатьОбъектыСозданныеПользователем" />
+          <xs:enumeration value="ПоказатьОбъектыПодструктуры" />
+          <xs:enumeration value="УправлениеПользователями" />
+          <xs:enumeration value="ПоказатьОбъектыПоАтрибуту" />
+          <xs:enumeration value="СкрытьРекламу" />
+          <xs:enumeration value="ЗапретитьРаботуСПочтой" />
+          <xs:enumeration value="ЗапретитьРаботуСЗадачами" />
+          <xs:enumeration value="ЗапретитьПоиск" />
+          <xs:enumeration value="ЗапретитьРасширенныйПоиск" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="ПраваПользователя" nillable="true" type="tns:ПраваПользователя" />
+</xs:schema>

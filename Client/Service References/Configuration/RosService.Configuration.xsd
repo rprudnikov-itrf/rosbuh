@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RosService.Configuration" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RosService.Configuration" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfDeleteLog">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeleteLog" nillable="true" type="tns:DeleteLog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeleteLog" nillable="true" type="tns:ArrayOfDeleteLog" />
+  <xs:complexType name="DeleteLog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="label" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteLog" nillable="true" type="tns:DeleteLog" />
+  <xs:complexType name="Type">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BaseType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeclaringType" type="xs:decimal" />
+      <xs:element minOccurs="0" name="HashCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsAutoIncrement" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsReadOnly" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSetDefaultValue" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MemberType" type="tns:MemberTypes" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Namespace" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReflectedType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegisterType" type="tns:RegisterTypes" />
+      <xs:element minOccurs="0" name="TypeHashCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Type" nillable="true" type="tns:Type" />
+  <xs:simpleType name="MemberTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="Object" />
+      <xs:enumeration value="String" />
+      <xs:enumeration value="Int" />
+      <xs:enumeration value="Double" />
+      <xs:enumeration value="DateTime" />
+      <xs:enumeration value="Bool" />
+      <xs:enumeration value="Ссылка" />
+      <xs:enumeration value="Таблица" />
+      <xs:enumeration value="Byte" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MemberTypes" nillable="true" type="tns:MemberTypes" />
+  <xs:simpleType name="RegisterTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="undefined" />
+      <xs:enumeration value="double_value" />
+      <xs:enumeration value="datetime_value" />
+      <xs:enumeration value="string_value" />
+      <xs:enumeration value="byte_value" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RegisterTypes" nillable="true" type="tns:RegisterTypes" />
+  <xs:complexType name="ArrayOfType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Type" nillable="true" type="tns:Type" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfType" nillable="true" type="tns:ArrayOfType" />
+  <xs:complexType name="ArrayOfBinding">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Binding" nillable="true" type="tns:Binding" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBinding" nillable="true" type="tns:ArrayOfBinding" />
+  <xs:complexType name="Binding">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PropertyPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StringFormat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="attribute" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="control" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Binding" nillable="true" type="tns:Binding" />
+  <xs:complexType name="ArrayOfEvent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Event" nillable="true" type="tns:Event" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEvent" nillable="true" type="tns:ArrayOfEvent" />
+  <xs:complexType name="Event">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="control" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ИмяСобытия" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ИмяФункции" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Event" nillable="true" type="tns:Event" />
+  <xs:complexType name="Форма">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bindings" nillable="true" type="tns:ArrayOfBinding" />
+      <xs:element minOccurs="0" name="Events" nillable="true" type="tns:ArrayOfEvent" />
+      <xs:element minOccurs="0" name="Xaml" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ИсходныйКод" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Форма" nillable="true" type="tns:Форма" />
+  <xs:simpleType name="УсловияКопирования">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="НеОпределено">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Атрибуты">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Шаблон">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ИсходныйКод">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ЗначенияПоУмолчанию">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Иконка">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ВсеДомены">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="УсловияКопирования" nillable="true" type="tns:УсловияКопирования" />
+  <xs:complexType name="ArrayOfВебСервис">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ВебСервис" nillable="true" type="tns:ВебСервис" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfВебСервис" nillable="true" type="tns:ArrayOfВебСервис" />
+  <xs:complexType name="ВебСервис">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Namespace" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Адрес" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Название" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Файл" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ВебСервис" nillable="true" type="tns:ВебСервис" />
+  <xs:complexType name="ArrayOfЖурнал">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Журнал" nillable="true" type="tns:Журнал" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfЖурнал" nillable="true" type="tns:ArrayOfЖурнал" />
+  <xs:complexType name="Журнал">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Группа" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Журнал" nillable="true" type="tns:Журнал" />
+  <xs:complexType name="ArrayOfОтчет">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Отчет" nillable="true" type="tns:Отчет" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfОтчет" nillable="true" type="tns:ArrayOfОтчет" />
+  <xs:complexType name="Отчет">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Группа" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Отчет" nillable="true" type="tns:Отчет" />
+  <xs:complexType name="ArrayOfСправочник">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Справочник" nillable="true" type="tns:Справочник" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfСправочник" nillable="true" type="tns:ArrayOfСправочник" />
+  <xs:complexType name="Справочник">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_node" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Группа" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Имя" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Описание" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Справочник" nillable="true" type="tns:Справочник" />
+  <xs:complexType name="ArrayOfCacheObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CacheObject" nillable="true" type="tns:CacheObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCacheObject" nillable="true" type="tns:ArrayOfCacheObject" />
+  <xs:complexType name="CacheObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AvgTime" nillable="true" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Count" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PercentCount" type="xs:float" />
+      <xs:element minOccurs="0" name="PercentTime" type="xs:float" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CacheObject" nillable="true" type="tns:CacheObject" />
+</xs:schema>

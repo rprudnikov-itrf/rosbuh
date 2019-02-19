@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="RosApplication.Клиент.Задачи.СписокПоручений"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    Name="Main">
+    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+
+        <Style TargetType="toolkit:DataGridRow" x:Key="{x:Type toolkit:DataGridRow}">
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=[Статус]}" Value="В работе" />
+                        <Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=Self}}" Value="False" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Foreground" Value="Red" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <r:Window IsButton="False" IsWhiteBackground="True" 
+              IsScroll="False" Padding="0,0,0,0" x:Name="Форма">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.70*" />
+                <ColumnDefinition Width="0.30*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.ColumnSpan="1">
+                <Border Background="Black" TextBlock.Foreground="White" 
+                            Padding="6,4" SnapsToDevicePixels="True">
+                    <StackPanel Orientation="Horizontal" TextBlock.FontSize="17" VerticalAlignment="Center">
+                        <!--<TextBlock Text="Поручения / "  />-->
+                        <TextBlock Text="{Binding Path=Header, ElementName=Main}" TextBlock.FontWeight="Bold" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*" />
+                    <RowDefinition Height="0.5*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" SnapsToDevicePixels="True"
+                        BorderThickness="0,0,0,3" BorderBrush="#d2e6fa">
+                    <r:DataGrid x:Name="ТаблицаСообщения"
+                        ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        IsButton="False" BorderThickness="0"
+                        GridLinesVisibility="Horizontal" ПоказыватьСтраницы="False"
+                        RowHeight="19" MinRowHeight="19"
+                        IsReadOnly="True" FontSize="11" 
+                        ClickMode="None"
+                        ИгнорироватьПраваДоступа="True"
+                        SelectedValuePath="[id_node]"
+                        Searched="ТаблицаСообщения_Searched"
+                        SelectionChanged="ТаблицаСообщения_SelectionChanged"
+                        SnapsToDevicePixels="True"
+                        CellEditEnding="ТаблицаСообщения_CellEditEnding">
+                        <r:DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Обновить" Command="Find" InputGestureText=" " />
+                            </ContextMenu>
+                        </r:DataGrid.ContextMenu>
+                        <r:DataGrid.Columns>
+                            <toolkit:DataGridTextColumn Header="" Width="20" MinWidth="20" Visibility="Collapsed" />
+                            <toolkit:DataGridTemplateColumn Width="14" MinWidth="14">
+                                <toolkit:DataGridTemplateColumn.Header>
+                                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="3" Height="11"
+                                                Stretch="None" Source="/RosApplication;component/Themes/images/hight.png"
+                                                VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </toolkit:DataGridTemplateColumn.Header>
+                                <toolkit:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="4" Height="10"
+                                            Stretch="None" Source="/RosApplication;component/Themes/images/hight2.png"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                                            Margin="0 0 0 0">
+                                            <Image.Visibility>
+                                                <Binding Path="[Срочно]" Converter="{StaticResource booleanToVisibilityConverter}" />
+                                            </Image.Visibility>
+                                        </Image>
+                                    </DataTemplate>
+                                </toolkit:DataGridTemplateColumn.CellTemplate>
+                            </toolkit:DataGridTemplateColumn>
+                            <toolkit:DataGridTemplateColumn Width="16" MinWidth="16">
+                                <toolkit:DataGridTemplateColumn.Header>
+                                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="6" Height="11"
+                                                Stretch="None" Source="/RosApplication;component/Themes/images/files.png"
+                                                VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </toolkit:DataGridTemplateColumn.Header>
+                                <toolkit:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="12" Height="12"
+                                            Stretch="None" Source="/RosControl.Wpf;component/Themes/images/files.png"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                                            Margin="0 0 0 0">
+                                            <Image.Visibility>
+                                                <Binding Path="[Вложения]" Converter="{StaticResource booleanToVisibilityConverter}" />
+                                            </Image.Visibility>
+                                        </Image>
+                                    </DataTemplate>
+                                </toolkit:DataGridTemplateColumn.CellTemplate>
+                            </toolkit:DataGridTemplateColumn>
+                            <!--<toolkit:DataGridTextColumn Header="Срок" Binding="{Binding [Срок], StringFormat=d}" Width="100" />-->
+                            <toolkit:DataGridTextColumn Header="Кому" Binding="{Binding [СсылкаНаОбъект.НазваниеОбъекта]}" Width="180" TextTrimming="CharacterEllipsis" />
+                            <toolkit:DataGridTextColumn Header="Тема" Binding="{Binding [НазваниеОбъекта]}" Width="*" TextTrimming="CharacterEllipsis" />
+                            <toolkit:DataGridTextColumn Header="Срок" Binding="{Binding [Срок], StringFormat={}{0:ddd dd.MM.yyyy}}" Width="110" />
+                            <toolkit:DataGridTextColumn Header="Выполнено" Binding="{Binding [ДатаЗавершения], StringFormat=g}" Width="110" />
+                            <r:DataGridColumnButton Width="24" MinWidth="24" Binding="{Binding Path=[Статус], UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <r:DataGridColumnButton.Header>
+                                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="10" Height="10"
+                                                Stretch="None" Source="/RosApplication;component/Themes/images/flag_header.png"
+                                                VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </r:DataGridColumnButton.Header>
+                                <r:DataGridColumnButton.CellTemplate>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="Transparent">
+                                            <Image x:Name="PART_Image" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="16" Height="16"
+                                                Stretch="None" Source="/RosApplication;component/Themes/images/flag.png"
+                                                VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Mode=Self}}" Value="Готово">
+                                                <Setter TargetName="PART_Image" Property="Source" Value="/RosApplication;component/Themes/images/flag_ok.png" />
+                                            </DataTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </r:DataGridColumnButton.CellTemplate>
+                            </r:DataGridColumnButton>
+                        </r:DataGrid.Columns>
+                    </r:DataGrid>
+                </Border>
+                <GridSplitter Height="3" Grid.ColumnSpan="1" Grid.Row="0" Background="Transparent" 
+                              HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="Gray" BorderThickness="0,0,0,1" SnapsToDevicePixels="True">
+                        <StackPanel Margin="6,4">
+                            <TextBlock FontSize="18" FontWeight="Bold" TextWrapping="Wrap" Text="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[НазваниеОбъекта]}" />
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="11" Margin="0 2 0 0" Padding="0" Content="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[СсылкаНаОбъект.НазваниеОбъекта]}" ContentStringFormat="{}Кому: {0}" />
+                                <Label FontSize="11" Margin="24 2 0 0" Padding="0" Content="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[ДатаСозданияОбъекта]}" ContentStringFormat="{}Отправлено: {0}" />
+                                <Label FontSize="11" Margin="24 2 0 0" Padding="0" Content="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[Срок]}" ContentStringFormat="{}Срок: {0}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel>
+                            <r:FileViewer Margin="0 0 0 0" id_node="{Binding Path=SelectedValue, ElementName=ТаблицаСообщения}" 
+                                          Хранилище="Оперативное" Background="Transparent" BorderThickness="0"
+                                          View="Table" StyleTemplate="Вложения" ContextMenuService.IsEnabled="False">
+                                <r:FileViewer.ContextMenu>
+                                    <ContextMenu />
+                                </r:FileViewer.ContextMenu>
+                            </r:FileViewer>
+                            <TextBox Padding="0" BorderThickness="0" Text="{Binding Path=ТекстСообщения, ElementName=Main}" 
+                                         TextWrapping="Wrap" Margin="6 8 6 6" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+            <GridSplitter Width="3" Grid.Row="1" Background="Transparent" />
+            <Border Grid.Column="1" Grid.RowSpan="2" Grid.Row="0"  SnapsToDevicePixels="True" BorderThickness="3,0,0,0" BorderBrush="Gray">
+                <r:Чат id_node="{Binding Path=SelectedValue, ElementName=ТаблицаСообщения, IsAsync=True}"
+                        АвтоматическиРассылатьОповещения="False" ПоказатьПанельПоиск="False"
+                        Стиль="ПоУмолчанию"/>
+            </Border>
+        </Grid>
+    </r:Window>
+</UserControl>

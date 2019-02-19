@@ -1,0 +1,1496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FinanceClient" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IFinance_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IFinance_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CustomBinding_IFinance1_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <gzip:GZipEncoding xmlns:gzip="http://schemas.microsoft.com/ws/06/2004/mspolicy/netgzip1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IFinance_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetNamedPipeBinding_IFinance_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/RosService.Finance" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IFinance_ДобавитьПлатеж_InputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьПлатеж" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ДобавитьПлатеж_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьПлатежResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ДобавитьВнутреннийПеревод_InputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьВнутреннийПеревод" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ДобавитьВнутреннийПеревод_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьВнутреннийПереводResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ДобавитьВнутреннийПереводНаСчет_InputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьВнутреннийПереводНаСчет" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ДобавитьВнутреннийПереводНаСчет_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ДобавитьВнутреннийПереводНаСчетResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_УдалитьВнутреннийПеревод_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьВнутреннийПеревод" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_УдалитьВнутреннийПеревод_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьВнутреннийПереводResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ВыводСредств_InputMessage">
+    <wsdl:part name="parameters" element="tns:ВыводСредств" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ВыводСредств_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ВыводСредствResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ВыводСредствСоСчета_InputMessage">
+    <wsdl:part name="parameters" element="tns:ВыводСредствСоСчета" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ВыводСредствСоСчета_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ВыводСредствСоСчетаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПеревестиСредства_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПеревестиСредства" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПеревестиСредства_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПеревестиСредстваResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПеревестиСредстваСоСчета_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПеревестиСредстваСоСчета" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПеревестиСредстваСоСчета_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПеревестиСредстваСоСчетаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_РегистрацияКлиента_InputMessage">
+    <wsdl:part name="parameters" element="tns:РегистрацияКлиента" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_РегистрацияКлиента_OutputMessage">
+    <wsdl:part name="parameters" element="tns:РегистрацияКлиентаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПополнитьСчет_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПополнитьСчет" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПополнитьСчет_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПополнитьСчетResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_СписатьСоСчета_InputMessage">
+    <wsdl:part name="parameters" element="tns:СписатьСоСчета" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_СписатьСоСчета_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СписатьСоСчетаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПеревестиСоСчета_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПеревестиСоСчета" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПеревестиСоСчета_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПеревестиСоСчетаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_УдалитьСоСчета_InputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьСоСчета" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_УдалитьСоСчета_OutputMessage">
+    <wsdl:part name="parameters" element="tns:УдалитьСоСчетаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ОбновитьОстаткиНаСчетах_InputMessage">
+    <wsdl:part name="parameters" element="tns:ОбновитьОстаткиНаСчетах" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ОбновитьОстаткиНаСчетах_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ОбновитьОстаткиНаСчетахResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ОбновитьСведенияКонтрагента_InputMessage">
+    <wsdl:part name="parameters" element="tns:ОбновитьСведенияКонтрагента" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ОбновитьСведенияКонтрагента_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ОбновитьСведенияКонтрагентаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ОбновитьОстаткиНаВнутреннихСчетах_InputMessage">
+    <wsdl:part name="parameters" element="tns:ОбновитьОстаткиНаВнутреннихСчетах" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ОбновитьОстаткиНаВнутреннихСчетах_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ОбновитьОстаткиНаВнутреннихСчетахResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПроверитьБанковскиеРеквизитыКонтрагента_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПроверитьБанковскиеРеквизитыКонтрагента" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПроверитьБанковскиеРеквизитыКонтрагента_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПроверитьБанковскиеРеквизитыКонтрагентаResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПроверитьБанковскиеРеквизиты_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПроверитьБанковскиеРеквизиты" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ПроверитьБанковскиеРеквизиты_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПроверитьБанковскиеРеквизитыResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_НДС_InputMessage">
+    <wsdl:part name="parameters" element="tns:НДС" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_НДС_OutputMessage">
+    <wsdl:part name="parameters" element="tns:НДСResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ЧислоПрописью_InputMessage">
+    <wsdl:part name="parameters" element="tns:ЧислоПрописью" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ЧислоПрописью_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ЧислоПрописьюResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ИнвентаризацияПродукцииНаСкладе_InputMessage">
+    <wsdl:part name="parameters" element="tns:ИнвентаризацияПродукцииНаСкладе" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ИнвентаризацияПродукцииНаСкладеТаблица_InputMessage">
+    <wsdl:part name="parameters" element="tns:ИнвентаризацияПродукцииНаСкладеТаблица" />
+  </wsdl:message>
+  <wsdl:message name="IFinance_ИнвентаризацияПродукцииНаСкладеТаблица_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ИнвентаризацияПродукцииНаСкладеТаблицаResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IFinance">
+    <wsdl:operation name="ДобавитьПлатеж">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ДобавитьПлатеж" message="tns:IFinance_ДобавитьПлатеж_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ДобавитьПлатежResponse" message="tns:IFinance_ДобавитьПлатеж_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПеревод">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ДобавитьВнутреннийПеревод" message="tns:IFinance_ДобавитьВнутреннийПеревод_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ДобавитьВнутреннийПереводResponse" message="tns:IFinance_ДобавитьВнутреннийПеревод_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПереводНаСчет">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ДобавитьВнутреннийПереводНаСчет" message="tns:IFinance_ДобавитьВнутреннийПереводНаСчет_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ДобавитьВнутреннийПереводНаСчетResponse" message="tns:IFinance_ДобавитьВнутреннийПереводНаСчет_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьВнутреннийПеревод">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/УдалитьВнутреннийПеревод" message="tns:IFinance_УдалитьВнутреннийПеревод_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/УдалитьВнутреннийПереводResponse" message="tns:IFinance_УдалитьВнутреннийПеревод_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредств">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ВыводСредств" message="tns:IFinance_ВыводСредств_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ВыводСредствResponse" message="tns:IFinance_ВыводСредств_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредствСоСчета">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ВыводСредствСоСчета" message="tns:IFinance_ВыводСредствСоСчета_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ВыводСредствСоСчетаResponse" message="tns:IFinance_ВыводСредствСоСчета_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредства">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ПеревестиСредства" message="tns:IFinance_ПеревестиСредства_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ПеревестиСредстваResponse" message="tns:IFinance_ПеревестиСредства_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредстваСоСчета">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ПеревестиСредстваСоСчета" message="tns:IFinance_ПеревестиСредстваСоСчета_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ПеревестиСредстваСоСчетаResponse" message="tns:IFinance_ПеревестиСредстваСоСчета_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="РегистрацияКлиента">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/РегистрацияКлиента" message="tns:IFinance_РегистрацияКлиента_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/РегистрацияКлиентаResponse" message="tns:IFinance_РегистрацияКлиента_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПополнитьСчет">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ПополнитьСчет" message="tns:IFinance_ПополнитьСчет_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ПополнитьСчетResponse" message="tns:IFinance_ПополнитьСчет_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СписатьСоСчета">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/СписатьСоСчета" message="tns:IFinance_СписатьСоСчета_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/СписатьСоСчетаResponse" message="tns:IFinance_СписатьСоСчета_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСоСчета">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ПеревестиСоСчета" message="tns:IFinance_ПеревестиСоСчета_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ПеревестиСоСчетаResponse" message="tns:IFinance_ПеревестиСоСчета_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьСоСчета">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/УдалитьСоСчета" message="tns:IFinance_УдалитьСоСчета_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/УдалитьСоСчетаResponse" message="tns:IFinance_УдалитьСоСчета_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаСчетах">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ОбновитьОстаткиНаСчетах" message="tns:IFinance_ОбновитьОстаткиНаСчетах_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ОбновитьОстаткиНаСчетахResponse" message="tns:IFinance_ОбновитьОстаткиНаСчетах_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьСведенияКонтрагента">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ОбновитьСведенияКонтрагента" message="tns:IFinance_ОбновитьСведенияКонтрагента_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ОбновитьСведенияКонтрагентаResponse" message="tns:IFinance_ОбновитьСведенияКонтрагента_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаВнутреннихСчетах">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ОбновитьОстаткиНаВнутреннихСчетах" message="tns:IFinance_ОбновитьОстаткиНаВнутреннихСчетах_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ОбновитьОстаткиНаВнутреннихСчетахResponse" message="tns:IFinance_ОбновитьОстаткиНаВнутреннихСчетах_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизитыКонтрагента">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизитыКонтрагента" message="tns:IFinance_ПроверитьБанковскиеРеквизитыКонтрагента_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизитыКонтрагентаResponse" message="tns:IFinance_ПроверитьБанковскиеРеквизитыКонтрагента_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизиты">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизиты" message="tns:IFinance_ПроверитьБанковскиеРеквизиты_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизитыResponse" message="tns:IFinance_ПроверитьБанковскиеРеквизиты_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="НДС">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/НДС" message="tns:IFinance_НДС_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/НДСResponse" message="tns:IFinance_НДС_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ЧислоПрописью">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ЧислоПрописью" message="tns:IFinance_ЧислоПрописью_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ЧислоПрописьюResponse" message="tns:IFinance_ЧислоПрописью_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладе">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладе" message="tns:IFinance_ИнвентаризацияПродукцииНаСкладе_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладеТаблица">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладеТаблица" message="tns:IFinance_ИнвентаризацияПродукцииНаСкладеТаблица_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладеТаблицаResponse" message="tns:IFinance_ИнвентаризацияПродукцииНаСкладеТаблица_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IFinance" type="tns:IFinance">
+    <wsp:PolicyReference URI="#WSHttpBinding_IFinance_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ДобавитьПлатеж">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьПлатеж" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПереводНаСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПереводНаСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредств">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредств" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредствСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредствСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредства">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредства" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредстваСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредстваСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="РегистрацияКлиента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/РегистрацияКлиента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПополнитьСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПополнитьСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписатьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/СписатьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьСведенияКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьСведенияКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаВнутреннихСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаВнутреннихСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизитыКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизитыКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизиты">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизиты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="НДС">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/НДС" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЧислоПрописью">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ЧислоПрописью" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладе">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладеТаблица">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладеТаблица" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IFinance" type="tns:IFinance">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ДобавитьПлатеж">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ДобавитьПлатеж" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПеревод">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПереводНаСчет">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПереводНаСчет" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьВнутреннийПеревод">
+      <soap:operation soapAction="http://tempuri.org/IFinance/УдалитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредств">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ВыводСредств" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредствСоСчета">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ВыводСредствСоСчета" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредства">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредства" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредстваСоСчета">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредстваСоСчета" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="РегистрацияКлиента">
+      <soap:operation soapAction="http://tempuri.org/IFinance/РегистрацияКлиента" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПополнитьСчет">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ПополнитьСчет" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписатьСоСчета">
+      <soap:operation soapAction="http://tempuri.org/IFinance/СписатьСоСчета" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСоСчета">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ПеревестиСоСчета" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьСоСчета">
+      <soap:operation soapAction="http://tempuri.org/IFinance/УдалитьСоСчета" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаСчетах">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаСчетах" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьСведенияКонтрагента">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ОбновитьСведенияКонтрагента" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаВнутреннихСчетах">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаВнутреннихСчетах" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизитыКонтрагента">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизитыКонтрагента" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизиты">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизиты" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="НДС">
+      <soap:operation soapAction="http://tempuri.org/IFinance/НДС" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЧислоПрописью">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ЧислоПрописью" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладе">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладе" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладеТаблица">
+      <soap:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладеТаблица" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IFinance" type="tns:IFinance">
+    <wsp:PolicyReference URI="#CustomBinding_IFinance_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ДобавитьПлатеж">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьПлатеж" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПереводНаСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПереводНаСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредств">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредств" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредствСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредствСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредства">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредства" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредстваСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредстваСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="РегистрацияКлиента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/РегистрацияКлиента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПополнитьСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПополнитьСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписатьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/СписатьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьСведенияКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьСведенияКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаВнутреннихСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаВнутреннихСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизитыКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизитыКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизиты">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизиты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="НДС">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/НДС" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЧислоПрописью">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ЧислоПрописью" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладе">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладеТаблица">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладеТаблица" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_IFinance1" type="tns:IFinance">
+    <wsp:PolicyReference URI="#CustomBinding_IFinance1_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ДобавитьПлатеж">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьПлатеж" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПереводНаСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПереводНаСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредств">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредств" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредствСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредствСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредства">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредства" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредстваСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредстваСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="РегистрацияКлиента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/РегистрацияКлиента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПополнитьСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПополнитьСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписатьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/СписатьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьСведенияКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьСведенияКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаВнутреннихСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаВнутреннихСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизитыКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизитыКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизиты">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизиты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="НДС">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/НДС" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЧислоПрописью">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ЧислоПрописью" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладе">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладеТаблица">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладеТаблица" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IFinance" type="tns:IFinance">
+    <wsp:PolicyReference URI="#NetTcpBinding_IFinance_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="ДобавитьПлатеж">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьПлатеж" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПереводНаСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПереводНаСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредств">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредств" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредствСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредствСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредства">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредства" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредстваСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредстваСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="РегистрацияКлиента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/РегистрацияКлиента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПополнитьСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПополнитьСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписатьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/СписатьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьСведенияКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьСведенияКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаВнутреннихСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаВнутреннихСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизитыКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизитыКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизиты">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизиты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="НДС">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/НДС" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЧислоПрописью">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ЧислоПрописью" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладе">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладеТаблица">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладеТаблица" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetNamedPipeBinding_IFinance" type="tns:IFinance">
+    <wsp:PolicyReference URI="#NetNamedPipeBinding_IFinance_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="ДобавитьПлатеж">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьПлатеж" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ДобавитьВнутреннийПереводНаСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ДобавитьВнутреннийПереводНаСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьВнутреннийПеревод">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьВнутреннийПеревод" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредств">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредств" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ВыводСредствСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ВыводСредствСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредства">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредства" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСредстваСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСредстваСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="РегистрацияКлиента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/РегистрацияКлиента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПополнитьСчет">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПополнитьСчет" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СписатьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/СписатьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПеревестиСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПеревестиСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="УдалитьСоСчета">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/УдалитьСоСчета" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьСведенияКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьСведенияКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОбновитьОстаткиНаВнутреннихСчетах">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ОбновитьОстаткиНаВнутреннихСчетах" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизитыКонтрагента">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизитыКонтрагента" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПроверитьБанковскиеРеквизиты">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ПроверитьБанковскиеРеквизиты" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="НДС">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/НДС" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ЧислоПрописью">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ЧислоПрописью" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладе">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладе" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ИнвентаризацияПродукцииНаСкладеТаблица">
+      <soap12:operation soapAction="http://tempuri.org/IFinance/ИнвентаризацияПродукцииНаСкладеТаблица" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FinanceClient">
+    <wsdl:port name="WSHttpBinding_IFinance" binding="tns:WSHttpBinding_IFinance">
+      <soap12:address location="http://localhost:8080/RosService/Finance" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Finance</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IFinance" binding="tns:BasicHttpBinding_IFinance">
+      <soap:address location="http://localhost:8080/RosService/Finance/basic" />
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IFinance" binding="tns:CustomBinding_IFinance">
+      <soap12:address location="http://localhost:8080/RosService/Finance/binary" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Finance/binary</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IFinance1" binding="tns:CustomBinding_IFinance1">
+      <soap12:address location="http://localhost:8080/RosService/Finance/gzip" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/Finance/gzip</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IFinance" binding="tns:NetTcpBinding_IFinance">
+      <soap12:address location="net.tcp://localhost/RosService/Finance/tcp" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost/RosService/Finance/tcp</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetNamedPipeBinding_IFinance" binding="tns:NetNamedPipeBinding_IFinance">
+      <soap12:address location="net.pipe://localhost/RosService/Finance/pipe" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/RosService/Finance/pipe</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

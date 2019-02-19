@@ -1,0 +1,327 @@
+﻿<UserControl x:Class="RosApplication.Клиент.Задачи.СписокЗадач"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    xmlns:task="clr-namespace:RosApplication.Клиент.Задачи"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    Name="Main" Loaded="Main_Loaded">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        <r:VisibilityConverter x:Key="visibilityConverter" />
+        <r:DataTimeConverter x:Key="dataTimeConverter" />
+        <task:StatusConverter x:Key="statusConverter" />
+        <task:UserTaskConverter x:Key="userTaskConverter" />
+        <task:UserTaskOutboxConverter x:Key="userTaskOutboxConverter" />
+
+        <Style TargetType="toolkit:DataGridRow" x:Key="{x:Type toolkit:DataGridRow}">
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=[Статус]}" Value="В работе" />
+                        <Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=Self}}" Value="False" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Foreground" Value="Red" />
+                </MultiDataTrigger>
+                <DataTrigger Binding="{Binding Path=[@Новый]}" Value="True">
+                    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <CollectionViewSource x:Key="TaskItemSource" Source="{Binding Path=ItemsSource, ElementName=Main}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="[Срок]" Converter="{StaticResource dataTimeConverter}" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+
+        <Style x:Key="Inbox" TargetType="ListBoxItem">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="PART_Border" BorderThickness="0 0 0 1" BorderBrush="#cccccc"
+                                                Background="Transparent" Cursor="Hand" Padding="2 3 4 3"
+                                                SnapsToDevicePixels="True">
+                            <Grid TextBlock.FontFamily="Segoe UI">
+                                <!--<Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="0.75*" />
+                                    <ColumnDefinition Width="0.25*" />
+                                    <ColumnDefinition Width="64" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding [СсылкаНаПользователя.НазваниеОбъекта]}" TextTrimming="CharacterEllipsis" FontSize="12" VerticalAlignment="Center" />-->
+
+                                <TextBlock x:Name="PART_Date" Grid.Column="3" Text="{Binding [Срок], StringFormat={}{0:dd.MM.yyyy}}" FontSize="11" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <TextBlock x:Name="PART_Subject" Grid.Column="1" Grid.Row="1" Text="{Binding [НазваниеОбъекта]}" TextTrimming="CharacterEllipsis" FontSize="12" />
+
+                                <TextBlock x:Name="PART_From" Grid.Column="2" Text="{Binding Path=., Converter={StaticResource userTaskConverter}}" 
+                                                           TextTrimming="CharacterEllipsis" FontSize="12" VerticalAlignment="Center" TextAlignment="Left"
+                                                           ToolTip="{Binding [СсылкаНаПользователя.НазваниеОбъекта]}" />
+
+                                <Rectangle x:Name="PART_BorderStatus" Grid.Column="0" Grid.RowSpan="2"
+                                                           Margin="-2 -3 2 -3" />
+                                <CheckBox x:Name="PART_CheckBox" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Top" 
+                                                              HorizontalAlignment="Center" Margin="0 2 0 0"
+                                                              IsChecked="{Binding Path=[Статус], Converter={StaticResource statusConverter}}"
+                                                              Click="CheckBox_Click" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding [Статус]}" Value="В работе">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter TargetName="PART_CheckBox" Property="ToolTip" Value="Щелкните, чтобы пометить как завершенное" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding [Статус]}" Value="Готово">
+                                <Setter Property="Foreground" Value="#777" />
+                                <Setter TargetName="PART_Subject" Property="TextDecorations" Value="Strikethrough" />
+                                <Setter TargetName="PART_Date" Property="TextDecorations" Value="Strikethrough" />
+                                <Setter TargetName="PART_From" Property="TextDecorations" Value="Strikethrough" />
+                                <Setter TargetName="PART_Border" Property="Background" Value="#edf0f9" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding [@Новый]}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </DataTrigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="PART_Border" Property="Background" Value="#bbe4fd" />
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter TargetName="PART_Subject" Property="TextDecorations" Value="{x:Null}" />
+                                <Setter TargetName="PART_Date" Property="TextDecorations" Value="{x:Null}" />
+                                <Setter TargetName="PART_From" Property="TextDecorations" Value="{x:Null}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PART_Subject" Property="TextDecorations" Value="{x:Null}" />
+                                <Setter TargetName="PART_Date" Property="TextDecorations" Value="{x:Null}" />
+                                <Setter TargetName="PART_From" Property="TextDecorations" Value="{x:Null}" />
+                            </Trigger>
+                            <Trigger SourceName="PART_CheckBox" Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PART_BorderStatus" Property="Fill" Value="#ffe7a2" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Outbox" TargetType="ListBoxItem">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="PART_Border" BorderThickness="0 0 0 1" BorderBrush="#cccccc"
+                                                Background="Transparent" Cursor="Hand" Padding="2 3 4 3"
+                                                SnapsToDevicePixels="True">
+                            <Grid TextBlock.FontFamily="Segoe UI">
+                                <!--<Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="0.75*" />
+                                    <ColumnDefinition Width="0.25*" />
+                                    <ColumnDefinition Width="64" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding [СсылкаНаПользователя.НазваниеОбъекта]}" TextTrimming="CharacterEllipsis" FontSize="12" VerticalAlignment="Center" />-->
+
+                                <TextBlock x:Name="PART_Date" Grid.Column="3" Text="{Binding [Срок], StringFormat={}{0:dd.MM.yyyy}}" FontSize="11" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <TextBlock x:Name="PART_Subject" Grid.Column="1" Grid.Row="1" Text="{Binding [НазваниеОбъекта]}" TextTrimming="CharacterEllipsis" FontSize="12" />
+
+                                <TextBlock x:Name="PART_From" Grid.Column="2" Text="{Binding Path=., Converter={StaticResource userTaskOutboxConverter}}" 
+                                                           TextTrimming="CharacterEllipsis" FontSize="12" VerticalAlignment="Center" TextAlignment="Left"
+                                                           ToolTip="{Binding [СсылкаНаОбъект.НазваниеОбъекта]}" />
+
+                                <Rectangle x:Name="PART_BorderStatus" Grid.Column="0" Grid.RowSpan="2"
+                                                           Margin="-2 -3 2 -3" />
+                                <CheckBox x:Name="PART_CheckBox" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Top" 
+                                                              HorizontalAlignment="Center" Margin="0 2 0 0"
+                                                              IsChecked="{Binding Path=[Статус], Converter={StaticResource statusConverter}}"
+                                                              Click="CheckBox_Click" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding [Статус]}" Value="В работе">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter TargetName="PART_CheckBox" Property="ToolTip" Value="Щелкните, чтобы пометить как завершенное" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding [Статус]}" Value="Готово">
+                                <Setter Property="Foreground" Value="#777" />
+                                <Setter TargetName="PART_Subject" Property="TextDecorations" Value="Strikethrough" />
+                                <Setter TargetName="PART_Date" Property="TextDecorations" Value="Strikethrough" />
+                                <Setter TargetName="PART_From" Property="TextDecorations" Value="Strikethrough" />
+                                <Setter TargetName="PART_Border" Property="Background" Value="#edf0f9" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding [@Новый]}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </DataTrigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="PART_Border" Property="Background" Value="#bbe4fd" />
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter TargetName="PART_Subject" Property="TextDecorations" Value="{x:Null}" />
+                                <Setter TargetName="PART_Date" Property="TextDecorations" Value="{x:Null}" />
+                                <Setter TargetName="PART_From" Property="TextDecorations" Value="{x:Null}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PART_Subject" Property="TextDecorations" Value="{x:Null}" />
+                                <Setter TargetName="PART_Date" Property="TextDecorations" Value="{x:Null}" />
+                                <Setter TargetName="PART_From" Property="TextDecorations" Value="{x:Null}" />
+                            </Trigger>
+                            <Trigger SourceName="PART_CheckBox" Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PART_BorderStatus" Property="Fill" Value="#ffe7a2" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="Find" Executed="Find_Executed" />
+    </UserControl.CommandBindings>
+
+    <r:Window IsButton="False" IsWhiteBackground="True" 
+              IsScroll="False" Padding="0,0,0,0" x:Name="Форма">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Border Background="Black" TextBlock.Foreground="White" 
+                            Padding="6,4" SnapsToDevicePixels="True">
+                    <TextBlock Text="{Binding Path=Header, ElementName=Main}" FontSize="17" FontWeight="Bold" VerticalAlignment="Center" />
+                </Border>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <ListBox x:Name="ТаблицаСообщения"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible"
+                         HorizontalContentAlignment="Stretch"
+                         ItemsSource="{Binding Source={StaticResource TaskItemSource}}"
+                         SelectedValuePath="[id_node]"
+                         SelectionChanged="ТаблицаСообщения_SelectionChanged"
+                         Margin="0" Padding="0" 
+                         BorderThickness="0"
+                         SnapsToDevicePixels="True"
+                         ItemContainerStyle="{StaticResource Inbox}">
+                    <ListBox.CommandBindings>
+                        <CommandBinding Command="Delete" Executed="Delete_Executed" />
+                    </ListBox.CommandBindings>
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Удалить" Command="Delete" InputGestureText=" " />
+                            <Separator />
+                            <MenuItem Header="Обновить" Command="Find" InputGestureText=" " />
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                    <ListBox.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="GroupItem">
+                                    <Setter Property="Margin" Value="0" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="GroupItem">
+                                                <StackPanel>
+                                                    <Border BorderThickness="0 0 0 1" BorderBrush="#cccccc"
+                                                            Padding="6 6 6 2">
+                                                        <TextBlock FontWeight="Bold" Text="{Binding Name}" FontSize="11" Foreground="#000" />
+                                                    </Border>
+                                                    <ItemsPresenter />
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </ListBox.GroupStyle>
+                </ListBox>
+            </Grid>
+            <GridSplitter Width="3" Grid.Row="1" Background="Transparent" />
+
+            <Border Grid.Column="1" Grid.RowSpan="2" Grid.Row="0"  SnapsToDevicePixels="True" BorderThickness="3,0,0,0" BorderBrush="Gray">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <!--<RowDefinition Height="*" />-->
+                        </Grid.RowDefinitions>
+
+                        <Border BorderBrush="Silver" BorderThickness="0,0,0,0" SnapsToDevicePixels="True">
+                            <Grid Margin="6 4 6 0">
+                                <StackPanel>
+                                    <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[НазваниеОбъекта]}" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label FontSize="11" Margin="0 2 0 0" Padding="0" Content="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[СсылкаНаОбъект.НазваниеОбъекта]}" ContentStringFormat="{}Кому: {0}" />                                        
+                                        <Label FontSize="11" Margin="24 2 0 0" Padding="0" Content="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[СсылкаНаПользователя.НазваниеОбъекта]}" ContentStringFormat="{}От: {0}" />
+                                        <Label FontSize="11" Margin="24 2 0 0" Padding="0" Content="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[ДатаСозданияОбъекта]}" ContentStringFormat="{}Получено: {0}" />
+                                        <Label FontSize="11" Margin="24 2 0 0" Padding="0" Content="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[Срок], StringFormat=\{0:dd.MM.yyyy\}}" ContentStringFormat="{}Срок: {0}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="1" BorderBrush="Silver" BorderThickness="0,0,0,1" SnapsToDevicePixels="True"
+                                Padding="1 0 0 0">
+                            <r:FileViewer Grid.Row="1" id_node="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[id_node]}" 
+                                          Хранилище="Оперативное" Background="Transparent" BorderThickness="0"
+                                          View="Table" StyleTemplate="Вложения" ContextMenuService.IsEnabled="False" 
+                                          ScrollViewer.VerticalScrollBarVisibility="Disabled" MaxHeight="200">
+                                <r:FileViewer.ContextMenu>
+                                    <ContextMenu />
+                                </r:FileViewer.ContextMenu>
+                            </r:FileViewer>
+                        </Border>
+
+                        <!--<ScrollViewer Grid.Row="2" 
+                                      VerticalScrollBarVisibility="Auto" 
+                                      HorizontalScrollBarVisibility="Disabled">
+                            <StackPanel>
+                                <r:FileViewer Grid.Row="1" id_node="{Binding ElementName=ТаблицаСообщения, Path=SelectedItem[id_node]}" 
+                                          Хранилище="Оперативное" Background="Transparent" BorderThickness="0"
+                                          View="Table" StyleTemplate="Вложения" ContextMenuService.IsEnabled="False" 
+                                          ScrollViewer.VerticalScrollBarVisibility="Disabled" MaxHeight="200">
+                                    <r:FileViewer.ContextMenu>
+                                        <ContextMenu />
+                                    </r:FileViewer.ContextMenu>
+                                </r:FileViewer>
+                                <TextBox Padding="0" BorderThickness="0" Text="{Binding Path=ТекстСообщения, ElementName=Main}" 
+                                     Margin="3 8 3 6" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </ScrollViewer>-->
+                    </Grid>
+
+                    <Border Grid.Row="1" 
+                            BorderThickness="0 0 0 0" BorderBrush="#bdbdbd"
+                            SnapsToDevicePixels="True">
+                        <r:Чат id_node="{Binding Path=SelectedValue, ElementName=ТаблицаСообщения, IsAsync=True}"
+                            АвтоматическиРассылатьОповещения="False" ПоказатьПанельПоиск="False"
+                            Стиль="ПоУмолчанию" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                            ОтправкаСообщения="Чат_ОтправкаСообщения"
+                            ПоказатьПанельОтправить="True" Dock="Top" />
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </r:Window>
+</UserControl>

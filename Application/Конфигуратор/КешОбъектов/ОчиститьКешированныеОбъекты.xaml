@@ -1,0 +1,30 @@
+﻿<Window x:Class="RosApplication.Конфигуратор.ОчиститьКешированныеОбъекты"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:r="http://itrf.ru/2009/xaml"
+        Title="Очистить кеш" 
+        Height="300" Width="300"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        x:Name="Main">
+    <r:Window ПоказатьКнопкуВыполнить="False"
+              ПоказатьКнопкуФайл="False"
+              IsWhiteBackground="False"
+              IsDeleteButton="False"
+              Complite="Window_Complite"
+              ДействиеПослеСохранения="Ничего" 
+              Name="Форма">
+        <GroupBox Header="Выберите что удалить">
+            <StackPanel Grid.IsSharedSizeScope="True">
+                <CheckBox IsChecked="{Binding Path=Значения, ElementName=Main}" Content="Значения" Margin="0 0 0 3" />
+                <CheckBox IsChecked="{Binding Path=Запросы, ElementName=Main}" Content="Запросы" Margin="0 0 0 3" />
+                <CheckBox IsChecked="{Binding Path=КешТаблицы, ElementName=Main}" Content="Кеш таблицы в SQL" Margin="0 0 0 3" />
+                <CheckBox IsChecked="{Binding Path=СписокАтрибутов, ElementName=Main}" Content="Список атрибутов" Margin="0 0 0 3" />
+                <CheckBox IsChecked="{Binding Path=Счётчики, ElementName=Main}" Content="Счётчики" Margin="0 0 0 3" />
+                <CheckBox IsChecked="{Binding Path=Индентификаторы, ElementName=Main}" Content="Индентификаторы" Margin="0 0 0 3" />
+                <CheckBox IsChecked="{Binding Path=ВсёОстальное, ElementName=Main}" Content="Всё остальное" Margin="0 0 0 3" />
+            </StackPanel>
+        </GroupBox>
+    </r:Window>
+</Window>

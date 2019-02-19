@@ -1,0 +1,243 @@
+﻿<UserControl x:Class="RosApplication.Клиент.Чат.МоиСообщения"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:r="http://itrf.ru/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase" 
+             xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             FontFamily="Tahoma" FontSize="12"
+             x:Name="MainWindow">
+    <UserControl.Resources>
+        <r:VisibilityExpressionConverter x:Key="visibilityExpressionConverter" />
+
+        <Style x:Key="MenuItemUser" TargetType="MenuItem">
+            <Setter Property="Margin" Value="0 1 0 1" />
+            <Setter Property="Padding" Value="2 1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter ContentSource="Header" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            </Trigger>
+                            <!--<MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="IsSelectionActive" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            </MultiTrigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MessageGroupStyle" TargetType="GroupItem">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupItem">
+                        <StackPanel Margin="0 0 0 0">
+                            <!--<Border BorderThickness="0,0,0,0" Padding="4,0,4,0" 
+                                    BorderBrush="#FFD5D5D5" SnapsToDevicePixels="True">
+                                <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="14" />
+                            </Border>-->
+                            <Border BorderThickness="0,0,0,1" Padding="4,1" 
+                                    BorderBrush="#989ea4" SnapsToDevicePixels="True">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#909faa" Offset="0" />
+                                        <GradientStop Color="#b8c1c8" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Grid>
+                                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="12" 
+                                           VerticalAlignment="Center" Foreground="#757b81">
+                                        <TextBlock.RenderTransform>
+                                            <TranslateTransform X="1" Y="1" />
+                                        </TextBlock.RenderTransform>
+                                    </TextBlock>
+
+                                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="12" 
+                                           VerticalAlignment="Center" Foreground="White" />
+                                </Grid>
+                            </Border>
+                            <ItemsPresenter />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <CollectionViewSource x:Key="MessagesSource"
+                              Source="{Binding Path=СписокПользователей, Mode=OneTime, RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, IsAsync=True}"
+                              Filter="MessagesSource_Filter">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Пользователь.Группа" />
+            </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <cm:SortDescription PropertyName="Пользователь.Группа" Direction="Ascending" />
+                <cm:SortDescription PropertyName="Пользователь.НазваниеОбъекта" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.CommandBindings>
+            <CommandBinding Command="Open" Executed="ОткрытьЧат" CanExecute="ОткрытьЧат_CanExecute"  />
+        </Grid.CommandBindings>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="0.5*" MinWidth="500" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Gray" BorderThickness="0 0 1 0" SnapsToDevicePixels="True">
+            <DockPanel>
+                <Grid Margin="6,3" DockPanel.Dock="Top">
+                    <CheckBox Content="{Binding Path=Items.Count, ElementName=PART_Users}" ContentStringFormat="{}Показать всех ({0})"
+                              IsChecked="{Binding Path=ПоказатьВсех, ElementName=MainWindow}" HorizontalAlignment="Left" />
+                </Grid>
+                <ListBox x:Name="PART_Users" 
+                         BorderThickness="0" Padding="0" Margin="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.CanContentScroll="False"
+                         HorizontalContentAlignment="Stretch"
+                         SelectionMode="Extended"                                                 
+                         SelectedValuePath="Пользователь.id_node"
+                         TextSearch.TextPath="Пользователь.НазваниеОбъекта"
+                         ItemsSource="{Binding Source={StaticResource MessagesSource}}">
+                    <ListBox.InputBindings>
+                        <KeyBinding Command="Open" Key="Enter" />
+                    </ListBox.InputBindings>
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Открыть" Command="Open" InputGestureText=" " />
+                            <MenuItem Header="Открыть в новом окне" CommandParameter="НовоеОкно" Command="Open" InputGestureText=" " />
+                            <Separator />
+                            <MenuItem Header="Рассылка сообщения..." Command="Open" CommandParameter="Рассылка" InputGestureText=" " />
+                            <Separator />
+                            <MenuItem Header="Обновить" Command="Find" CommandParameter="Пользователи" InputGestureText=" " />
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True"
+                                                    VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#e0e0e0" BorderThickness="0 0 0 1" 
+                                    SnapsToDevicePixels="True">
+                                <Grid Height="28" Cursor="Hand" 
+                                  Background="Transparent">
+                                    <Grid.InputBindings>
+                                        <MouseBinding Command="Open" MouseAction="LeftDoubleClick" />
+                                    </Grid.InputBindings>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30" />
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="26" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="1" Name="PART_Online" 
+                                        Stretch="UniformToFill" Source="/RosControl.Wpf;component/Themes/images/offline.png"
+                                        Width="16" Height="16"
+                                        VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="2" FontSize="11"
+                                               Text="{Binding Пользователь.НазваниеОбъекта}" 
+                                               ToolTip="{Binding Пользователь.НазваниеОбъекта}" 
+                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                                    <Label Grid.Column="3" Style="{StaticResource CountsLabel}"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        ContentStringFormat="d" 
+                                        Content="{Binding Сообщения}">
+                                        <Label.Visibility>
+                                            <Binding Path="Сообщения" ConverterParameter=">0" Converter="{StaticResource visibilityExpressionConverter}" />
+                                        </Label.Visibility>
+                                    </Label>
+
+                                    <r:FilePreview Width="28" Height="28" id_node="{Binding Пользователь.СсылкаНаАватар, IsAsync=True}" 
+                                                   VerticalAlignment="Top" HorizontalAlignment="Left" DefaultSource="/RosApplication;component/Themes/msg/user-28.png"
+                                                   РазрешитьОткрытиеФайла="False" />
+                                </Grid>
+                            </Border>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Пользователь.ВСети}" Value="True">
+                                    <Setter TargetName="PART_Online" Property="Source" Value="/RosControl.Wpf;component/Themes/images/online.png" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource MessageGroupStyle}" />
+                    </ListBox.GroupStyle>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Margin" Value="0" />
+                            <Setter Property="Padding" Value="0" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </DockPanel>
+        </Border>
+        <GridSplitter Width="3" Background="Transparent" ShowsPreview="False" />
+
+        <Grid Grid.Column="1">
+            <Frame x:Name="PART_Content" />
+        </Grid>
+        <Border Grid.Column="2" SnapsToDevicePixels="True" BorderThickness="1,0,0,0" BorderBrush="Gray"
+                Background="#fff">
+
+            <StackPanel x:Name="PART_UserInfo" Orientation="Vertical" Margin="12 10"
+                        Visibility="Collapsed">
+                <r:FilePreview id_node="{Binding Path=Пользователь.СсылкаНаАватар}"
+                           Width="140" Height="140" Margin="0 0 0 6" 
+                           HorizontalAlignment="Left" />
+                <TextBlock Text="{Binding Path=Пользователь.НазваниеОбъекта}" FontSize="14"
+                           FontWeight="Bold" TextWrapping="Wrap" />
+
+                <!--<StackPanel TextBlock.FontSize="11">
+                    <r:ParamItemControl Header="День рождения:"></r:ParamItemControl>
+                    <r:ParamItemControl Header="Почта:"></r:ParamItemControl>
+                    <r:ParamItemControl Header="Телефон:"></r:ParamItemControl>
+                </StackPanel>-->
+                
+                <r:HyperLink Content="закрыть чат" Click="Close_Click" Margin="0 6 0 0" />
+            </StackPanel>
+            <!--
+            Background="#0e1420"
+            <StackPanel>
+                <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Width="222" Height="321"
+                    Stretch="UniformToFill" Source="/RosApplication;component/Themes/phone/index.jpg"
+                    VerticalAlignment="Top" HorizontalAlignment="Center" />
+                <TextBlock Text="Подробнее об услуги 'Телефония' можно узнать в РосИнфоТех, support@itrf.ru" 
+                           Foreground="White" Margin="8 14" 
+                           TextWrapping="Wrap" TextAlignment="Center"
+                           FontSize="11"/>
+            </StackPanel>-->
+        </Border>
+        <!--<Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.70*" />
+                <ColumnDefinition Width="0.30*" />
+            </Grid.ColumnDefinitions>
+            <GridSplitter Width="3" Grid.Row="1" Background="Transparent" />
+            <Border Grid.Column="1" SnapsToDevicePixels="True" BorderThickness="3,0,0,0" BorderBrush="Gray">
+            </Border>
+        </Grid>-->
+    </Grid>
+</UserControl>

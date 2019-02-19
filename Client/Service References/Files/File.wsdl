@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FileClient" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_IFile_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RosService.Data" />
+      <xsd:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/RosService.Files" />
+      <xsd:import schemaLocation="http://localhost:8080/RosService/File?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="DownloadRequest">
+    <wsdl:part name="parameters" element="tns:DownloadRequest" />
+  </wsdl:message>
+  <wsdl:message name="DownloadRequest_Headers">
+    <wsdl:part name="domain" element="tns:domain" />
+    <wsdl:part name="user" element="tns:user" />
+    <wsdl:part name="хранилище" element="tns:хранилище" />
+  </wsdl:message>
+  <wsdl:message name="DownloadResponce">
+    <wsdl:part name="parameters" element="tns:DownloadResponce" />
+  </wsdl:message>
+  <wsdl:message name="DownloadResponce_Headers">
+    <wsdl:part name="FileName" element="tns:FileName" />
+    <wsdl:part name="Length" element="tns:Length" />
+  </wsdl:message>
+  <wsdl:message name="IFile_ПолучитьФайлПолностью_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФайлПолностью" />
+  </wsdl:message>
+  <wsdl:message name="IFile_ПолучитьФайлПолностью_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФайлПолностьюResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFile_ПолучитьФайлПолностьюПоНазванию_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФайлПолностьюПоНазванию" />
+  </wsdl:message>
+  <wsdl:message name="IFile_ПолучитьФайлПолностьюПоНазванию_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФайлПолностьюПоНазваниюResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadRequest">
+    <wsdl:part name="parameters" element="tns:UploadRequest" />
+  </wsdl:message>
+  <wsdl:message name="UploadRequest_Headers">
+    <wsdl:part name="Length" element="tns:Length" />
+    <wsdl:part name="domain" element="tns:domain" />
+    <wsdl:part name="id_node" element="tns:id_node" />
+    <wsdl:part name="user" element="tns:user" />
+    <wsdl:part name="ИдентификаторФайла" element="tns:ИдентификаторФайла" />
+    <wsdl:part name="ИмяФайла" element="tns:ИмяФайла" />
+    <wsdl:part name="Описание" element="tns:Описание" />
+    <wsdl:part name="хранилище" element="tns:хранилище" />
+  </wsdl:message>
+  <wsdl:message name="UploadResponce">
+    <wsdl:part name="parameters" element="tns:UploadResponce" />
+  </wsdl:message>
+  <wsdl:message name="IFile_СохранитьФайлПолностью_InputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьФайлПолностью" />
+  </wsdl:message>
+  <wsdl:message name="IFile_СохранитьФайлПолностью_OutputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьФайлПолностьюResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFile_СохранитьФайлПолностьюАсинхронно_InputMessage">
+    <wsdl:part name="parameters" element="tns:СохранитьФайлПолностьюАсинхронно" />
+  </wsdl:message>
+  <wsdl:message name="ОтчетRequest">
+    <wsdl:part name="parameters" element="tns:ОтчетRequest" />
+  </wsdl:message>
+  <wsdl:message name="ОтчетResponce">
+    <wsdl:part name="parameters" element="tns:ОтчетResponce" />
+  </wsdl:message>
+  <wsdl:message name="ОтчетResponce_Headers">
+    <wsdl:part name="FileName" element="tns:FileName" />
+    <wsdl:part name="Length" element="tns:Length" />
+    <wsdl:part name="MimeType" element="tns:MimeType" />
+  </wsdl:message>
+  <wsdl:message name="ОтчетКонструкторRequest">
+    <wsdl:part name="parameters" element="tns:ОтчетКонструкторRequest" />
+  </wsdl:message>
+  <wsdl:message name="ОтчетДанныеRequest">
+    <wsdl:part name="parameters" element="tns:ОтчетДанныеRequest" />
+  </wsdl:message>
+  <wsdl:message name="IFile_ПолучитьФайлПросмотр_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФайлПросмотр" />
+  </wsdl:message>
+  <wsdl:message name="IFile_ПолучитьФайлПросмотр_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФайлПросмотрResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFile_ПолучитьФайлПросмотрПоНазванию_InputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФайлПросмотрПоНазванию" />
+  </wsdl:message>
+  <wsdl:message name="IFile_ПолучитьФайлПросмотрПоНазванию_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ПолучитьФайлПросмотрПоНазваниюResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFile_GetMimeType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMimeType" />
+  </wsdl:message>
+  <wsdl:message name="IFile_GetMimeType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMimeTypeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IFile">
+    <wsdl:operation name="ПолучитьФайл">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/ПолучитьФайл" name="DownloadRequest" message="tns:DownloadRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/ПолучитьФайлResponse" name="DownloadResponce" message="tns:DownloadResponce" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФайлПолностью">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/ПолучитьФайлПолностью" message="tns:IFile_ПолучитьФайлПолностью_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/ПолучитьФайлПолностьюResponse" message="tns:IFile_ПолучитьФайлПолностью_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФайлПолностьюПоНазванию">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/ПолучитьФайлПолностьюПоНазванию" message="tns:IFile_ПолучитьФайлПолностьюПоНазванию_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/ПолучитьФайлПолностьюПоНазваниюResponse" message="tns:IFile_ПолучитьФайлПолностьюПоНазванию_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьФайл">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/СохранитьФайл" name="UploadRequest" message="tns:UploadRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/СохранитьФайлResponse" name="UploadResponce" message="tns:UploadResponce" />
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьФайлПолностью">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/СохранитьФайлПолностью" message="tns:IFile_СохранитьФайлПолностью_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/СохранитьФайлПолностьюResponse" message="tns:IFile_СохранитьФайлПолностью_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьФайлПолностьюАсинхронно">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/СохранитьФайлПолностьюАсинхронно" message="tns:IFile_СохранитьФайлПолностьюАсинхронно_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Отчет">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/Отчет" name="ОтчетRequest" message="tns:ОтчетRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/ОтчетResponse" name="ОтчетResponce" message="tns:ОтчетResponce" />
+    </wsdl:operation>
+    <wsdl:operation name="ОтчетКонструктор">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/ОтчетКонструктор" name="ОтчетКонструкторRequest" message="tns:ОтчетКонструкторRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/ОтчетКонструкторResponse" name="ОтчетResponce" message="tns:ОтчетResponce" />
+    </wsdl:operation>
+    <wsdl:operation name="ОтчетДанные">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/ОтчетДанные" name="ОтчетДанныеRequest" message="tns:ОтчетДанныеRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/ОтчетДанныеResponse" name="DownloadResponce" message="tns:DownloadResponce" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФайлПросмотр">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/ПолучитьФайлПросмотр" message="tns:IFile_ПолучитьФайлПросмотр_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/ПолучитьФайлПросмотрResponse" message="tns:IFile_ПолучитьФайлПросмотр_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФайлПросмотрПоНазванию">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/ПолучитьФайлПросмотрПоНазванию" message="tns:IFile_ПолучитьФайлПросмотрПоНазванию_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/ПолучитьФайлПросмотрПоНазваниюResponse" message="tns:IFile_ПолучитьФайлПросмотрПоНазванию_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMimeType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFile/GetMimeType" message="tns:IFile_GetMimeType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFile/GetMimeTypeResponse" message="tns:IFile_GetMimeType_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_IFile" type="tns:IFile">
+    <wsp:PolicyReference URI="#CustomBinding_IFile_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ПолучитьФайл">
+      <soap12:operation soapAction="http://tempuri.org/IFile/ПолучитьФайл" style="document" />
+      <wsdl:input name="DownloadRequest">
+        <soap12:header message="tns:DownloadRequest_Headers" part="domain" use="literal" />
+        <soap12:header message="tns:DownloadRequest_Headers" part="user" use="literal" />
+        <soap12:header message="tns:DownloadRequest_Headers" part="хранилище" use="literal" />
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DownloadRequest_Headers" part="domain" use="literal" />
+        <soap12:header message="tns:DownloadRequest_Headers" part="user" use="literal" />
+        <soap12:header message="tns:DownloadRequest_Headers" part="хранилище" use="literal" />
+        <soap12:header message="tns:DownloadRequest_Headers" part="domain" use="literal" />
+        <soap12:header message="tns:DownloadRequest_Headers" part="user" use="literal" />
+        <soap12:header message="tns:DownloadRequest_Headers" part="хранилище" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DownloadResponce">
+        <soap12:header message="tns:DownloadResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="Length" use="literal" />
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="Length" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФайлПолностью">
+      <soap12:operation soapAction="http://tempuri.org/IFile/ПолучитьФайлПолностью" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФайлПолностьюПоНазванию">
+      <soap12:operation soapAction="http://tempuri.org/IFile/ПолучитьФайлПолностьюПоНазванию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьФайл">
+      <soap12:operation soapAction="http://tempuri.org/IFile/СохранитьФайл" style="document" />
+      <wsdl:input name="UploadRequest">
+        <soap12:header message="tns:UploadRequest_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="domain" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="id_node" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="user" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="ИдентификаторФайла" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="ИмяФайла" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="Описание" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="хранилище" use="literal" />
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="domain" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="id_node" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="user" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="ИдентификаторФайла" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="ИмяФайла" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="Описание" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="хранилище" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="domain" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="id_node" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="user" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="ИдентификаторФайла" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="ИмяФайла" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="Описание" use="literal" />
+        <soap12:header message="tns:UploadRequest_Headers" part="хранилище" use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UploadResponce">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьФайлПолностью">
+      <soap12:operation soapAction="http://tempuri.org/IFile/СохранитьФайлПолностью" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="СохранитьФайлПолностьюАсинхронно">
+      <soap12:operation soapAction="http://tempuri.org/IFile/СохранитьФайлПолностьюАсинхронно" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Отчет">
+      <soap12:operation soapAction="http://tempuri.org/IFile/Отчет" style="document" />
+      <wsdl:input name="ОтчетRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ОтчетResponce">
+        <soap12:header message="tns:ОтчетResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="MimeType" use="literal" />
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="MimeType" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="MimeType" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОтчетКонструктор">
+      <soap12:operation soapAction="http://tempuri.org/IFile/ОтчетКонструктор" style="document" />
+      <wsdl:input name="ОтчетКонструкторRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ОтчетResponce">
+        <soap12:header message="tns:ОтчетResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="MimeType" use="literal" />
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="MimeType" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:ОтчетResponce_Headers" part="MimeType" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ОтчетДанные">
+      <soap12:operation soapAction="http://tempuri.org/IFile/ОтчетДанные" style="document" />
+      <wsdl:input name="ОтчетДанныеRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DownloadResponce">
+        <soap12:header message="tns:DownloadResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="Length" use="literal" />
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="Length" use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:DownloadResponce_Headers" part="Length" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФайлПросмотр">
+      <soap12:operation soapAction="http://tempuri.org/IFile/ПолучитьФайлПросмотр" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ПолучитьФайлПросмотрПоНазванию">
+      <soap12:operation soapAction="http://tempuri.org/IFile/ПолучитьФайлПросмотрПоНазванию" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMimeType">
+      <soap12:operation soapAction="http://tempuri.org/IFile/GetMimeType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FileClient">
+    <wsdl:port name="CustomBinding_IFile" binding="tns:CustomBinding_IFile">
+      <soap12:address location="http://localhost:8080/RosService/File" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/File</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IFile1" binding="tns:CustomBinding_IFile">
+      <soap12:address location="http://localhost:8080/RosService/File/basic" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/File/basic</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_IFile2" binding="tns:CustomBinding_IFile">
+      <soap12:address location="http://localhost:8080/RosService/File/binary" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/RosService/File/binary</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

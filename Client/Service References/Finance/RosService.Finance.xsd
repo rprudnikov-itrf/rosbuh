@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RosService.Finance" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RosService.Finance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="НапралениеПлатежа">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Приход" />
+      <xs:enumeration value="Расход" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="НапралениеПлатежа" nillable="true" type="tns:НапралениеПлатежа" />
+  <xs:simpleType name="СтавкаНдс">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="БезНДС" />
+      <xs:enumeration value="НДС0" />
+      <xs:enumeration value="НДС18" />
+      <xs:enumeration value="НДС18_118" />
+      <xs:enumeration value="НДС10" />
+      <xs:enumeration value="НДС10_110" />
+      <xs:enumeration value="НДС20" />
+      <xs:enumeration value="НДС20_120" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="СтавкаНдс" nillable="true" type="tns:СтавкаНдс" />
+  <xs:simpleType name="ФорматЧислаПрописью">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Число" />
+      <xs:enumeration value="Рубли" />
+      <xs:enumeration value="Доллар" />
+      <xs:enumeration value="Евро" />
+      <xs:enumeration value="РублиБезКопеек" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ФорматЧислаПрописью" nillable="true" type="tns:ФорматЧислаПрописью" />
+  <xs:complexType name="ArrayOfИнвентаризация">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Инвентаризация" nillable="true" type="tns:Инвентаризация" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfИнвентаризация" nillable="true" type="tns:ArrayOfИнвентаризация" />
+  <xs:complexType name="Инвентаризация">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="КоличествоНаСкладе" type="xs:decimal" />
+      <xs:element minOccurs="0" name="КоличествоОстаток" type="xs:decimal" />
+      <xs:element minOccurs="0" name="КоличествоПродано" type="xs:decimal" />
+      <xs:element minOccurs="0" name="СуммаПродано" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Товар" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Инвентаризация" nillable="true" type="tns:Инвентаризация" />
+</xs:schema>

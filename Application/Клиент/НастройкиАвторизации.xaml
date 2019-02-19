@@ -1,0 +1,139 @@
+﻿<Window x:Class="RosApplication.Клиент.НастройкиАвторизации"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    xmlns:p="clr-namespace:RosApplication.Properties"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    Title="Настройки авторизации" Height="600" Width="740" 
+    WindowStartupLocation="CenterScreen" 
+    ResizeMode="NoResize" 
+    Name="Main">
+    <!--Background="#d4e2f2"-->
+
+    <r:Window ПоказатьКнопкуВыполнить="False" ПоказатьКнопкуФайл="False" 
+              IsWhiteBackground="False"
+              IsScroll="False" Padding="10" IsButton="False">
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" 
+                        HorizontalAlignment="Right"
+                        Margin="0 10 0 0">
+                <Button Margin="0 0 8 0" Click="Сохранить">Сохранить</Button>
+                <Button IsCancel="True">Отмена</Button>
+            </StackPanel>
+            <TabControl Style="{DynamicResource VerticalTabControl}"
+                        Padding="10">
+                <TabItem ToolTip="Настройки соединения">
+                    <TabItem.Header>
+                        <Grid MinHeight="38">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/RosApplication;component/Themes/images/icon_24.png" Stretch="UniformToFill" 
+                                   StretchDirection="Both" Width="22" Height="22" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="Общие" VerticalAlignment="Center" />
+                        </Grid>
+                    </TabItem.Header>
+                    <StackPanel Grid.IsSharedSizeScope="True">
+                        <r:ParamItemControl Header="Прокси-сервер:">
+                            <TextBox Name="proxyServer" IsReadOnly="True" />
+                        </r:ParamItemControl>
+                        <r:ParamItemControl Header="Адрес сервера:" VerticalContentAlignment="Top">
+                            <StackPanel>
+                                <TextBox Text="{Binding Path=АдресСервера, ElementName=Main}" />
+                                <TextBlock FontSize="11" Foreground="Gray" Margin="0 2 0 0">Например: itrf.ru или 89.108.72.236</TextBlock>
+                            </StackPanel>
+                        </r:ParamItemControl>
+                        <r:ParamItemControl Header="Путь к ключам:" Visibility="Collapsed">
+                            <DockPanel>
+                                <Button DockPanel.Dock="Right" Margin="6 0 0 0">Обзор...</Button>
+                                <TextBox Name="Путь" />
+                            </DockPanel>
+                        </r:ParamItemControl>
+                        <r:ParamItemControl Header="Тип соединения:">
+                            <r:RadioButtonList SelectedValuePath="Content" SelectedValue="{Binding Source={x:Static p:Settings.Default}, Path=ТипСоединения}"
+                                               Orientation="Horizontal">
+                                <ListBoxItem Content="GZip" />
+                                <ListBoxItem Content="Tcp" />
+                            </r:RadioButtonList>
+                        </r:ParamItemControl>
+                        <!--<r:ParamItemControl Header="Версия:" Margin="0">
+                            <r:RadioButtonList SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static p:Settings.Default}, Path=Версия}"
+                                               Orientation="Horizontal">
+                                <ListBoxItem Content="4.0" Tag="0" />
+                                <ListBoxItem Content="5.0" Tag="5" />
+                            </r:RadioButtonList>
+                        </r:ParamItemControl>-->
+                        <!--<Line X1="0" X2="1" Stroke="Silver" StrokeThickness="1" Stretch="Fill" Margin="0 18" />-->
+                        <r:Separator  Margin="0,18" Orientaion="Horizontal"/>
+                        <r:ParamItemControl Header="Вкладки:">
+                            <CheckBox Content="Cохранять открытые вкладки" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=СохранятьОткрытыеВкладки}" />
+                        </r:ParamItemControl>
+                        <r:ParamItemControl Header="Обновление:">
+                            <CheckBox Content="Автоматически проверять и устанавливать обновления" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=АвтоматическоеОбновление}" />
+                        </r:ParamItemControl>
+                        <r:ParamItemControl Header="Сообщения:">
+                            <CheckBox Content="Не показывать сообщение об удалении" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=НеПоказыватьСообщениеОбУдалении}" />
+                        </r:ParamItemControl>
+                    </StackPanel>
+                </TabItem>
+                <TabItem ToolTip="Учетные записи" Visibility="Collapsed">
+                    <TabItem.Header>
+                        <Grid MinHeight="38">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/RosApplication;component/Themes/images/group.png" Stretch="UniformToFill" 
+                                   StretchDirection="Both" Width="22" Height="22" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="Учетные записи" VerticalAlignment="Center" />
+                        </Grid>
+                    </TabItem.Header>
+                    <r:DataGrid IsButton="False" ПоказатьКнопкуДобавить="False" ButtonAlignment="Top" ClickMode="None"  ПоказыватьСтраницы="False" IsMargin="False" RowHeight="20" 
+                                MinRowHeight="20" CanUserAddRows="True" CanUserDeleteRows="True" BorderThickness="1" FontSize="12" Name="Accounts" Margin="0,0,0,0"
+                                IsReadOnly="False" SearchedComplite="Accounts_SearchedComplite" SelectionMode="Extended" SelectionUnit="FullRow">
+                        <r:DataGrid.Columns>
+                            <toolkit:DataGridTextColumn Binding="{Binding Path=Login, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Header="Логин" IsReadOnly="False" Width="*" MinWidth="80" />
+                            <!--<toolkit:DataGridComboBoxColumn Header="Версия" Width="80" SelectedValueBinding="{Binding Версия}" SelectedValuePath="Tag" IsReadOnly="False">
+                                <toolkit:DataGridComboBoxColumn.ItemsSource>
+                                    <CompositeCollection>
+                                        <ComboBoxItem Tag="4">4.0</ComboBoxItem>
+                                        <ComboBoxItem Tag="5">5.0</ComboBoxItem>
+                                    </CompositeCollection>
+                                </toolkit:DataGridComboBoxColumn.ItemsSource>
+                            </toolkit:DataGridComboBoxColumn>-->
+                        </r:DataGrid.Columns>
+                    </r:DataGrid>
+                    <!--<Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBox Name="Адрес" Margin="0 0 0 4" Text="{Binding Path=SelectedValue, ElementName=PART_ListBox, Mode=OneWay}" />
+
+                        <ListBox Name="PART_ListBox" Grid.Row="1" BorderBrush="Silver"
+                                 SelectionMode="Extended"
+                                 ItemsSource="{Binding Path=СписокПользователей, ElementName=Main}">
+                            <ListBox.CommandBindings>
+                                <CommandBinding Command="Delete" Executed="Delete_Executed" CanExecute="Delete_CanExecute" />
+                            </ListBox.CommandBindings>
+                        </ListBox>
+
+                        <StackPanel Margin="8 0 0 0" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Top">
+                            <Button Margin="0,0,0,3">Добавить</Button>
+                            <Button Margin="0,0,0,12" CommandTarget="{Binding ElementName=PART_ListBox}" Command="Delete">Удалить</Button>
+
+                            <Button Content="Сохранить" Margin="0,0,0,3" Click="Button_Click" />
+                            <Button Content="Загрузить" Click="Button_Click_1" />
+                        </StackPanel>
+                    </Grid>-->
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </r:Window>
+</Window>

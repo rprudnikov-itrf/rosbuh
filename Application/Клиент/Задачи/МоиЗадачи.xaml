@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="RosApplication.Клиент.Задачи.МоиЗадачи"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:t="clr-namespace:RosApplication.Клиент.Задачи"
+             xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             FontFamily="Tahoma" FontSize="12"
+             Loaded="MainWindow_Loaded"
+             x:Name="MainWindow">
+    <UserControl.Resources>
+        <Style x:Key="TreeViewItemTask" TargetType="TreeViewItem">
+            <Setter Property="Tag" Value="{Binding Задачи.Количество}" />
+            <Setter Property="Margin" Value="0 1 0 1" />
+            <Setter Property="Padding" Value="2 1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TreeViewItem">
+                        <Grid Cursor="Hand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Image Stretch="UniformToFill" Source="/RosApplication;component/Themes/images/clock.png"
+                                                                       Width="16" Height="16"
+                                                                       VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Border Name="Bd"
+                                        VerticalAlignment="Center"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}"
+                                        SnapsToDevicePixels="True">
+                                    <ContentPresenter Name="PART_ContentPresenter" ContentSource="Header" VerticalAlignment="Center" TextBlock.FontWeight="Bold" />
+                                </Border>
+                                <Label Name="PART_Counts" VerticalAlignment="Center" 
+                                                                               Margin="3,0,2,0" Padding="0"
+                                                                               Content="{TemplateBinding Tag}" ContentStringFormat="{}({0})"
+                                                                               Foreground="#0000ff"  />
+                            </StackPanel>
+                            <ItemsPresenter x:Name="ItemsHost" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="IsSelectionActive" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            </MultiTrigger>
+                            <Trigger Property="Tag" Value="{x:Null}">
+                                <Setter TargetName="PART_ContentPresenter" Property="TextBlock.FontWeight" Value="Normal" />
+                            </Trigger>
+                            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}" Value="0">
+                                <Setter TargetName="PART_ContentPresenter" Property="TextBlock.FontWeight" Value="Normal" />
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <CollectionViewSource x:Key="TasksSource" 
+                              Source="{Binding Path=СписокПользователей, Mode=OneTime, IsAsync=True, RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}}"
+                              Filter="TasksSource_Filter">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Пользователь.Группа" />
+            </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <cm:SortDescription PropertyName="Пользователь.Группа" Direction="Ascending" />
+                <cm:SortDescription PropertyName="Пользователь.НазваниеОбъекта" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <CompositeCollection x:Key="TasksSource_CompositeCollection">
+            <TreeViewItem Header="Задачи" IsExpanded="True" ItemContainerStyle="{StaticResource TreeViewItemTask}">
+                <TreeViewItem x:Name="ЗадачиВходящие" Header="Входящие" Tag="{Binding Path=Входящие}" />
+                <TreeViewItem x:Name="ЗадачиОтправленные" Header="Отправленные" />
+                <TreeViewItem x:Name="ЗадачиКИсполнению" Header="К исполнению" Tag="{Binding Path=КИсполнению}"/>
+                <TreeViewItem x:Name="ЗадачиСрочные" Header="Срочные" Tag="{Binding Path=Срочные}"/>
+            </TreeViewItem>
+            <CollectionContainer Collection="{Binding Source={StaticResource TasksSource}, Path=Groups, Mode=OneTime, IsAsync=True}" />
+        </CompositeCollection>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Gray" BorderThickness="0 0 1 0" SnapsToDevicePixels="True">
+            <DockPanel>
+                <CheckBox Content="Показать всех" IsChecked="{Binding Path=ПоказатьВсех, ElementName=MainWindow}" HorizontalAlignment="Left"
+                          Margin="6,3" DockPanel.Dock="Top" />
+                <TreeView x:Name="PART_Tasks" BorderThickness="0" SelectedItemChanged="ОткрытьЗадачи"
+                          ItemsSource="{StaticResource TasksSource_CompositeCollection}"
+                          DataContext="{Binding ElementName=MainWindow}">
+                    <TreeView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Обновить" Command="Find" CommandParameter="Задачи" InputGestureText=" " />
+                        </ContextMenu>
+                    </TreeView.ContextMenu>
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="True" />
+                            <Setter Property="Margin" Value="0 0 0 6" />
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Items}"
+                                                  ItemContainerStyle="{StaticResource TreeViewItemTask}">
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Пользователь.НазваниеОбъекта}" VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </DockPanel>
+        </Border>
+        <GridSplitter Width="3" Background="Transparent" ShowsPreview="False" />
+        <Frame x:Name="PART_Content" Grid.Column="1" />
+        <!--<t:СписокЗадач Grid.Column="1" Header="Входящие" />-->
+    </Grid>
+</UserControl>

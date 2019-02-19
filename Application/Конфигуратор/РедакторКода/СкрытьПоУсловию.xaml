@@ -1,0 +1,88 @@
+﻿<Window x:Class="RosApplication.Конфигуратор.Редакторы.СкрытьПоУсловию"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="http://itrf.ru/2009/xaml"
+    Title="Показать по условию" Height="520" Width="680"
+    Name="PART_Window" Initialized="PART_Window_Initialized">
+    <r:Window ПоказатьКнопкуВыполнить="False" ПоказатьКнопкуФайл="False" 
+              IsWhiteBackground="True" IsScroll="False" 
+              Complite="Window_Complite" 
+              ПроверкаЗначений="Window_ПроверкаЗначений">
+        <StackPanel Grid.IsSharedSizeScope="True">
+            <Label HorizontalAlignment="Left" Margin="0,0,0,22" Padding="0" FontSize="22" FontFamily="Times New Roman" FontWeight="Bold">Показать по условию</Label>
+            <r:ParamItemControl Header="Условие:" VerticalContentAlignment="Top" Padding="0,0,54,0">
+                <r:RadioButtonList Name="Условие" SelectedValuePath="Tag">
+                    <ListBoxItem Content="@НовыйРаздел" Tag="НовыйРаздел" />
+                    <ListBoxItem Content="Группа пользователя" Tag="ГруппаПользователя" />
+                    <ListBoxItem Content="Значение атрибута" Tag="ЗначениеАтрибута" />
+                    <ListBoxItem IsSelected="True" Content="Значение контрола" Tag="ЗначениеКонтрола" />
+                </r:RadioButtonList>
+            </r:ParamItemControl>
+            <r:ParamItemControl Header="Оператор:" VerticalContentAlignment="Top">
+                <r:RadioButtonList Name="Оператор" SelectedValuePath="Tag">
+                    <ListBoxItem Content="Равно (=)" Tag="Равно" IsSelected="True" />
+                    <ListBoxItem Content="Не равно (!=)" Tag="Не равно" />
+                </r:RadioButtonList>
+            </r:ParamItemControl>
+            <r:GroupBox Header="Параметры" Margin="0,14,0,0" Padding="0,8,0,0">
+                <r:GroupBox.Visibility>
+                    <Binding Path="SelectedValue" ConverterParameter="ЗначениеАтрибута|ЗначениеКонтрола|ГруппаПользователя" ElementName="Условие">
+                        <Binding.Converter>
+                            <r:VisibilityConverter />
+                        </Binding.Converter>
+                    </Binding>
+                </r:GroupBox.Visibility>
+                <StackPanel>
+                    <r:ParamItemControl Header="Атрибут:">
+                        <r:ParamItemControl.Visibility>
+                            <Binding Path="SelectedValue" ConverterParameter="ЗначениеАтрибута" ElementName="Условие">
+                                <Binding.Converter>
+                                    <r:VisibilityConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </r:ParamItemControl.Visibility>
+                        <ComboBox Name="Атрибуты" SelectedValuePath="Content"
+                                  ItemsSource="{Binding Path=ItemsSourceAttributes, ElementName=PART_Window}"/>
+                    </r:ParamItemControl>
+                    <r:ParamItemControl Header="Контролы:">
+                        <r:ParamItemControl.Visibility>
+                            <Binding Path="SelectedValue" ConverterParameter="ЗначениеКонтрола" ElementName="Условие">
+                                <Binding.Converter>
+                                    <r:VisibilityConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </r:ParamItemControl.Visibility>
+                        <ComboBox Name="Контролы" SelectedValuePath="Content"
+                                  ItemsSource="{Binding Path=ItemsSourceControls, ElementName=PART_Window}"/>
+                    </r:ParamItemControl>
+                    <r:ParamItemControl Header="Значение:" VerticalContentAlignment="Top">
+                        <r:ParamItemControl.Visibility>
+                            <Binding Path="SelectedValue" ConverterParameter="ЗначениеАтрибута|ЗначениеКонтрола" ElementName="Условие">
+                                <Binding.Converter>
+                                    <r:VisibilityConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </r:ParamItemControl.Visibility>
+                        <StackPanel>
+                            <TextBox Name="Значение" TextWrapping="Wrap" />
+                            <TextBlock TextWrapping="Wrap" Text="Для указания нескольких значений используйте сивол '|'." Foreground="Gray" FontSize="11" />
+                            <TextBlock TextWrapping="Wrap" Text="Например: Оплачен|Продлен" Foreground="Gray" FontSize="11" />
+                        </StackPanel>
+                    </r:ParamItemControl>
+                    <r:ParamItemControl Header="Группы:" VerticalContentAlignment="Top">
+                        <r:ParamItemControl.Visibility>
+                            <Binding Path="SelectedValue" ConverterParameter="ГруппаПользователя" ElementName="Условие">
+                                <Binding.Converter>
+                                    <r:VisibilityConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </r:ParamItemControl.Visibility>
+                        <r:CheckedListBox Name="Группы" SelectedValuePath="[НазваниеОбъекта]" 
+                                        DisplayMemberPath="[НазваниеОбъекта]">
+                        </r:CheckedListBox>
+                    </r:ParamItemControl>
+                </StackPanel>
+            </r:GroupBox>
+        </StackPanel>
+    </r:Window>
+</Window>

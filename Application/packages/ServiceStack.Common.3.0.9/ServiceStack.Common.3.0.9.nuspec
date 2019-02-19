@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ServiceStack.Common</id>
+    <version>3.0.9</version>
+    <title>ServiceStack.Common</title>
+    <authors>Demis Bellot</authors>
+    <owners>Demis Bellot</owners>
+    <licenseUrl>https://github.com/ServiceStack/ServiceStack/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ServiceStack/ServiceStack</projectUrl>
+    <iconUrl>http://www.servicestack.net/logo-100x100.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Common library dependency for other ServiceStack projects
+        Includes: 
+            - ServiceStack.Interfaces.dll
+            - ServiceStack.Common.dll
+        Dependenies:
+            - ServiceStack.Text.dll</description>
+    <summary>Opensource .NET and Mono REST Web Services framework</summary>
+    <copyright>Liquidbit 2011 and contributors</copyright>
+    <tags>ServiceStack Common Framework</tags>
+    <dependencies>
+      <dependency id="ServiceStack.Text" />
+    </dependencies>
+    <references>
+      <reference file="ServiceStack.Common.dll" />
+      <reference file="ServiceStack.Interfaces.dll" />
+    </references>
+  </metadata>
+</package>

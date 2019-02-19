@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RosService.Finance.FinanceClient" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="2" Width="2.75" />
+    <Members>
+      <Field Name="data" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>MgAAAIEAEAAAABAoJAhIGIACAACAAACAEAAQCABAAAA=</HashCode>
+      <FileName>Client\Finance.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RosService.Data.DataClient">
+    <Position X="0.75" Y="4" Width="3.75" />
+    <Members>
+      <Field Name="_НеУдалятьСвязанныеОбъекты" Hidden="true" />
+      <Field Name="_ОтключитьАрхивЗначений" Hidden="true" />
+      <Field Name="_ОтключитьКешированиеТаблиц" Hidden="true" />
+      <Method Name="_СписокФайлов" Hidden="true" />
+      <Method Name="getMimeType" Hidden="true" />
+      <Method Name="GetTablePrefix" Hidden="true" />
+      <Field Name="HistoryValues" Hidden="true" />
+      <Field Name="lookHistoryValues" Hidden="true" />
+      <Method Name="Ping" Hidden="true" />
+      <Method Name="SaveHistoryValues" Hidden="true" />
+      <Method Name="ВосстановитьРаздел" Hidden="true" />
+      <Method Name="ДобавитьПроизвольныйРаздел" Hidden="true" />
+      <Method Name="ДобавитьРазделАсинхронно" Hidden="true" />
+      <Method Name="ИзменитьТипРаздела" Hidden="true" />
+      <Method Name="КоличествоФайлов" Hidden="true" />
+      <Method Name="КопироватьРаздел" Hidden="true" />
+      <Property Name="НеУдалятьСвязанныеОбъекты" Hidden="true" />
+      <Property Name="ОтключитьАрхивЗначений" Hidden="true" />
+      <Property Name="ОтключитьКешированиеТаблиц" Hidden="true" />
+      <Method Name="ОтправитьПисьмо" Hidden="true" />
+      <Method Name="ПоискИстории" Hidden="true" />
+      <Method Name="ПолучитьЗначенияФормы" Hidden="true" />
+      <Method Name="ПолучитьИсторию" Hidden="true" />
+      <Method Name="ПолучитьКонстанту" Hidden="true" />
+      <Method Name="ПолучитьРаздел" Hidden="true" />
+      <Method Name="ПолучитьТипРаздела" Hidden="true" />
+      <Method Name="Проиндексировать" Hidden="true" />
+      <Method Name="СохранитьЗначениеАсинхронно" Hidden="true" />
+      <Method Name="СохранитьЗначениеПоискАсинхронно" Hidden="true" />
+      <Method Name="СписокЗависимыхРазделов" Hidden="true" />
+      <Method Name="СписокРазделов" Hidden="true" />
+      <Method Name="Удалить" Hidden="true" />
+      <Method Name="УдалитьПодразделыАсинхронно" Hidden="true" />
+      <Method Name="УдалитьРазделАсинхронно" Hidden="true" />
+      <Method Name="УдалитьРазделПоискАсинхронно" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Class Name="RosService.Data.DataClient.HistoryValueContanier" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Data.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgQwAAFUIAEgUKACBECgCgACFghEBCAAIJAZgQARIAA=</HashCode>
+      <FileName>Client\Data.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RosService.Data.Object" Collapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACIAAAAgAAAAAAAAAAAAAAAAAAABAABAAACAA=</HashCode>
+      <FileName>Client\Data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

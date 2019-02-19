@@ -1,0 +1,43 @@
+﻿<Window x:Class="RosApplication.Клиент.СоздатьНовыйАккаунт"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:r="http://itrf.ru/2009/xaml"
+        Title="Создать новый аккаунт" Height="440" Width="600"
+        WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=Домен}">
+    <r:Window ПоказатьКнопкуВыполнить="False" ПоказатьКнопкуФайл="False" 
+              IsWhiteBackground="True" IsScroll="False"
+              ButtonCompliteText="Продолжить" ButtonCancelText="Отмена"
+              Header="Создать новый аккаунт" StyleHeaderTemplate="Black"
+              Complite="Window_Complite" ПроверкаЗначений="Window_ПроверкаЗначений">
+        <StackPanel Grid.IsSharedSizeScope="True">
+            <r:ParamItemControl Header="Имя базы:" VerticalContentAlignment="Top" Margin="0 0 0 16">
+                <StackPanel>
+                    <TextBox Name="Домен" MaxLength="20" />
+                    <TextBlock Foreground="Gray"
+                               FontSize="11" Margin="0 0 0 2"
+                               Text="Рекомендуем имя компании без пробелов" />
+                    <TextBlock Foreground="Gray"
+                               FontSize="11" Margin="0 0 0 2"
+                               Text="Например: росинфотех, новая-компания" />                    
+                </StackPanel>
+            </r:ParamItemControl>
+            <!--<r:ParamItemControl Header="e-mail:" VerticalContentAlignment="Top" Margin="0 0 0 16">
+                <StackPanel>
+                    <TextBox Name="Почта" MaxLength="48" />
+                    <TextBlock Foreground="Gray"
+                               FontSize="11" Margin="0 0 0 2"
+                               Text="После создания аккаунта на указанный адрес будет выслана инструкция" />
+                </StackPanel>
+            </r:ParamItemControl>-->
+
+            <r:ParamItemControl Header="Логин:">
+                <TextBox Name="Логин" MaxLength="25" />
+            </r:ParamItemControl>
+            <r:ParamItemControl Header="Пароль:">
+                <PasswordBox Name="Пароль" MaxLength="25" />
+            </r:ParamItemControl>
+
+        </StackPanel>
+    </r:Window>
+</Window>
